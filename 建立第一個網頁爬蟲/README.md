@@ -51,7 +51,7 @@ print(bs.html.body.h1)
 print(bs.html.h1)
 print(bs.body.h1)
 
-=======================================
+結果:=======================================
 <h1>An Interesting Title</h1>
 <h1>An Interesting Title</h1>
 <h1>An Interesting Title</h1>
@@ -75,3 +75,82 @@ bs = BeautifulSoup(html.read(), 'lxml'
 ```python
 bs = BeautifulSoup(html.read(), 'html5lib')
 ```
+
+## 確保連線正常和處理意外錯誤
+
+```python
+html = urlopen('http://www.pythonscraping.com/pages/page1.html')
+```
+
+上面這行程式有可能遇到2個錯誤
+
+1. 不存在page1.html
+2. 主機伺服器沒有發現
+
+### 解決網頁沒有發現
+第1個錯誤會產生HTTP錯誤,有可能是"404 Page Not Found"或是"500 Internal Server Error",當發生這個錯誤時urlopen()會丟出一個exception HTTPError, 我們就必需手動處理這個錯誤
+
+```python
+from urllib.request import urlopen
+from urllib.error import HTTPError
+
+try:
+    html = urlopen('http://www.pythonscraping.com/pages/page1.html')
+except HTTPError as e:
+    print(e)    
+    #處理錯誤
+else:
+    print("沒有錯誤")
+    #沒有發生錯誤
+```
+
+### 解決主機伺服器沒有發現
+第2個錯誤是主機伺服器沒有發現，urlopen將會發出URLError，由於伺服器是負責發出HTTP 狀態碼，所以HTTPError例外不會被丟出。
+
+```python
+from urllib.request import urlopen 
+from urllib.error import HTTPError 
+from urllib.error import URLError
+
+try:
+    html = urlopen('https://pythonscrapingthisurldoesnotexist.com')
+except HTTPError as e:
+    print(e)
+except URLError as e:
+    print("沒有發現伺服器主機")
+else:
+    print("沒有發生錯誤")
+    
+結果:==============================
+沒有發現伺服器主機
+```
+
+就算上面的2個錯誤，也不能肯定你要找的元素標籤有存在，如果元素標籤不存在網頁內，BeautifulSoup會傳出一個None的物件，當操作None物件時，將會丟出AttributeError例外。
+
+```python
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+html = urlopen('http://pythonscraping.com/pages/page1.html')
+bs = BeautifulSoup(html.read(), 'html.parser')
+print(bs.header) #沒有header這個標籤
+print(bs.header.h1) #None存取屬性會丟出AttributeError
+
+
+結果=====================
+None
+AttributeError: 'NoneType' object has no attribute 'h1'
+```
+
+### 解決沒有發現標籤的解決方式如下程式
+
+```python
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+html = urlopen('http://pythonscraping.com/pages/page1.html')
+bs = BeautifulSoup(html.read(), 'html.parser')
+
+bs.header.h1
+```
+
