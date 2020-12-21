@@ -151,6 +151,49 @@ from bs4 import BeautifulSoup
 html = urlopen('http://pythonscraping.com/pages/page1.html')
 bs = BeautifulSoup(html.read(), 'html.parser')
 
-bs.header.h1
+try:
+    badContent = bs.header.h1
+except AttributeError as e:
+    print('標籤沒有發現')
+else:
+    if badContent == None:
+        print('標籤沒有發現')
+    else:
+        print('找到標籤')
+
+結果:=========================
+標籤沒有發現
+```
+
+### 整合所有問題並簡化程式碼
+
+```python
+from urllib.request import urlopen 
+from urllib.error import HTTPError 
+from bs4 import BeautifulSoup
+
+def getTitle(url):
+    try:
+        html = urlopen(url)
+    except HTTPError as e:
+        return None
+    
+    try:
+        bs = BeautifulSoup(html.read(), 'html.parser')
+        title = bs.body.h1        
+    except AttributeError as e:
+        return None
+    
+    return title
+
+title = getTitle('http://www.pythonscraping.com/pages/page1.html')
+
+if title == None:
+    print("沒有發現標籤")
+else:
+    print(title)
+    
+結果:==================================
+<h1>An Interesting Title</h1>
 ```
 
