@@ -59,7 +59,7 @@ print(bs.body.h1)
 ```
 
 ### bs = BeautifulSoup(html.read(), 'html.parser')
-BeautifulSoup必需使用2個引數,第一個引數是html的內容,第二個引數是解析方式,這裏使用的是基本的html.parser,另外還有2種方式方式
+BeautifulSoup必需使用2個引數,第一個引數是html的內容,第二個引數是解析方式,這裏使用的是基本的**html.parser**,另外還有2種方式方式
 
 1. 使用lxml
 
