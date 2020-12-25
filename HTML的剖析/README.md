@@ -469,6 +469,7 @@ for image in images:
 myTag.attrs 
 
 或
+
 擷取屬性的'src'
 myTag.attrs['src']
 ```
