@@ -357,7 +357,119 @@ html = urlopen('http://www.pythonscraping.com/pages/page3.html')
 bs = BeautifulSoup(html, 'html.parser')
 
 print(bs.find('img',{'src':'../img/gifts/img1.jpg'}).parent.previous_sibling.get_text())
-    
+
+結果:==================
+$15.00   
 ```
 
 ### 正規則運算式
+
+尋找有規則的文字，例如手機號碼，email，...
+
+例如:
+1. 想要一個a開頭，並且最少一個a字完
+2. a後一定要有5個b
+3. b後要c，偶數數量
+4. 最給一定要e或d結尾
+
+如aaaabbbbbccccd, aabbbbbcce
+
+正規則的寫法:
+aa*bbbbb(cc)*(d|e)
+
+```
+aa*
+
+*a 代表0個以上的a
+```
+
+```
+bbbbb
+
+明確的5個b
+```
+
+```
+(cc)*
+
+代表0個以上的cc
+```
+
+```
+(d|e)
+
+代表d或e
+```
+
+- 正規表示式可以指定與給定字串進行比較的模式。
+- 以下是正規表示式的基本模式
+
+| 模式 |	描述 |
+|:-- | :-- |
+| ^ |	在字串開頭匹配 |
+|$	| 在字串的結尾處匹配|
+|.|	匹配任意一個字元（不包括換行符）|
+|[...]|	匹配括號內的單個字元|
+| *	| 給定字串中出現 0 次或更多次 |
+| +	| 給定字串中出現 1 次或多次前面的 |
+| ?	| 給定字串中出現 0 次或 1 次 |
+| {n} |	匹配給定字串中出現次數為 n |
+| {n,} | 匹配給定字串中出現次數為 n 次或多次 |
+|{n,m}	| 匹配給定字串中的出現次數為至少 n 個，最多 m 個 |
+| \w	 | 此模式用於匹配單詞 |
+| \W |	此模式用於匹配非單詞 |
+| \s	 | 它將匹配空格。\ s 等於[\ t \ n \ r \ n] |
+| \S |	它將匹配非空格 |
+| \d	 | \ d 等於 [0-9]。它匹配字串中的數字 |
+| \D |	匹配非數字 |
+| \A	 | 匹配字串的開頭 |
+| \Z |	匹配字串的結尾。如果有任何換行符，它將在換行符之前匹配 |
+| \z |	匹配字串的結尾 |
+| \G	 | \G 用於匹配最後一次匹配結束的點 |
+| \b	 | 匹配在開頭或者結尾的空字元 |
+| \B |	匹配不在開頭或者結尾的空字元 |
+
+### BeautifulSout整合正規則運算
+
+範例網頁
+```
+http://www.python‐ scraping.com/pages/page3.html
+```
+
+頁面包含下面元素:
+```
+<img src="../img/gifts/img3.jpg">
+```
+
+```python
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+import re
+
+html = urlopen('http://www.pythonscraping.com/pages/page3.html')
+bs = BeautifulSoup(html, 'html.parser')
+images = bs.find_all('img',
+                    {'src':re.compile('\.\.\/img\/gifts\/img.*\.jpg')})
+for image in images:
+    print(image.attrs['src'])
+
+結果:================================
+../img/gifts/img1.jpg
+../img/gifts/img2.jpg
+../img/gifts/img3.jpg
+../img/gifts/img4.jpg
+../img/gifts/img6.jpg
+
+```
+
+#### 存取元素屬性
+
+```
+擷取所有屬性
+myTag.attrs 
+
+或
+擷取屬性的'src'
+myTag.attrs['src']
+```
+
