@@ -188,6 +188,8 @@ title = bs.find_all(id='title', class_='text')
 
 ## 解析元素樹
 
+find_all function 功能可以利用標籤名和屬性擷取資料。但是如果要利用樹狀結構取得資料，可以利用連續串接的手法。
+
 ```
 bs.tag.subTag.anotherSubTag
 ```
@@ -197,6 +199,165 @@ bs.tag.subTag.anotherSubTag
 http://www.pythonscraping.com/pages/page3.html
 ```
 
+![](./images/pic2.png)
+
 ##### html架構
 
 ![](images/pic1.png)
+
+#### 操控子元素和子孫元素
+
+子元素，代表是父元素的下一個元素，子孫元素代表的是父元素下的所有元素。一般BeautifulSoup function是使用子孫元素，bs.body.h1 所代表的意思尋找body內的第一個h1元素。
+
+相同的，bs.div.find_all('img') 將尋找div內第一個img元素。
+
+如果只想要直接子元素，請使用 .children屬性
+
+```python
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+html = urlopen('http://www.pythonscraping.com/pages/page3.html')
+bs = BeautifulSoup(html, 'html.parser')
+
+for child in bs.find('table',{'id':'giftList'}).children:
+    print(child)
+    
+結果:=====================================
+<tr><th>
+Item Title
+</th><th>
+Description
+</th><th>
+Cost
+</th><th>
+Image
+</th></tr>
+
+
+<tr class="gift" id="gift1"><td>
+Vegetable Basket
+</td><td>
+This vegetable basket is the perfect gift for your health conscious (or overweight) friends!
+<span class="excitingNote">Now with super-colorful bell peppers!</span>
+</td><td>
+$15.00
+</td><td>
+<img src="../img/gifts/img1.jpg"/>
+</td></tr>
+
+.
+.
+.
+```
+
+如果使用 .descendants屬性,會依序尋找所有子元素
+
+```python
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+html = urlopen('http://www.pythonscraping.com/pages/page3.html')
+bs = BeautifulSoup(html, 'html.parser')
+
+for child in bs.find('table',{'id':'giftList'}).descendants:
+    print(child)
+    
+結果:===========================
+<tr><th>
+Item Title
+</th><th>
+Description
+</th><th>
+Cost
+</th><th>
+Image
+</th></tr>
+<th>
+Item Title
+</th>
+
+Item Title
+
+<th>
+Description
+</th>
+
+Description
+
+<th>
+Cost
+</th>
+
+Cost
+
+<th>
+Image
+</th>
+
+```
+
+#### 操控同一階層元素
+
+使用BeautifulSoup next_siblings() function
+
+```python
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+html = urlopen('http://www.pythonscraping.com/pages/page3.html')
+bs = BeautifulSoup(html, 'html.parser')
+
+for child in bs.find('table',{'id':'giftList'}).tr.next_siblings: #先找到table內第一個tr,並找尋所有後面相同階層的元素
+    print(child)
+
+結果:===========================
+<tr class="gift" id="gift1"><td>
+Vegetable Basket
+</td><td>
+This vegetable basket is the perfect gift for your health conscious (or overweight) friends!
+<span class="excitingNote">Now with super-colorful bell peppers!</span>
+</td><td>
+$15.00
+</td><td>
+<img src="../img/gifts/img1.jpg"/>
+</td></tr>
+
+
+<tr class="gift" id="gift2"><td>
+Russian Nesting Dolls
+</td><td>
+Hand-painted by trained monkeys, these exquisite dolls are priceless! And by "priceless," we mean "extremely expensive"! <span class="excitingNote">8 entire dolls per set! Octuple the presents!</span>
+</td><td>
+$10,000.52
+</td><td>
+<img src="../img/gifts/img2.jpg"/>
+</td></tr>
+
+.
+.
+.
+```
+
+相似尋找多個的功能有:
+- next_siblings,previous_siblings
+
+相似尋找一個的功能有:
+- next_sibling,previous_sibling
+
+#### 操控父元素
+
+使用 .parent 或 .parents
+
+```python
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+html = urlopen('http://www.pythonscraping.com/pages/page3.html')
+bs = BeautifulSoup(html, 'html.parser')
+
+print(bs.find('img',{'src':'../img/gifts/img1.jpg'}).parent.previous_sibling.get_text())
+    
+```
+
+### 正規則運算式
