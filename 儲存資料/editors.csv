@@ -1,0 +1,71 @@
+,Creator,First public release,Latest stable version,Latest Release Date,Programming language,Cost (US$),Software license,Open source,CLI available,Minimum installed size
+Acme,Rob Pike,1993,Plan 9 and Inferno,,C,Free,LPL (OSI approved),,,
+AkelPad,"Alexey Kuznetsov, Alexander Shengalts",2003,4.9.8,2016‑07‑18,C,Free,BSD,,,
+Alphatk,Vince Darley,1999,8.3.3,2004‑12‑10,,$40,"Proprietary, with BSD components",,,
+Aquamacs,David Reitter,2005,3.5,2019‑08‑18,"C, Emacs Lisp",Free,GPL,,,
+Atom,GitHub,2014,1.46.0,2020‑05‑05,"HTML, CSS, JavaScript, C++",Free,MIT,,,~ 107‑185 MB
+BBEdit,Rich Siegel,1992,13.0.4,2020‑01‑15,"Objective-C, Objective-C++","Free for most features, $49.99 for full version",Proprietary,,,
+Bluefish,Bluefish Development Team,1999,2.2.12,2020‑11‑05,C,Free,GPL,,,
+Brackets,Adobe Systems,2012,1.14,2019‑05‑02,"HTML, CSS, JavaScript, C++",Free,MIT,,,~ 64‑105 MB
+Coda,Panic,2007,2.7.6,2020‑10‑12[1],Objective-C,$99,Proprietary,,,
+ConTEXT,ConTEXT Project Ltd,1999,0.98.6,2009‑08‑14,Object Pascal (Delphi),Free,BSD,,,
+Crimson Editor,"Ingyu Kang, Emerald Editor Team",1999,3.72,2008‑05‑14,C++,Free,GPL,,,
+CudaText,"UVViewSoft (alexey_t, kvichans, matthias030)",2015,1.57.0,2018‑06‑25,Object Pascal (Lazarus),Free,MPL 2.0,,,"8 MB Mac
+12 MB Win
+5 Mb *nix"
+ed,Ken Thompson,1970,unchanged from original,,C,Free,?,,,0.04 MB
+Editra,Cody Precord,2007,0.7.20,2013‑01‑05,Python,Free,wxWindows license,,,
+EmEditor,"Emurasoft, Inc.",1997,20.3.3,2020‑12‑02,C++,179.99,Shareware,,,
+epsilon,Lugaru Software,1984,14.00,2020‑10‑20[2],C,$250,Proprietary,,,
+gedit,GNU Project,2000,"3.28.2 (Win 3.20.1, Mac 3.2.6[3])",2018‑05‑09,C,Free,GPL,,,
+Geany,Enrico Tröger,2005,1.33,2018‑02‑25,"C, GTK2",Free,GPL,,,
+GNU Emacs,Richard Stallman,1984,27.1,2020‑08‑10,"C, Emacs Lisp",Free,GPL,,,11.6 MB
+GNU nano,Chris Allegretta,1999,5.0,2020‑07‑29,C,Free,GPL,,,0.6 MB
+JED,John E. Davis,1992,0.99‑19,2009‑12‑13,"C, S-Lang",Free,GPL,,,3.5 MB[4]
+jEdit,Slava Pestov,1998,5.5.0,2018‑04‑09,Java,Free,GPL,,,
+JOE,Joseph Allen,1988,4.6,2018‑01‑10,C,Free,GPL,,,1.3 MB
+JOVE,Johnathon Payne,1983,4.16,1996‑03‑19,C,Free,GPL,,,
+Kate,KDE Project,2000‑12,19.12.3,2020‑03‑24,C++,Free,GPL,,,
+KEDIT,"Mansfield Software Group, Inc.",1983,1.6.1,2016‑12‑05,C,$129,Proprietary,,,1.1MB
+Komodo Edit,Activestate,2007 (open-sourced),10.2.3,2017‑07‑11,"Python, JavaScript, Perl, Tcl, PHP, Ruby",Free,"MPL, GPL, LGPL",,,
+Komodo IDE,Activestate,2001,11.0.2,2017‑12‑19,"Python, JavaScript, Perl, Tcl, PHP, Ruby",$295,Proprietary,,,
+KWrite,KDE Project,2000,20.08.3,2020‑11‑23,C++,Free,GPL,,,
+LE,Alexander V. Lukyanov,1997,1.16.3,2016‑06‑06,C++,Free,GPL,,,
+Leo,Edward K. Ream,1996,5.7.2,2018‑05‑07,Python,Free,MIT,,,
+Light Table,Chris Granger,2012,0.8.1,2016‑01‑21,ClojureScript,Free,MIT,,,
+Metapad,Alexander Davidson,1999,3.6,2011‑05‑28,C,Free,GPL,,,
+mg,Dave Conroy,1986,current,2020‑07‑22[5],C,Free,Public domain,,,
+MinEd,Thomas Wolff,1992,2015.25,2015‑03‑30,C,Free,GPL,,,
+MS-DOS Editor,Microsoft,1991,2.0.026,,,"Bundled with MS-DOS, Microsoft Windows",Proprietary,,,
+ne,"Sebastiano Vigna, Todd Lewis, Daniele Filaretti",1993,3.2.1,2019‑10‑02,C,Free,GPL,,,2.7 MB
+NEdit,Mark Edel,1991,5.7,2017‑02‑08,C,Free,GPL,,,
+Notepad,Microsoft,1985,6.0,,MASM (originally),Bundled with Microsoft Windows,Proprietary,,,
+Notepad++,Don Ho,2003‑11‑25,7.8.9,2020‑07‑16,C++,Free,GPL,,,11.9 MB
+Notepad2,Florian Balmer,2004‑04,4.2.25,2011‑05‑06,C++,Free,BSD,,,
+NoteTab,"Eric Fookes, Fookes Software",1995,7.2,2014‑11‑04,Object Pascal (Delphi),"Free, €39.95 Pro",Proprietary,,,
+nvi,Keith Bostic,1994,1.79,,C,Free,BSD,,,
+Pico,University of Washington,1992,4.64,,C,Free,AL2,,,
+PolyEdit,PolySoft Solutions,1998,5.4,2010‑04‑07,,$27.95,Shareware,,,
+PSPad,Jan Fiala,2002,5.0.3 (377),2020‑02‑10,Object Pascal (Delphi),Free,Proprietary,,,
+Q10,Baara Estudio,2007,1.2.21,2011‑06‑16,?,Free,Proprietary,,,
+RJ TextEd,Rickard Johansson,2004,13.10,2018‑05‑07,Object Pascal (Delphi),Free,Proprietary,,,
+Sam,Rob Pike,1980s (early),stable,,C,Free,LPL (OSI approved),,,
+SciTE,Neil Hodgson,1999,4.0.5,2018‑04‑10,C++,$41.99 for macOS. free for others,HPND,,,
+SlickEdit,"SlickEdit, Inc.",1988,25.0.0,2020‑10‑20,"C, Slick-C",$299,Proprietary,,,
+Smultron,Peter Borg,2004,12.1.1,2017‑02‑20,Objective-C,$7.99,Proprietary,,,
+Source Insight,Source Dynamics,?,4.0.0084,2017‑02‑26,Source Insight macro language,$239-$255,Proprietary,,,
+SubEthaEdit,TheCodingMonkeys,2003,4.1,2015‑02‑25,,$35 commercial use,Proprietary,,,
+Sublime Text,Jon Skinner,2008,3.2.2,2019‑10‑1,"C++, Python",$80,Shareware,,,
+TED Notepad,Juraj Simlovic,2001,6.1.1,2016‑12‑04,C,Free,Freeware,,,
+Textadept,Mitchell,2007,10.8,2020‑01‑01,"C, Lua",Free,MIT,,,
+TextEdit,Apple Inc.,2001,1.13,2017‑07‑16,,Free (also bundled with macOS),New BSD,,,
+TextMate,MacroMates,2004‑10‑10,1.5.11,2012‑07‑13,Objective-C++,$53 (€39),"Proprietary, with MIT components. Version 2 released under GPLv3",(from version 2),,
+TextPad,Helios Software Solutions,1992,8.4.2,2020‑07‑07,,$30.00 (£16.50),Shareware,,,
+TextWrangler,Bare Bones Software,2003,5.5.2,2016‑09‑20 (discontinued),,Free,Proprietary,,,
+The SemWare Editor,Sammy Mitchell,1985‑11,4.4,2005‑06‑24,"C, SAL",$99,Proprietary,,,
+UltraEdit,IDM Computer Solutions,1994,25.0,2018‑03‑12,C++,$99.95,Proprietary,,,
+VEDIT,"Ted Green, Greenview Data",1980,6.24.2,2015‑01‑12,"Assembly, C","$89 standard,239 Pro64",Proprietary,,,0.6 MB
+vi,Bill Joy,1976,3.7,,C,Free,BSD or CDDL,,,
+Vim,Bram Moolenaar,1991,8.2,2019‑12‑12,"C, Vim script",Free,GPL compatible,,,2.2 MB
+Visual Studio Code,Microsoft,2015,1.40.1,2019‑11‑13,"JavaScript, TypeScript",Free,MIT,,,~ 53‑82 MB
+XEmacs,Lucid Inc.,1991,21.4.22,2009‑01‑30,"C, Emacs Lisp",Free,GPL,,,
