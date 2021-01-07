@@ -84,7 +84,7 @@ the prince
 
 #### find() and find_all()
 
-官方文件說明find(),find_all(),2個的功能幾乎一樣
+官方文件說明find(),find_all()
 
 ```
 find_all(tag, attributes, recursive, text, limit, keywords)
