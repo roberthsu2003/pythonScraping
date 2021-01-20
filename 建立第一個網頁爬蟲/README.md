@@ -10,14 +10,23 @@
 - urlopen()可以透過internet來讀取資料(html檔案,影像檔或其他任何檔案)
 
 ```python
-from urllib.request import urlopen
-
-html = urlopen('http://pythonscraping.com/pages/page1.html')
-print(html.read())
+import requests
+res = requests.get("http://pythonscraping.com/pages/page1.html")
+print(res.text)
 
 
 ====================================
-b'<html>\n<head>\n<title>A Useful Page</title>\n</head>\n<body>\n<h1>An Interesting Title</h1>\n<div>\nLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n</div>\n</body>\n</html>\n'
+<html>
+<head>
+<title>A Useful Page</title>
+</head>
+<body>
+<h1>An Interesting Title</h1>
+<div>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</div>
+</body>
+</html>
 ```
 
 ## BeautifulSoup
@@ -108,31 +117,32 @@ else:
 第2個錯誤是主機伺服器沒有發現，urlopen將會發出URLError，由於伺服器是負責發出HTTP 狀態碼，所以HTTPError例外不會被丟出。
 
 ```python
-from urllib.request import urlopen 
-from urllib.error import HTTPError 
-from urllib.error import URLError
+import requests
+from requests import ConnectionError,HTTPError,Timeout
 
 try:
-    html = urlopen('https://pythonscrapingthisurldoesnotexist.com')
-except HTTPError as e:
-    print(e)
-except URLError as e:
-    print("沒有發現伺服器主機")
+    res = requests.get("https://pythonscrapingthisurldoesnotexist.com")    
+    res.raise_for_status()    
+except ConnectionError:
+    print('找不到伺服器')
+except HTTPError:
+    print('網頁找不到')
+except Timeout:
+    print('超過時間沒有回應')
 else:
-    print("沒有發生錯誤")
-    
+    print('沒有發生問題')    
 結果:==============================
-沒有發現伺服器主機
+找不到伺服器
 ```
 
-就算上面的2個錯誤，也不能肯定你要找的元素標籤有存在，如果元素標籤不存在網頁內，BeautifulSoup會傳出一個None的物件，當操作None物件時，將會丟出AttributeError例外。
+就算上面沒有產生2個錯誤，也不能肯定你要找的元素標籤有存在，如果元素標籤不存在網頁內，BeautifulSoup會傳出一個None的物件，當操作None物件時，將會丟出AttributeError例外。
 
 ```python
-from urllib.request import urlopen
+import requests
 from bs4 import BeautifulSoup
 
-html = urlopen('http://pythonscraping.com/pages/page1.html')
-bs = BeautifulSoup(html.read(), 'html.parser')
+res = requests.get('http://pythonscraping.com/pages/page1.html')
+bs = BeautifulSoup(res.text, 'html.parser')
 print(bs.header) #沒有header這個標籤
 print(bs.header.h1) #None存取屬性會丟出AttributeError
 
@@ -145,19 +155,19 @@ AttributeError: 'NoneType' object has no attribute 'h1'
 ### 解決沒有發現標籤的解決方式如下程式
 
 ```python
-from urllib.request import urlopen
+import requests
 from bs4 import BeautifulSoup
 
-html = urlopen('http://pythonscraping.com/pages/page1.html')
-bs = BeautifulSoup(html.read(), 'html.parser')
+res = requests.get('http://pythonscraping.com/pages/page1.html')
+bs = BeautifulSoup(res.read(), 'html.parser')
 
 try:
     badContent = bs.header.h1
 except AttributeError as e:
-    print('標籤沒有發現')
+    print('標籤header沒有發現')
 else:
     if badContent == None:
-        print('標籤沒有發現')
+        print('標籤h1沒有發現')
     else:
         print('找到標籤')
 

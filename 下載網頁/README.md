@@ -171,6 +171,29 @@ Traceback (most recent call last):
 requests.exceptions.HTTPError: 404 Client Error
 ```
 
+## 錯誤和例外處理
+- 伺服器找人到，或網路錯誤會throw requests.ConnectionError
+- 如果傳回的status code 不是 200,執行Response.raise_for_status()會throw requests.HTTPError
+- Timeout會傳出requests.Timeout
+- 所有的exception都繼承requests.exceptions.RequestException
+
+```python
+import requests
+from requests import ConnectionError,HTTPError,Timeout
+
+try:
+    res = requests.get("http://www.pythonscraping.com/pages/page1.html")    
+    res.raise_for_status()    
+except ConnectionError:
+    print('找不到伺服器')
+except HTTPError:
+    print('網頁找不到')
+except Timeout:
+    print('超過時間沒有回應')
+else:
+    print('沒有發生問題')
+```
+
 ## 實際操作
 1. 讀取雲端json(API)
 
