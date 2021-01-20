@@ -50,11 +50,11 @@ from bs4 import BeautifulSoup
 取出page1.html內的第一個h1元素
 
 ```
-from urllib.request import urlopen
+import requests
 from bs4 import BeautifulSoup
 
-html = urlopen('http://pythonscraping.com/pages/page1.html')
-bs = BeautifulSoup(html.read(), 'html.parser') #HTML content is then transformed into a BeautifulSoup object
+res = requests.get('http://pythonscraping.com/pages/page1.html')
+bs = BeautifulSoup(res.text, 'html.parser') #HTML content is then transformed into a BeautifulSoup object
 print(bs.h1)
 print(bs.html.body.h1)
 print(bs.html.h1)
@@ -67,7 +67,7 @@ print(bs.body.h1)
 <h1>An Interesting Title</h1>
 ```
 
-### bs = BeautifulSoup(html.read(), 'html.parser')
+### bs = BeautifulSoup(res.text, 'html.parser')
 BeautifulSoup必需使用2個引數,第一個引數是html的內容,第二個引數是解析方式,這裏使用的是基本的**html.parser**,另外還有2種方式方式
 
 1. 使用lxml
@@ -82,13 +82,13 @@ bs = BeautifulSoup(html.read(), 'lxml'
 2. 使用html5lib
 
 ```python
-bs = BeautifulSoup(html.read(), 'html5lib')
+bs = BeautifulSoup(res.text, 'html5lib')
 ```
 
 ## 確保連線正常和處理意外錯誤
 
 ```python
-html = urlopen('http://www.pythonscraping.com/pages/page1.html')
+res = requests.get('http://www.pythonscraping.com/pages/page1.html')
 ```
 
 上面這行程式有可能遇到2個錯誤
@@ -97,14 +97,15 @@ html = urlopen('http://www.pythonscraping.com/pages/page1.html')
 2. 主機伺服器沒有發現
 
 ### 解決網頁沒有發現
-第1個錯誤會產生HTTP錯誤,有可能是"404 Page Not Found"或是"500 Internal Server Error",當發生這個錯誤時urlopen()會丟出一個exception HTTPError, 我們就必需手動處理這個錯誤
+第1個錯誤會產生HTTP錯誤,有可能是"404 Page Not Found"或是"500 Internal Server Error",當發生這個錯誤時res.raise_for_status()會丟出一個exception HTTPError, 我們就必需手動處理這個錯誤
 
 ```python
-from urllib.request import urlopen
-from urllib.error import HTTPError
+import requests
+from requests import ConnectionError,HTTPError,Timeout
 
 try:
-    html = urlopen('http://www.pythonscraping.com/pages/page1.html')
+    res = requests.get('http://www.pythonscraping.com/pages/page1.html')
+    res.raise_for_status()
 except HTTPError as e:
     print(e)    
     #處理錯誤
@@ -114,7 +115,8 @@ else:
 ```
 
 ### 解決主機伺服器沒有發現
-第2個錯誤是主機伺服器沒有發現，urlopen將會發出URLError，由於伺服器是負責發出HTTP 狀態碼，所以HTTPError例外不會被丟出。
+
+第2個錯誤是主機伺服器沒有發現，request.get()將會發出ConnectionError
 
 ```python
 import requests
@@ -159,7 +161,7 @@ import requests
 from bs4 import BeautifulSoup
 
 res = requests.get('http://pythonscraping.com/pages/page1.html')
-bs = BeautifulSoup(res.read(), 'html.parser')
+bs = BeautifulSoup(res.text, 'html.parser')
 
 try:
     badContent = bs.header.h1
@@ -172,24 +174,27 @@ else:
         print('找到標籤')
 
 結果:=========================
-標籤沒有發現
+標籤header沒有發現
 ```
 
 ### 整合所有問題並簡化程式碼
 
 ```python
-from urllib.request import urlopen 
-from urllib.error import HTTPError 
+import requests
+from requests import ConnectionError,HTTPError,Timeout
 from bs4 import BeautifulSoup
 
 def getTitle(url):
     try:
-        html = urlopen(url)
+        res = requests.get(url)
+        res.raise_for_status()
+    except ConnectionError as e:
+        return None
     except HTTPError as e:
         return None
     
     try:
-        bs = BeautifulSoup(html.read(), 'html.parser')
+        bs = BeautifulSoup(res.text, 'html.parser')
         title = bs.body.h1        
     except AttributeError as e:
         return None
@@ -201,8 +206,7 @@ title = getTitle('http://www.pythonscraping.com/pages/page1.html')
 if title == None:
     print("沒有發現標籤")
 else:
-    print(title)
-    
+    print(title)    
 結果:==================================
 <h1>An Interesting Title</h1>
 ```
