@@ -14,6 +14,8 @@ bs.find_all('table')[4].find_all('tr')[2].find('td').find_all('div')[1].find('a'
 - 學習如何從元素串列中取得資料
 - 學習如何解析元素樹
 
+下面為html標籤套用css的語法
+
 ```html
 <span class="green"></span>
 
@@ -28,7 +30,17 @@ bs.find_all('table')[4].find_all('tr')[2].find('td').find_all('div')[1].find('a'
 http://www.pythonscraping.com/pages/warandpeace.html
 ```
 
-透過網頁開發工具(chrome 開發人員工具)，可以搜尋到class="red"有45個標籤,class="green"有42個標籤。如下
+透過網頁開發工具(chrome 開發人員工具)，可以搜尋到class="red"有29個標籤,class="green"有38個標籤。如下
+
+#### 使用chrome搜尋步驟
+1. 使用chrome
+2. 進入網頁
+3. 使用開發人員工具
+4. 使用開發人員工具的Network
+5. chrome重新載入網頁
+6. 使用Network內的Search
+7. 點選搜尋結果
+
 
 ```html
 <span class="red">Heavens! what a virulent attack!</span> replied 
@@ -37,32 +49,36 @@ not in the least disconcerted by this reception.
 ```
 
 ## 學習如何透過屬性取得資料,元素串列中取得資料
-
 #### 先取得所有頁面內容，並建立BeautifulSoup物件 
 
 ```python
-from urllib.request import urlopen
+import requests
 from bs4 import BeautifulSoup
 
-html = urlopen('http://www.pythonscraping.com/pages/warandpeace.html')
-bs = BeautifulSoup(html.read(), 'html.parser')
-print(type(bs))
+res = requests.get('http://www.pythonscraping.com/pages/warandpeace.html')
+bs = BeautifulSoup(res.text, 'html.parser')
 
 結果:=======================
 <class 'bs4.BeautifulSoup'>
 ```
 
-建立BeautifulSoup實體
+以上為建立BeautifulSoup實體
 
-#### 使用 find_all function
+#### 使用 find_all() function
+
+語法: find_all(name, attrs, recursive, string, limit, **kwargs)
+
+find_all()方法，可以取得所有符合條件的Tag實體，並被包裝於ResultSet實體內
 
 ```python
-nameList = bs.findAll('span', {'class':'green'})
+nameList = bs.find_all(name='span', attrs={'class':'green'})
+print(type(nameList))
 for name in nameList:
     print(type(name))
     print(name.get_text())
     
 結果:=======================
+<class 'bs4.element.ResultSet'>
 <class 'bs4.element.Tag'>
 Anna
 Pavlovna Scherer
@@ -71,33 +87,40 @@ Empress Marya
 Fedorovna
 <class 'bs4.element.Tag'>
 Prince Vasili Kuragin
-<class 'bs4.element.Tag'>
-Anna Pavlovna
-<class 'bs4.element.Tag'>
-St. Petersburg
-<class 'bs4.element.Tag'>
-the prince
 ...
 ```
 
-使用BeautifulSoup實體findAll(標籤名稱, 標籤屬性)方法，取得list物件。list內是Tag實體，再使用Tag實體的get_text()方法取得元素內容。
+使用BeautifulSoup實體find_all(標籤名稱, 標籤屬性)方法，取得ResultSet物件。
+
+ResultSet內是Tag實體，再使用Tag實體的get_text()方法取得元素內容。
+
+get_text()方法只會取得所有的元素內容，而排除標籤名稱和所有的標籤屬性
 
 #### find() and find_all()
 
-官方文件說明find(),find_all()
-
 ```
-find_all(tag, attributes, recursive, text, limit, keywords)
-find(tag, attributes, recursive, text, keywords)
-```
+find_all()語法:find_all(name, attrs, recursive, string, limit, **kwargs)
 
-#### find_all()取得多個標籤
+find()語法:find(name, attrs, recursive, string, **kwargs)
+
+````
+
+2個方法非常相似，find()語法，沒有limit的引數，因為find()方法只可以取得一個Tag實體
+
+2個方法，95%只會使用到name,attrs的引數名稱
+
+#### find_all()方法，搜尋不同的標籤名稱
+
+name引數也可以使用list的語法，一次取得多到不同的標籤名稱
 
 ```python
 .find_all(['h1','h2','h3','h4','h5','h6'])
 ```
 
-#### find_all()取得多屬性內容
+#### find_all(),搜尋不同的屬性名稱
+
+attrs引數-做用是的dict的語法，可以一次搜尋多個條件
+attrs引數的dict內的vlaue可以使用set, 搜尋不同的屬性value
 
 ```python
 .find_all('span', {'class':{'green', 'red'}})
@@ -105,30 +128,62 @@ find(tag, attributes, recursive, text, keywords)
 
 #### 引數 recursive
 
-recursive引數預設是False，就是只搜尋最上層的標籤，不搜尋標籤內容的內容. 
+recursive引數預設是True，向內搜尋. 
 
 #### 引數 text
-搜尋元素內容有包含text內容的標籤
+
+text的目的是搜尋元素內容有the prince`有多少個?`
+最終取得的是NavigableString實體
 
 ```
 nameList = bs.find_all(text='the prince')
+print(type(nameList))
 print(len(nameList))
-
-結果:==========================
+print("=================")
+for name in nameList:
+    print(type(name))
+    print(name)
+    
+輸出:===================
+<class 'bs4.element.ResultSet'>
 7
+=================
+<class 'bs4.element.NavigableString'>
+the prince
+<class 'bs4.element.NavigableString'>
+the prince
+<class 'bs4.element.NavigableString'>
+the prince
+<class 'bs4.element.NavigableString'>
+the prince
+<class 'bs4.element.NavigableString'>
+the prince
+<class 'bs4.element.NavigableString'>
+the prince
+<class 'bs4.element.NavigableString'>
+the prince
 ```
 
 #### 引數 limit 限定取出的數量
 
 預設為沒有限定
 
+如果有設定是取出最前面幾個
+
 #### 引數 keyword
 
+keyword引數最常使用的是id,class_
+
 ```python
-title = bs.find(id='title')
+title = bs.find(id='title', class_='text')
 ```
 
-取出有屬性id="title"的元素
+上方範例，取出同時有屬性id='title'和class_='text'的元素
+
+上方範例只會取出一個標籤，原因是html內的id屬性值是不可以重複的
+
+```python
+```
 
 範例:  
 
@@ -180,15 +235,12 @@ bs.find_all(class_='green')
 bs.find_all('', {'class':'green'})
 ```
 
-#### 取出有多個屬性的元素
-
-```python
-title = bs.find_all(id='title', class_='text')
-```
 
 ## 解析元素樹
 
-find_all function 功能可以利用標籤名和屬性擷取資料。但是如果要利用樹狀結構取得資料，可以利用連續串接的手法。
+find_all function功能是利用標籤名和屬性擷取資料。
+
+但是如果要利用樹狀結構取得資料，可以利用連續串接的手法。
 
 ```
 bs.tag.subTag.anotherSubTag
@@ -207,23 +259,41 @@ http://www.pythonscraping.com/pages/page3.html
 
 #### 操控子元素和子孫元素
 
-子元素，代表是父元素的下一個元素，子孫元素代表的是父元素下的所有元素。一般BeautifulSoup function是使用子孫元素，bs.body.h1 所代表的意思尋找body內的第一個h1元素。
+子元素，代表是父元素的下一個元素，子孫元素代表的是父元素下的所有元素。
 
-相同的，bs.div.find_all('img') 將尋找div內第一個img元素。
+例如這個範例，tr是table的`子元素`，tr,th,td,img和span全部是table的`子孫元素`
 
-如果只想要直接子元素，請使用 .children屬性
+一般BeautifulSoup function是使用子孫元素。
+
+bs.body.h1 所代表的意思尋找body內所有的子孫元素的第一個h1元素。
+
+相同的，bs.div.find_all('img') 將尋找整個html的第一個div內，所有的子孫元素img
+
+所以如果只想要直接取得所有的子元素，請使用.children屬性
 
 ```python
-from urllib.request import urlopen
+import requests
 from bs4 import BeautifulSoup
 
-html = urlopen('http://www.pythonscraping.com/pages/page3.html')
-bs = BeautifulSoup(html, 'html.parser')
+res = requests.get('http://www.pythonscraping.com/pages/page3.html')
+bs = BeautifulSoup(res.text, 'html.parser')
+print(bs.find('table',{'id':'giftList'}).__class__)
+trList = bs.find('table',{'id':'giftList'}).children
+print(trList.__class__)
 
-for child in bs.find('table',{'id':'giftList'}).children:
+for child in trList:
+    print(child.__class__)
     print(child)
-    
+    print("================")
+        
 結果:=====================================
+<class 'bs4.element.Tag'>
+<class 'list_iterator'>
+<class 'bs4.element.NavigableString'>
+
+
+================
+<class 'bs4.element.Tag'>
 <tr><th>
 Item Title
 </th><th>
@@ -233,8 +303,12 @@ Cost
 </th><th>
 Image
 </th></tr>
+================
+<class 'bs4.element.NavigableString'>
 
 
+================
+<class 'bs4.element.Tag'>
 <tr class="gift" id="gift1"><td>
 Vegetable Basket
 </td><td>
@@ -245,6 +319,9 @@ $15.00
 </td><td>
 <img src="../img/gifts/img1.jpg"/>
 </td></tr>
+================
+<class 'bs4.element.NavigableString'>
+
 
 .
 .
@@ -254,16 +331,28 @@ $15.00
 如果使用 .descendants屬性,會依序尋找所有子元素
 
 ```python
-from urllib.request import urlopen
+import requests
 from bs4 import BeautifulSoup
 
-html = urlopen('http://www.pythonscraping.com/pages/page3.html')
-bs = BeautifulSoup(html, 'html.parser')
+res = requests.get('http://www.pythonscraping.com/pages/page3.html')
+bs = BeautifulSoup(res.text, 'html.parser')
 
-for child in bs.find('table',{'id':'giftList'}).descendants:
+trList = bs.find('table',{'id':'giftList'}).descendants
+print(trList.__class__)
+
+for child in trList:
+    print(child.__class__)
     print(child)
+    print("================")
     
+        
 結果:===========================
+<class 'generator'>
+<class 'bs4.element.NavigableString'>
+
+
+================
+<class 'bs4.element.Tag'>
 <tr><th>
 Item Title
 </th><th>
@@ -273,45 +362,71 @@ Cost
 </th><th>
 Image
 </th></tr>
+================
+<class 'bs4.element.Tag'>
 <th>
 Item Title
 </th>
+================
+<class 'bs4.element.NavigableString'>
 
 Item Title
 
+================
+<class 'bs4.element.Tag'>
 <th>
 Description
 </th>
+================
+<class 'bs4.element.NavigableString'>
 
 Description
 
+================
+<class 'bs4.element.Tag'>
 <th>
 Cost
 </th>
+================
+<class 'bs4.element.NavigableString'>
 
 Cost
 
+================
+<class 'bs4.element.Tag'>
 <th>
 Image
 </th>
+================
+<class 'bs4.element.NavigableString'>
 
+Image
+
+================
+.
+.
+.
 ```
 
 #### 操控同一階層元素
 
-使用BeautifulSoup next_siblings() function
+-next_siblings() 後面的同階層
+-previous_siblings() 前面的同階層
 
 ```python
-from urllib.request import urlopen
+import requests
 from bs4 import BeautifulSoup
 
-html = urlopen('http://www.pythonscraping.com/pages/page3.html')
-bs = BeautifulSoup(html, 'html.parser')
+res = requests.get('http://www.pythonscraping.com/pages/page3.html')
+bs = BeautifulSoup(res.text, 'html.parser')
 
-for child in bs.find('table',{'id':'giftList'}).tr.next_siblings: #先找到table內第一個tr,並找尋所有後面相同階層的元素
+print(bs.find('table',{'id':'giftList'}).tr.next_siblings.__class__)
+
+for child in bs.find('table',{'id':'giftList'}).tr.next_siblings: #table內,第一個tr,相同階層的tr, 並不包含第一個
     print(child)
 
 結果:===========================
+<class 'generator'>
 <tr class="gift" id="gift1"><td>
 Vegetable Basket
 </td><td>
@@ -339,10 +454,10 @@ $10,000.52
 .
 ```
 
-相似尋找多個的功能有:
+尋找多個的功能有:
 - next_siblings,previous_siblings
 
-相似尋找一個的功能有:
+尋找一個的功能有:
 - next_sibling,previous_sibling
 
 #### 操控父元素
