@@ -1,6 +1,6 @@
 ## Python Scraping
 0. [下載網頁](./下載網頁)
-1. BeautifulSoup(./BeautifulSoup)
+1. [BeautifulSoup](./BeautifulSoup)
 2. [建立第一個網頁爬蟲](./建立第一個網頁爬蟲)
 3. [HTML的剖析](./HTML的剖析)
 4. [爬行](./爬行)
