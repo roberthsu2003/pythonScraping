@@ -1,16 +1,33 @@
 # 儲存資料
+資料只是顯示在終端機上是不夠，最好的方式是將收集的資料可以永久保持下來，這個方式就是儲存成為檔案。
 ## 下載多媒體檔案
+下載多媒體的檔案有2種方式，一種是下載儲存在電腦上，一種是儲存這些媒體所在的網址。
+僅儲存多媒體所在的位址的優點:
+
+- 收集速度加快，並僅需要很少的頻寬
+- 由於只是儲存網址，所以所占的空間將會很小
+- 撰寫的程式將會比較容易，因為只有儲存網址，不需要下載檔案
+- 可避免下載到大型的檔案
+
+
 ### 下載一個檔案
-下載一個已知的檔案，並知道檔案名稱和副檔名
+
+使用urllib.request.urlretrieve
+
+使用這樣的方式適合下載一個已知的檔案，並知道檔案名稱和副檔名
+
 ```python
 from urllib.request import urlretrieve
-from urllib.request import urlopen
+import requests
 from bs4 import BeautifulSoup
 
-html = urlopen('http://www.pythonscraping.com')
-bs = BeautifulSoup(html, 'html.parser')
+res = requests.get('http://www.pythonscraping.com')
+bs = BeautifulSoup(res.text, 'html.parser')
 imageLocation = bs.find('a',{'id':'logo'}).find('img')['src']
 urlretrieve(imageLocation, 'logo.jpg')
+
+輸出:=================
+('logo.jpg', <http.client.HTTPMessage at 0x7fbf94091c70>)
 ```
 
 ### 下載多個檔案，並自動依路徑存檔
