@@ -47,6 +47,8 @@ deserunt mollit anim id est laborum.
 
 ### 載入BeautifulSoup套件
 
+- 使用BeautifulSoup實體方法prettify(), 輸出修飾過的html
+
 ```python
 from bs4 import BeautifulSoup
 soup = BeautifulSoup(html_doc,'html.parser')
@@ -97,26 +99,39 @@ deserunt mollit anim id est laborum.
 
 ### 導覽目前內容
 
+- 一些簡單方式導覽內容
+
+#### 型別bs4.element.Tag
+
 ```python
+
 soup.title
 
 輸出:===========
 <title>A Useful Page</title>
 ```
 
+#### Tag實體屬性name
+
 ```python
+
 soup.title.name
 
 輸出:===========
 'title'
 ```
 
+#### Tag實體屬性string
+
 ```python
+
 soup.title.string
 
 輸出:===========
 'A Useful Page'
 ```
+
+#### Tag實體屬性parent
 
 ```python
 soup.title.parent.name
@@ -139,6 +154,8 @@ soup.p
 <p class="title"><b>The Dormouse's story</b></p>
 ```
 
+#### Tag['標籤屬性'],傳出list
+
 ```python
 soup.p['class']
 
@@ -155,6 +172,8 @@ soup.a
 </a>
 ```
 
+#### BeautifulSoup實體方法find_all(), 傳出ResultSet實體
+
 ```python
 soup.find_all('a')
 
@@ -170,6 +189,8 @@ soup.find_all('a')
  </a>]
 ```
 
+#### eautifulSoup實體方法find(), 傳出Tag實體
+
 ```python
 soup.find(id='link3')
 
@@ -180,6 +201,10 @@ Tillie
 ```
 
 ### 取出< a >標籤所有連結網址
+
+- ResultSet實體是集合物件
+- 取出的物件是Tag實體
+- Tag實體方法get(),取出標籤屬性值
 
 ```python
 for link in soup.find_all('a'):
@@ -192,6 +217,8 @@ http://example.com/tillie
 ```
 
 ### 取出所有的標籤元素所有文字內容
+
+#### BeautifulSoup實體方法get_text()
 
 ```python
 print(soup.get_text())
