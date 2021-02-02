@@ -182,9 +182,6 @@ title = bs.find(id='title', class_='text')
 
 上方範例只會取出一個標籤，原因是html內的id屬性值是不可以重複的
 
-```python
-```
-
 範例:  
 
 ```python
@@ -219,7 +216,7 @@ Annette Scherer."
 
 get_text()，取出的內容如果有標籤，會全部移除
 
-下方是相同的功能:
+下方是相同的功能, 只取出id屬性值為text的標籤:
 
 ```python
 bs.find_all(id='text')
@@ -235,18 +232,29 @@ bs.find_all(class_='green')
 bs.find_all('', {'class':'green'})
 ```
 
+### BeautifulSoup常用的物件
+- BeautifulSoup 物件
+	- 例如上方的bs實體
+- ResultSet 物件
+- Tag 物件
+- NavigableString 物件
+- Comment 物件
+
 
 ## 解析元素樹
 
 find_all function功能是利用標籤名和屬性擷取資料。
 
-但是如果要利用樹狀結構取得資料，可以利用連續串接的手法。
+但是如果要利用樹狀結構的位置取得資料，可以利用下方語法，使用連續串接的手法，這樣的手法主要是抓取子元素，並且只抓取第一個元素
 
 ```
 bs.tag.subTag.anotherSubTag
 ```
 
+以下的範例將介紹的是抓取父元素,同階層元素
+
 ##### 範例網頁
+
 ```
 http://www.pythonscraping.com/pages/page3.html
 ```
@@ -269,7 +277,7 @@ bs.body.h1 所代表的意思尋找body內所有的子孫元素的第一個h1元
 
 相同的，bs.div.find_all('img') 將尋找整個html的第一個div內，所有的子孫元素img
 
-所以如果只想要直接取得所有的子元素，請使用.children屬性
+所以如果只想要取得所有的子元素，請使用.children屬性
 
 ```python
 import requests
