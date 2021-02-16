@@ -6,15 +6,15 @@
 以下範例取出一個頁面的所有超連結，並收集起來
 
 ```python
-from urllib.request import urlopen
+import requests
 from bs4 import BeautifulSoup
 
-html = urlopen('http://en.wikipedia.org/wiki/Kevin_Bacon')
-bs = BeautifulSoup(html, 'html.parser')
+response = requests.get('http://en.wikipedia.org/wiki/Kevin_Bacon')
+bs = BeautifulSoup(response.text,'html.parser')
 for link in bs.find_all('a'):
-   if 'href' in link.attrs:
-    print(link.attrs['href'])
-    
+    if 'href' in link.attrs:
+        print(link.attrs['href'])
+            
 結果:=============================
 /wiki/Wikipedia:Protection_policy#semi
 #mw-head
@@ -39,6 +39,8 @@ http://baconbros.com/
 /wiki/Balto_(film)
 /wiki/Sleepers
 /wiki/The_Woodsman_(2004_film)
+/wiki/Animal_House
+/wiki/Diner_(1982_film)
 ```
 
 觀察所要搜尋的內容
@@ -48,13 +50,13 @@ http://baconbros.com/
 - 連結的開始一定包含/wiki/
 
 ```
-from urllib.request import urlopen
+import requests
 from bs4 import BeautifulSoup
 import re
 
-html = urlopen('http://en.wikipedia.org/wiki/Kevin_Bacon')
-bs = BeautifulSoup(html, 'html.parser')
-for link in bs.find('div',{'id':'bodyContent'}).find_all('a', href=re.compile('^(/wiki/)((?!:).)*$')):
+response = requests.get('http://en.wikipedia.org/wiki/Kevin_Bacon')
+bs = BeautifulSoup(response.text,'html.parser')
+for link in bs.find('div',{'id':'bodyContent'}).find_all('a', href=re.compile('^(/wiki/)((?!:).)*$')):  #前面要有'/wiki/',後面不可以包含':'的所有字元
     if 'href' in link.attrs:
         print(link.attrs['href'])
 
