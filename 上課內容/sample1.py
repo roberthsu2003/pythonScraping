@@ -1,4 +1,5 @@
 from PERSON import Person as P
+from PERSON import sayHello
 
 someOne = P('張xx',170,70)
 print(someOne.name)
@@ -11,3 +12,6 @@ print(someTwo.name)
 print(someTwo.height)
 print(someTwo.weight)
 print('bmi:',someTwo.bmi())
+
+sayHello(someOne.name)
+sayHello(someTwo.name)
