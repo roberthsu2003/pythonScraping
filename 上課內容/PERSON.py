@@ -7,3 +7,4 @@ class Person:
 
     def bmi(self):
         return self.weight / ((self.height / 100) ** 2)
+
