@@ -1,6 +1,8 @@
 ## 使用API
 ### 氣象開放平台
 
+[氣象開放平台開發指南](https://opendata.cwb.gov.tw/devManual/insrtuction)
+
 ```python
 import requests
 import json
