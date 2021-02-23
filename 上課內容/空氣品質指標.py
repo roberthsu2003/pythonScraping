@@ -6,8 +6,11 @@
 
 from tkinter import *
 
+def buttonClick():
+    print("button click")
+
 def createWindow(w):
-    btn = Button(w,text="取得目前AQI指數",padx=20,pady=20)
+    btn = Button(w,text="取得目前AQI指數",padx=20,pady=20,command=buttonClick)
     btn.pack()
 
 
