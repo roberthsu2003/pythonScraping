@@ -7,8 +7,9 @@
 from tkinter import *
 
 def createWindow(w):
-    print(w)
-    print("createWindow")
+    btn = Button(w,text="取得目前AQI指數",padx=20,pady=20)
+    btn.pack()
+
 
 if __name__ == "__main__":
     window=Tk()
