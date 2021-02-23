@@ -8,7 +8,10 @@ from tkinter import *
 import requests
 
 class AirWindow(Tk):
-    pass
+    def __init__(self):
+        super().__init__()
+        btn = Button(self, text="取得目前AQI指數", padx=20, pady=20, command=buttonClick)
+        btn.pack()
 
 url = "https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json"
 def buttonClick():
@@ -27,14 +30,13 @@ def buttonClick():
         print("時間:", record['ImportDate'])
         print("========")
 
-def createWindow(w):
-    btn = Button(w,text="取得目前AQI指數",padx=20,pady=20,command=buttonClick)
-    btn.pack()
+
+
 
 
 if __name__ == "__main__":
     window=AirWindow()
     window.title("空氣品質指標")
     window.geometry("400x150")
-    createWindow(window)
+
     window.mainloop()
