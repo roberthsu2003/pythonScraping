@@ -3,7 +3,7 @@
 
 ## 安裝requests
 ```python
-$ python -m pip install requests
+$ pip install requests
 ```
 
 ## 請求網頁(Request)
