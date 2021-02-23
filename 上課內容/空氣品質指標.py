@@ -6,8 +6,13 @@
 
 from tkinter import *
 
+def createWindow(w):
+    print(w)
+    print("createWindow")
+
 if __name__ == "__main__":
     window=Tk()
     window.title("空氣品質指標")
     window.geometry("400x150")
+    createWindow(window)
     window.mainloop()
