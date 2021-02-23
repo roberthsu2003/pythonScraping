@@ -4,8 +4,10 @@
 使用視窗顯示
 '''
 
-import tkinter
+from tkinter import *
 
 if __name__ == "__main__":
-    window=tkinter.Tk()
+    window=Tk()
+    window.title("空氣品質指標")
+    window.geometry("400x150")
     window.mainloop()
