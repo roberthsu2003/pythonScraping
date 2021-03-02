@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b5f05aa1-bd7e-4550-9c1d-18691cf2e951" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/空氣品質指標1.py" beforeDir="false" afterPath="$PROJECT_DIR$/空氣品質指標1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +32,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.空氣品質指標1">
+  <component name="RunManager" selected="Python.空氣品質指標">
     <configuration name="空氣品質指標" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="上課內容" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -99,8 +98,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.空氣品質指標1" />
         <item itemvalue="Python.空氣品質指標" />
+        <item itemvalue="Python.空氣品質指標1" />
         <item itemvalue="Python.sample1" />
       </list>
     </recent_temporary>
@@ -352,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614068770785</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="modify">
+      <created>1614069525006</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1614069525006</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
