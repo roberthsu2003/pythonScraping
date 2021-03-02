@@ -2,6 +2,7 @@ import requests
 from requests import ConnectionError,HTTPError,Timeout
 
 url = "https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json"
+newRecords = [] #建立要傳出的list
 
 def getAirData():
     try:
@@ -27,7 +28,6 @@ def getAirData():
 
     allData = response.json()  # dictinary
     records = allData['records']  # list
-    newRecords = []  #建立要傳出的list
     for record in records:  # record是dictionary
         newItem = {}
         newItem["監測點"] = record["SiteName"]
@@ -38,3 +38,9 @@ def getAirData():
         newRecords.append(newItem)
 
     return newRecords
+
+def getPositionList():
+    positionList = []
+    for itemDic in newRecords:
+        positionList.append(itemDic['監測點'])
+    return tuple(positionList)
