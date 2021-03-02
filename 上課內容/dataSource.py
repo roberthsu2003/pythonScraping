@@ -1,0 +1,2 @@
+def getAirData():
+    return None
