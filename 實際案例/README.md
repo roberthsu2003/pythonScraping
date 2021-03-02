@@ -9,4 +9,6 @@
 
 5. [下載政府開放平台資料](./政府開放平台/空氣品質指標.ipynb)
 
-6. [PTT文章下載](./ptt/ptt文章.ipynb)
+6. [PTT文章下載(爬行多個頁面)](./ptt/ptt文章.ipynb)
+
+7. [Yahoo本周新片](./yahoo_thisWeek_movie/yahooMovie.ipynb)
