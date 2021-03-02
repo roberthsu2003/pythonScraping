@@ -48,3 +48,8 @@ def getPositionList():
         positionList.append(itemDic['監測點'])
     return tuple(positionList)
 
+def getOneSiteData(name):
+    for itemDic in newRecords:
+        if itemDic['監測點'] == name:
+            return itemDic
+
