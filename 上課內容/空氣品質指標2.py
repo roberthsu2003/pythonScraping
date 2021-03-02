@@ -4,6 +4,7 @@
 '''
 
 from tkinter import Tk
+from tkinter import Frame
 import dataSource
 
 
@@ -21,6 +22,11 @@ class AirWindow(Tk):
         self.title("台灣各地空氣品質指標")
         self.geometry('300x100+200+200')
         self.resizable(width=0, height=0)
+
+        #建立label Frame
+        labelFrame = Frame(self,bg='#A6E2D4',height=100,width=300)
+        labelFrame.pack()
+
 
 
 if __name__ == '__main__':
