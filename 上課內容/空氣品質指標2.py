@@ -3,8 +3,7 @@
 應用程式說明
 '''
 
-from tkinter import Tk
-from tkinter import Frame
+from tkinter import *
 import dataSource
 
 
@@ -20,11 +19,13 @@ class AirWindow(Tk):
 
         #建立視窗
         self.title("台灣各地空氣品質指標")
-        self.geometry('300x100+200+200')
+        #self.geometry('300x100+200+200')
         self.resizable(width=0, height=0)
 
         #建立label Frame
-        labelFrame = Frame(self,bg='#A6E2D4',height=100,width=300)
+        labelFrame = Frame(self)
+        Label(labelFrame,text='台灣各地空氣品質指標',font=("Arial", 20)).pack(side=LEFT,padx=20,pady=20)
+        Label(labelFrame, text=f'日期時間:{self.airData[0]["時間"]}', font=("Arial", 20)).pack(side=RIGHT,padx=20, pady=20)
         labelFrame.pack()
 
 
