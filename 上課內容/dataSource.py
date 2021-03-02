@@ -27,10 +27,14 @@ def getAirData():
 
     allData = response.json()  # dictinary
     records = allData['records']  # list
+    newRecords = []  #建立要傳出的list
     for record in records:  # record是dictionary
-        print("監測點:", record["SiteName"])
-        print("城市:", record['County'])
-        print("AQI:", record['AQI'])
-        print("狀態:", record['Status'])
-        print("時間:", record['ImportDate'])
-        print("========")
+        newItem = {}
+        newItem["監測點"] = record["SiteName"]
+        newItem["城市"] = record['County']
+        newItem["AQI"] = record['AQI']
+        newItem["狀態"] = record['Status']
+        newItem["時間"] = record['ImportDate']
+        newRecords.append(newItem)
+
+    return newRecords
