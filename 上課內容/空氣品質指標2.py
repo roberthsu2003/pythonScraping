@@ -41,6 +41,20 @@ class AirWindow(Tk):
         Label(displayFrame, text=f'日期時間:{self.airData[0]["時間"]}', font=("Arial", 14)).pack(side=RIGHT, padx=20, pady=20)
         displayFrame.pack(fill=X)
 
+        # 建立list Frame
+        listFrame = Frame(self)
+        Label(listFrame,text='監測點', font=("Arial", 14)).grid(row=0,column=0)
+        Label(listFrame, text=selectedSiteData['監測點'], font=("Arial", 14)).grid(row=0, column=1)
+        Label(listFrame, text='城市', font=("Arial", 14)).grid(row=1, column=0)
+        Label(listFrame, text=selectedSiteData['城市'], font=("Arial", 14)).grid(row=1, column=1)
+        Label(listFrame, text='AQI', font=("Arial", 14)).grid(row=2, column=0)
+        Label(listFrame, text=selectedSiteData['AQI'], font=("Arial", 14)).grid(row=2, column=1)
+        Label(listFrame, text='狀態', font=("Arial", 14)).grid(row=3, column=0)
+        Label(listFrame, text=selectedSiteData['狀態'], font=("Arial", 14)).grid(row=3, column=1)
+        Label(listFrame, text='時間', font=("Arial", 14)).grid(row=4, column=0)
+        Label(listFrame, text=selectedSiteData['時間'], font=("Arial", 14)).grid(row=4, column=1)
+        listFrame.pack(fill=X)
+
 
 
 if __name__ == '__main__':
