@@ -86,10 +86,10 @@ class AirWindow(Tk):
         locale.setlocale(locale.LC_TIME, 'zh_tw')
         sft = "%Y-%m-%d %H:%M:%S"
         monitorTime = time.strptime(dateString[:19],sft)
-        nextTime = time.mktime(monitorTime) + 30*60
+        nextTime = time.mktime(monitorTime) + 30*60 #將struct_time轉為Epoch,Epoch是float,並加30分
         fmt = "觀測時間:%Y年%b%d日%A %p%I:%M:%S"
         fmt1 = "下次觀測:%Y年%b%d日%A %p%I:%M:%S"
-        return time.strftime(fmt,monitorTime),time.strftime(fmt1,time.localtime(nextTime))
+        return time.strftime(fmt,monitorTime),time.strftime(fmt1,time.localtime(nextTime)) #使用time.localtime(nextTime),將Epoch轉為struct_time
 
 
 
