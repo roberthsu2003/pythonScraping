@@ -50,7 +50,7 @@ def getOneSiteData(name):
         if itemDic['監測點'] == name:
             return itemDic
 
-print(__name__)
+
 
 __all__ = ["newRecords", "getAirData","getPositionList", "getOneSiteData"]
 

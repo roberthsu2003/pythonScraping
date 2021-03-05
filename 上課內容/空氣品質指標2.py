@@ -15,8 +15,7 @@ class AirWindow(Tk):
         self.airData=getAirData()
         if self.airData == None:
             print("下載錯誤")
-        else:
-           print(self.airData)
+
 
         #建立視窗
         self.title("台灣各地空氣品質指標")
@@ -29,6 +28,7 @@ class AirWindow(Tk):
         #建立label Frame
         titleFrame = Frame(mainFrame)
         Label(titleFrame,text='台灣各地空氣品質指標',font=("Arial", 20)).pack(padx=20,pady=20)
+        AirWindow.convertDateFormat(self.airData[0]["時間"])
         Label(titleFrame, text=f'日期時間:{self.airData[0]["時間"]}', font=("Arial", 14)).pack(padx=20, pady=20)
         titleFrame.pack()
 
@@ -42,8 +42,6 @@ class AirWindow(Tk):
         selectedSiteName = positionSelected.get()
         selectedSiteData = getOneSiteData(selectedSiteName)
         positionSelected.bind("<<ComboboxSelected>>",self.userSelected)
-        print(selectedSiteData)
-
         displayFrame.pack(fill=X)
 
         # 建立list Frame
@@ -77,6 +75,10 @@ class AirWindow(Tk):
         self.aqiLabel.configure(text=selectedSiteData['AQI'])
         self.stateLabel.configure(text=selectedSiteData['狀態'])
         self.timeLabel.configure(text=selectedSiteData['時間'])
+
+    @classmethod
+    def convertDateFormat(cls,dateString):
+        print(dateString)
 
 
 
