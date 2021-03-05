@@ -32,20 +32,22 @@ class AirWindow(Tk):
         titleFrame = Frame(mainFrame)
         Label(titleFrame,text='台灣各地空氣品質指標',font=("Arial", 20,'bold'),fg='#555555').pack(padx=20,pady=20)
         fomatTime,nextFomatTime = AirWindow.convertDateFormat(self.airData[0]["時間"])
-        Label(titleFrame, text=f'{fomatTime}', font=("Arial", 8)).pack()
-        Label(titleFrame, text=f'{nextFomatTime}', font=("Arial", 8)).pack()
+        self.nowLabel = Label(titleFrame, text=f'{fomatTime}', font=("Arial", 8))
+        self.nowLabel.pack()
+        self.nextLabel = Label(titleFrame, text=f'{nextFomatTime}', font=("Arial", 8))
+        self.nextLabel.pack()
         titleFrame.pack()
 
         #建立display Frame
         displayFrame = Frame(mainFrame)
         Label(displayFrame, text='請選擇監測點:', font=("Arial", 20),fg='#999999').pack(side=LEFT, padx=10, pady=20)
-        positionSelected = ttk.Combobox(displayFrame, width=10, font=("Arial", 20))
-        positionSelected['values'] = getPositionList()
-        positionSelected.pack(side=LEFT)
-        positionSelected.current(0) #選擇預設第一筆資料
-        selectedSiteName = positionSelected.get()
+        self.positionSelected = ttk.Combobox(displayFrame, width=10, font=("Arial", 20))
+        self.positionSelected['values'] = getPositionList()
+        self.positionSelected.pack(side=LEFT)
+        self.positionSelected.current(0) #選擇預設第一筆資料
+        selectedSiteName = self.positionSelected.get()
         selectedSiteData = getOneSiteData(selectedSiteName)
-        positionSelected.bind("<<ComboboxSelected>>",self.userSelected)
+        self.positionSelected.bind("<<ComboboxSelected>>",self.userSelected)
         displayFrame.pack(fill=X)
 
         # 建立list Frame
@@ -72,6 +74,7 @@ class AirWindow(Tk):
 
     #combobox的事件接收
     def userSelected(self,event):
+        print("userSelected")
         selectedSiteName = event.widget.get()
         selectedSiteData = getOneSiteData(selectedSiteName)
         self.moniterLabel.configure(text=selectedSiteData['監測點'])
@@ -85,6 +88,18 @@ class AirWindow(Tk):
         self.airData = getAirData()
         if self.airData == None:
             print("下載錯誤")
+
+        selectedSiteName = self.positionSelected.get()
+        selectedSiteData = getOneSiteData(selectedSiteName)
+        self.moniterLabel.configure(text=selectedSiteData['監測點'])
+        self.cityLabel.configure(text=selectedSiteData['城市'])
+        self.aqiLabel.configure(text=selectedSiteData['AQI'])
+        self.stateLabel.configure(text=selectedSiteData['狀態'])
+        self.timeLabel.configure(text=selectedSiteData['時間'])
+
+        fomatTime,nextFomatTime = AirWindow.convertDateFormat(self.airData[0]["時間"])
+        self.nowLabel.configure(text=fomatTime)
+        self.nextLabel.configure(text=nextFomatTime)
 
 
 
@@ -108,13 +123,14 @@ def calulateTime():
     #時間到更新
     if interval <= 0:
         window.updateData()
-
-    minutes,seconds = divmod(interval,60)
-    print(f"{int(minutes)}:{int(seconds)}")
+    else:
+        minutes,seconds = divmod(interval,60)
+        print(f"{int(minutes)}:{int(seconds)}")
     t = threading.Timer(1, calulateTime)
     t.start()
 
 if __name__ == '__main__':
     window = AirWindow()
     calulateTime()
+    window.updateData()
     window.mainloop()
