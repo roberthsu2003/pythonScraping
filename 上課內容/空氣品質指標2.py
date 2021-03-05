@@ -29,15 +29,15 @@ class AirWindow(Tk):
 
         #建立label Frame
         titleFrame = Frame(mainFrame)
-        Label(titleFrame,text='台灣各地空氣品質指標',font=("Arial", 20)).pack(padx=20,pady=20)
+        Label(titleFrame,text='台灣各地空氣品質指標',font=("Arial", 20,'bold'),fg='#555555').pack(padx=20,pady=20)
         fomatTime,nextFomatTime = AirWindow.convertDateFormat(self.airData[0]["時間"])
-        Label(titleFrame, text=f'{fomatTime}', font=("Arial", 14)).pack(padx=20, pady=20)
-        Label(titleFrame, text=f'{nextFomatTime}', font=("Arial", 14)).pack(padx=20, pady=20)
+        Label(titleFrame, text=f'{fomatTime}', font=("Arial", 8)).pack()
+        Label(titleFrame, text=f'{nextFomatTime}', font=("Arial", 8)).pack()
         titleFrame.pack()
 
         #建立display Frame
         displayFrame = Frame(mainFrame)
-        Label(displayFrame, text='請選擇監測點:', font=("Arial", 20)).pack(side=LEFT, padx=10, pady=20)
+        Label(displayFrame, text='請選擇監測點:', font=("Arial", 20),fg='#999999').pack(side=LEFT, padx=10, pady=20)
         positionSelected = ttk.Combobox(displayFrame, width=10, font=("Arial", 20))
         positionSelected['values'] = getPositionList()
         positionSelected.pack(side=LEFT)
@@ -63,7 +63,7 @@ class AirWindow(Tk):
         self.stateLabel = Label(listFrame, text=selectedSiteData['狀態'], font=("Arial", 14))
         self.stateLabel.grid(row=3, column=1,sticky=W,padx=10,pady=10)
         Label(listFrame, text='時間:', font=("Arial", 14)).grid(row=4, column=0,sticky=E,padx=10,pady=10)
-        self.timeLabel = Label(listFrame, text=selectedSiteData['時間'], font=("Arial", 14))
+        self.timeLabel = Label(listFrame, text=selectedSiteData['時間'][:19], font=("Arial", 14))
         self.timeLabel.grid(row=4, column=1,sticky=W,padx=10,pady=10)
         listFrame.pack(side=LEFT)
 
@@ -88,7 +88,7 @@ class AirWindow(Tk):
         monitorTime = time.strptime(dateString[:19],sft)
         nextTime = time.mktime(monitorTime) + 30*60 #將struct_time轉為Epoch,Epoch是float,並加30分
         fmt = "觀測時間:%Y年%b%d日%A %p%I:%M:%S"
-        fmt1 = "下次觀測:%Y年%b%d日%A %p%I:%M:%S"
+        fmt1 = "下次更新:%Y年%b%d日%A %p%I:%M:%S"
         return time.strftime(fmt,monitorTime),time.strftime(fmt1,time.localtime(nextTime)) #使用time.localtime(nextTime),將Epoch轉為struct_time
 
 
