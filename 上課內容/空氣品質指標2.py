@@ -6,6 +6,8 @@
 from tkinter import *
 from tkinter import ttk
 from dataSource import *
+import time
+import locale
 
 
 class AirWindow(Tk):
@@ -28,8 +30,8 @@ class AirWindow(Tk):
         #建立label Frame
         titleFrame = Frame(mainFrame)
         Label(titleFrame,text='台灣各地空氣品質指標',font=("Arial", 20)).pack(padx=20,pady=20)
-        AirWindow.convertDateFormat(self.airData[0]["時間"])
-        Label(titleFrame, text=f'日期時間:{self.airData[0]["時間"]}', font=("Arial", 14)).pack(padx=20, pady=20)
+        fomatTime = AirWindow.convertDateFormat(self.airData[0]["時間"])
+        Label(titleFrame, text=f'{fomatTime}', font=("Arial", 14)).pack(padx=20, pady=20)
         titleFrame.pack()
 
         #建立display Frame
@@ -78,8 +80,12 @@ class AirWindow(Tk):
 
     @classmethod
     def convertDateFormat(cls,dateString):
-        print(dateString)
-
+        print(dateString[:19])
+        locale.setlocale(locale.LC_TIME, 'zh_tw')
+        sft = "%Y-%m-%d %H:%M:%S"
+        monitorTime = time.strptime(dateString[:19],sft)
+        fmt = "觀測時間:%Y年%b%d日%A %p%I:%M:%S"
+        return time.strftime(fmt,monitorTime)
 
 
 
