@@ -30,8 +30,9 @@ class AirWindow(Tk):
         #建立label Frame
         titleFrame = Frame(mainFrame)
         Label(titleFrame,text='台灣各地空氣品質指標',font=("Arial", 20)).pack(padx=20,pady=20)
-        fomatTime = AirWindow.convertDateFormat(self.airData[0]["時間"])
+        fomatTime,nextFomatTime = AirWindow.convertDateFormat(self.airData[0]["時間"])
         Label(titleFrame, text=f'{fomatTime}', font=("Arial", 14)).pack(padx=20, pady=20)
+        Label(titleFrame, text=f'{nextFomatTime}', font=("Arial", 14)).pack(padx=20, pady=20)
         titleFrame.pack()
 
         #建立display Frame
@@ -79,13 +80,16 @@ class AirWindow(Tk):
         self.timeLabel.configure(text=selectedSiteData['時間'])
 
     @classmethod
+    #return tuple
     def convertDateFormat(cls,dateString):
         print(dateString[:19])
         locale.setlocale(locale.LC_TIME, 'zh_tw')
         sft = "%Y-%m-%d %H:%M:%S"
         monitorTime = time.strptime(dateString[:19],sft)
+        nextTime = time.mktime(monitorTime) + 30*60
         fmt = "觀測時間:%Y年%b%d日%A %p%I:%M:%S"
-        return time.strftime(fmt,monitorTime)
+        fmt1 = "下次觀測:%Y年%b%d日%A %p%I:%M:%S"
+        return time.strftime(fmt,monitorTime),time.strftime(fmt1,time.localtime(nextTime))
 
 
 
