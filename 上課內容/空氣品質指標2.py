@@ -23,13 +23,17 @@ class AirWindow(Tk):
         #self.geometry('300x100+200+200')
         self.resizable(width=0, height=0)
 
+        #建立main Frame
+        mainFrame = Frame(self,relief="groove",borderwidth=2)
+
         #建立label Frame
-        labelFrame = Frame(self)
-        Label(labelFrame,text='台灣各地空氣品質指標',font=("Arial", 20)).pack(side=LEFT,padx=20,pady=20)
-        labelFrame.pack()
+        titleFrame = Frame(mainFrame)
+        Label(titleFrame,text='台灣各地空氣品質指標',font=("Arial", 20)).pack(padx=20,pady=20)
+        Label(titleFrame, text=f'日期時間:{self.airData[0]["時間"]}', font=("Arial", 14)).pack(padx=20, pady=20)
+        titleFrame.pack()
 
         #建立display Frame
-        displayFrame = Frame(self)
+        displayFrame = Frame(mainFrame)
         Label(displayFrame, text='請選擇監測點:', font=("Arial", 20)).pack(side=LEFT, padx=10, pady=20)
         positionSelected = ttk.Combobox(displayFrame, width=10, font=("Arial", 20))
         positionSelected['values'] = getPositionList()
@@ -39,11 +43,11 @@ class AirWindow(Tk):
         selectedSiteData = getOneSiteData(selectedSiteName)
         positionSelected.bind("<<ComboboxSelected>>",self.userSelected)
         print(selectedSiteData)
-        Label(displayFrame, text=f'日期時間:{self.airData[0]["時間"]}', font=("Arial", 14)).pack(side=RIGHT, padx=20, pady=20)
+
         displayFrame.pack(fill=X)
 
         # 建立list Frame
-        listFrame = Frame(self)
+        listFrame = Frame(mainFrame)
 
         Label(listFrame,text='監測點:', font=("Arial", 14)).grid(row=0,column=0,sticky=E,padx=10,pady=10)
         self.moniterLabel = Label(listFrame, text=selectedSiteData['監測點'], font=("Arial", 14))
@@ -61,6 +65,8 @@ class AirWindow(Tk):
         self.timeLabel = Label(listFrame, text=selectedSiteData['時間'], font=("Arial", 14))
         self.timeLabel.grid(row=4, column=1,sticky=W,padx=10,pady=10)
         listFrame.pack(side=LEFT)
+
+        mainFrame.pack(padx=30,pady=30,ipadx=20,ipady=20)
 
     #combobox的事件接收
     def userSelected(self,event):
