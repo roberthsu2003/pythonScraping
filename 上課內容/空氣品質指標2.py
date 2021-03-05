@@ -5,14 +5,14 @@
 
 from tkinter import *
 from tkinter import ttk
-import dataSource
+from dataSource import *
 
 
 class AirWindow(Tk):
     def __init__(self):
         super().__init__()
         #取得資料
-        self.airData=dataSource.getAirData()
+        self.airData=getAirData()
         if self.airData == None:
             print("下載錯誤")
         else:
@@ -32,11 +32,11 @@ class AirWindow(Tk):
         displayFrame = Frame(self)
         Label(displayFrame, text='請選擇監測點:', font=("Arial", 20)).pack(side=LEFT, padx=10, pady=20)
         positionSelected = ttk.Combobox(displayFrame, width=10, font=("Arial", 20))
-        positionSelected['values'] = dataSource.getPositionList()
+        positionSelected['values'] = getPositionList()
         positionSelected.pack(side=LEFT)
         positionSelected.current(0) #選擇預設第一筆資料
         selectedSiteName = positionSelected.get()
-        selectedSiteData = dataSource.getOneSiteData(selectedSiteName)
+        selectedSiteData = getOneSiteData(selectedSiteName)
         print(selectedSiteData)
         Label(displayFrame, text=f'日期時間:{self.airData[0]["時間"]}', font=("Arial", 14)).pack(side=RIGHT, padx=20, pady=20)
         displayFrame.pack(fill=X)
