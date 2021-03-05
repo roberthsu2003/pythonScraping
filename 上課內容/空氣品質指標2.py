@@ -87,14 +87,18 @@ class AirWindow(Tk):
         locale.setlocale(locale.LC_TIME, 'zh_tw')
         sft = "%Y-%m-%d %H:%M:%S"
         monitorTime = time.strptime(dateString[:19],sft)
-        nextTime = time.mktime(monitorTime) + 40*60 #將struct_time轉為Epoch,Epoch是float,並加30分
+        cls.nextTime = time.mktime(monitorTime) + 40*60 #將struct_time轉為Epoch,Epoch是float,並加30分
         fmt = "觀測時間:%Y年%b%d日%A %p%I:%M:%S"
         fmt1 = "下次更新:%Y年%b%d日%A %p%I:%M:%S"
-        return time.strftime(fmt,monitorTime),time.strftime(fmt1,time.localtime(nextTime)) #使用time.localtime(nextTime),將Epoch轉為struct_time
+        return time.strftime(fmt,monitorTime),time.strftime(fmt1,time.localtime(cls.nextTime)) #使用time.localtime(nextTime),將Epoch轉為struct_time
 
 
 def calulateTime():
-    print("Hello! right now")
+    print('目前時間:',time.time())
+    print('更新時間:',AirWindow.nextTime)
+    interval = AirWindow.nextTime - time.time()
+    minutes,seconds = divmod(interval,60)
+    print(f"{int(minutes)}:{int(seconds)}")
     t = threading.Timer(1, calulateTime)
     t.start()
 
