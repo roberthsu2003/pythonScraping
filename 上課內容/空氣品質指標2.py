@@ -80,6 +80,14 @@ class AirWindow(Tk):
         self.stateLabel.configure(text=selectedSiteData['狀態'])
         self.timeLabel.configure(text=selectedSiteData['時間'])
 
+    def updateData(self):
+        print("updateData")
+        self.airData = getAirData()
+        if self.airData == None:
+            print("下載錯誤")
+
+
+
     @classmethod
     #return tuple
     def convertDateFormat(cls,dateString):
@@ -97,6 +105,10 @@ def calulateTime():
     print('目前時間:',time.time())
     print('更新時間:',AirWindow.nextTime)
     interval = AirWindow.nextTime - time.time()
+    #時間到更新
+    if interval <= 0:
+        window.updateData()
+
     minutes,seconds = divmod(interval,60)
     print(f"{int(minutes)}:{int(seconds)}")
     t = threading.Timer(1, calulateTime)
