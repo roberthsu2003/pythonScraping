@@ -45,21 +45,32 @@ class AirWindow(Tk):
         # 建立list Frame
         listFrame = Frame(self)
         Label(listFrame,text='監測點', font=("Arial", 14)).grid(row=0,column=0)
-        Label(listFrame, text=selectedSiteData['監測點'], font=("Arial", 14)).grid(row=0, column=1)
+        self.moniterLabel = Label(listFrame, text=selectedSiteData['監測點'], font=("Arial", 14))
+        self.moniterLabel.grid(row=0, column=1)
         Label(listFrame, text='城市', font=("Arial", 14)).grid(row=1, column=0)
-        Label(listFrame, text=selectedSiteData['城市'], font=("Arial", 14)).grid(row=1, column=1)
+        self.cityLabel = Label(listFrame, text=selectedSiteData['城市'], font=("Arial", 14))
+        self.cityLabel.grid(row=1, column=1)
         Label(listFrame, text='AQI', font=("Arial", 14)).grid(row=2, column=0)
-        Label(listFrame, text=selectedSiteData['AQI'], font=("Arial", 14)).grid(row=2, column=1)
+        self.aqiLabel = Label(listFrame, text=selectedSiteData['AQI'], font=("Arial", 14))
+        self.aqiLabel.grid(row=2, column=1)
         Label(listFrame, text='狀態', font=("Arial", 14)).grid(row=3, column=0)
-        Label(listFrame, text=selectedSiteData['狀態'], font=("Arial", 14)).grid(row=3, column=1)
+        self.stateLabel = Label(listFrame, text=selectedSiteData['狀態'], font=("Arial", 14))
+        self.stateLabel.grid(row=3, column=1)
         Label(listFrame, text='時間', font=("Arial", 14)).grid(row=4, column=0)
-        Label(listFrame, text=selectedSiteData['時間'], font=("Arial", 14)).grid(row=4, column=1)
+        self.timeLabel = Label(listFrame, text=selectedSiteData['時間'], font=("Arial", 14))
+        self.timeLabel.grid(row=4, column=1)
         listFrame.pack(fill=X)
 
     def userSelected(self,event):
         selectedSiteName = event.widget.get()
         selectedSiteData = getOneSiteData(selectedSiteName)
-        print(selectedSiteData)
+        self.moniterLabel.configure(text=selectedSiteData['監測點'])
+        self.cityLabel.configure(text=selectedSiteData['城市'])
+        self.aqiLabel.configure(text=selectedSiteData['AQI'])
+        self.stateLabel.configure(text=selectedSiteData['狀態'])
+        self.timeLabel.configure(text=selectedSiteData['時間'])
+
+
 
 
 
