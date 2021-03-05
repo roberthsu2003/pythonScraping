@@ -31,13 +31,13 @@ class AirWindow(Tk):
         #建立display Frame
         displayFrame = Frame(self)
         Label(displayFrame, text='請選擇監測點:', font=("Arial", 20)).pack(side=LEFT, padx=10, pady=20)
-        positionSelected = ttk.Combobox(displayFrame, width=10, font=("Arial", 20))
-        positionSelected['values'] = getPositionList()
-        positionSelected.pack(side=LEFT)
-        positionSelected.current(0) #選擇預設第一筆資料
-        selectedSiteName = positionSelected.get()
+        self.positionSelected = ttk.Combobox(displayFrame, width=10, font=("Arial", 20))
+        self.positionSelected['values'] = getPositionList()
+        self.positionSelected.pack(side=LEFT)
+        self.positionSelected.current(0) #選擇預設第一筆資料
+        selectedSiteName = self.positionSelected.get()
         selectedSiteData = getOneSiteData(selectedSiteName)
-        positionSelected.bind("<<ComboboxSelected>>",self.userSelected)
+        self.positionSelected.bind("<<ComboboxSelected>>",self.userSelected)
         print(selectedSiteData)
         Label(displayFrame, text=f'日期時間:{self.airData[0]["時間"]}', font=("Arial", 14)).pack(side=RIGHT, padx=20, pady=20)
         displayFrame.pack(fill=X)
@@ -57,7 +57,10 @@ class AirWindow(Tk):
         listFrame.pack(fill=X)
 
     def userSelected(self,event):
-        print(event)
+        print(event.target)
+        selectedSiteName = self.positionSelected.get()
+        selectedSiteData = getOneSiteData(selectedSiteName)
+        print(selectedSiteData)
 
 
 
