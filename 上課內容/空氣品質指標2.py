@@ -8,6 +8,7 @@ from tkinter import ttk
 from dataSource import *
 import time
 import locale
+import threading
 
 
 class AirWindow(Tk):
@@ -86,14 +87,18 @@ class AirWindow(Tk):
         locale.setlocale(locale.LC_TIME, 'zh_tw')
         sft = "%Y-%m-%d %H:%M:%S"
         monitorTime = time.strptime(dateString[:19],sft)
-        nextTime = time.mktime(monitorTime) + 30*60 #將struct_time轉為Epoch,Epoch是float,並加30分
+        nextTime = time.mktime(monitorTime) + 40*60 #將struct_time轉為Epoch,Epoch是float,並加30分
         fmt = "觀測時間:%Y年%b%d日%A %p%I:%M:%S"
         fmt1 = "下次更新:%Y年%b%d日%A %p%I:%M:%S"
         return time.strftime(fmt,monitorTime),time.strftime(fmt1,time.localtime(nextTime)) #使用time.localtime(nextTime),將Epoch轉為struct_time
 
 
-
+def calulateTime():
+    print("Hello! right now")
+    t = threading.Timer(1, calulateTime)
+    t.start()
 
 if __name__ == '__main__':
     window = AirWindow()
+    calulateTime()
     window.mainloop()
