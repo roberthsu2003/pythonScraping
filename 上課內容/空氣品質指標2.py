@@ -37,6 +37,7 @@ class AirWindow(Tk):
         positionSelected.current(0) #選擇預設第一筆資料
         selectedSiteName = positionSelected.get()
         selectedSiteData = getOneSiteData(selectedSiteName)
+        positionSelected.bind("<<ComboboxSelected>>",self.userSelected)
         print(selectedSiteData)
         Label(displayFrame, text=f'日期時間:{self.airData[0]["時間"]}', font=("Arial", 14)).pack(side=RIGHT, padx=20, pady=20)
         displayFrame.pack(fill=X)
@@ -54,6 +55,9 @@ class AirWindow(Tk):
         Label(listFrame, text='時間', font=("Arial", 14)).grid(row=4, column=0)
         Label(listFrame, text=selectedSiteData['時間'], font=("Arial", 14)).grid(row=4, column=1)
         listFrame.pack(fill=X)
+
+    def userSelected(self,event):
+        print(event)
 
 
 
