@@ -44,21 +44,22 @@ class AirWindow(Tk):
 
         # 建立list Frame
         listFrame = Frame(self)
-        Label(listFrame,text='監測點:', font=("Arial", 14)).grid(row=0,column=0,sticky=E)
+
+        Label(listFrame,text='監測點:', font=("Arial", 14)).grid(row=0,column=0,sticky=E,padx=10,pady=10)
         self.moniterLabel = Label(listFrame, text=selectedSiteData['監測點'], font=("Arial", 14))
-        self.moniterLabel.grid(row=0, column=1,sticky=W)
-        Label(listFrame, text='城市:', font=("Arial", 14)).grid(row=1, column=0,sticky=E)
+        self.moniterLabel.grid(row=0, column=1,sticky=W,padx=10,pady=10)
+        Label(listFrame, text='城市:', font=("Arial", 14)).grid(row=1, column=0,sticky=E,padx=10,pady=10)
         self.cityLabel = Label(listFrame, text=selectedSiteData['城市'], font=("Arial", 14))
-        self.cityLabel.grid(row=1, column=1,sticky=W)
-        Label(listFrame, text='AQI:', font=("Arial", 14)).grid(row=2, column=0,sticky=E)
+        self.cityLabel.grid(row=1, column=1,sticky=W,padx=10,pady=10)
+        Label(listFrame, text='AQI:', font=("Arial", 14)).grid(row=2, column=0,sticky=E,padx=10,pady=10)
         self.aqiLabel = Label(listFrame, text=selectedSiteData['AQI'], font=("Arial", 14))
-        self.aqiLabel.grid(row=2, column=1,sticky=W)
-        Label(listFrame, text='狀態:', font=("Arial", 14)).grid(row=3, column=0,sticky=E)
+        self.aqiLabel.grid(row=2, column=1,sticky=W,padx=10,pady=10)
+        Label(listFrame, text='狀態:', font=("Arial", 14)).grid(row=3, column=0,sticky=E,padx=10,pady=10)
         self.stateLabel = Label(listFrame, text=selectedSiteData['狀態'], font=("Arial", 14))
-        self.stateLabel.grid(row=3, column=1,sticky=W)
-        Label(listFrame, text='時間:', font=("Arial", 14)).grid(row=4, column=0,sticky=E)
+        self.stateLabel.grid(row=3, column=1,sticky=W,padx=10,pady=10)
+        Label(listFrame, text='時間:', font=("Arial", 14)).grid(row=4, column=0,sticky=E,padx=10,pady=10)
         self.timeLabel = Label(listFrame, text=selectedSiteData['時間'], font=("Arial", 14))
-        self.timeLabel.grid(row=4, column=1,sticky=W)
+        self.timeLabel.grid(row=4, column=1,sticky=W,padx=10,pady=10)
         listFrame.pack(side=LEFT)
 
     #combobox的事件接收
