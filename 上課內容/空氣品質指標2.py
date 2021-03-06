@@ -36,6 +36,8 @@ class AirWindow(Tk):
         self.nowLabel.pack()
         self.nextLabel = Label(titleFrame, text=f'{nextFomatTime}', font=("Arial", 8))
         self.nextLabel.pack()
+        self.remainLabel = Label(titleFrame,font=("Arial", 14))
+        self.remainLabel.pack(side=RIGHT)
         titleFrame.pack()
 
         #建立display Frame
@@ -96,8 +98,7 @@ class AirWindow(Tk):
         self.aqiLabel.configure(text=selectedSiteData['AQI'])
         self.stateLabel.configure(text=selectedSiteData['狀態'])
         self.timeLabel.configure(text=selectedSiteData['時間'])
-
-        fomatTime,nextFomatTime = AirWindow.convertDateFormat(self.airData[0]["時間"])
+        fomatTime, nextFomatTime = AirWindow.convertDateFormat(self.airData[0]["時間"])
         self.nowLabel.configure(text=fomatTime)
         self.nextLabel.configure(text=nextFomatTime)
 
@@ -110,6 +111,7 @@ class AirWindow(Tk):
         locale.setlocale(locale.LC_TIME, 'zh_tw')
         sft = "%Y-%m-%d %H:%M:%S"
         monitorTime = time.strptime(dateString[:19],sft)
+        #建立type attribute
         cls.nextTime = time.mktime(monitorTime) + 40*60 #將struct_time轉為Epoch,Epoch是float,並加30分
         fmt = "觀測時間:%Y年%b%d日%A %p%I:%M:%S"
         fmt1 = "下次更新:%Y年%b%d日%A %p%I:%M:%S"
@@ -124,7 +126,8 @@ def calulateTime():
     if interval <= 0:
         window.updateData()
     else:
-        minutes,seconds = divmod(interval,60)
+        minutes,seconds = divmod(interval,60)  #同時得到商和餘數
+        window.remainLabel.configure(text=f"{int(minutes)}:{int(seconds)}")
         print(f"{int(minutes)}:{int(seconds)}")
     t = threading.Timer(1, calulateTime)
     t.start()

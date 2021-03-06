@@ -2,9 +2,10 @@ import requests
 from requests import ConnectionError,HTTPError,Timeout
 
 url = "https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json"
-newRecords = [] #建立要傳出的list
-
+newRecords = [] # 建立要傳出的list
 def getAirData():
+    global newRecords
+    newRecords = []  #由於有更新的動作，所以要全部清空，重新再抓一次
     try:
         response = requests.get(url)
         response.raise_for_status()
