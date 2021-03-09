@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b5f05aa1-bd7e-4550-9c1d-18691cf2e951" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/台北市youbike/.ipynb_checkpoints/sample1-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/台北市youbike/.ipynb_checkpoints/sample1-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/台北市youbike/sample1.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/台北市youbike/sample1.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,13 +137,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1613618526045</updated>
-    </task>
-    <task id="LOCAL-00025" summary="modify">
-      <created>1614061231962</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1614061231962</updated>
     </task>
     <task id="LOCAL-00026" summary="modify">
       <created>1614061909867</created>
@@ -479,7 +474,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615250733244</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="modify">
+      <created>1615253227052</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1615253227052</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
