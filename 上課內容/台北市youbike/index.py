@@ -33,7 +33,8 @@ class YoubikeWindow(tk.Tk):
         listbox = event.widget
         areaName = listbox.get(listbox.curselection())
         #得到選取區域的簡單資料
-        print(dataSource.getAreaSimpleInfo(areaName))
+        simpleInfo = dataSource.getAreaSimpleInfo(areaName)
+        print(simpleInfo)
 
 
 
