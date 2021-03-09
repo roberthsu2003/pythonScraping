@@ -7,17 +7,18 @@ class YoubikeWindow(tk.Tk):
         super().__init__()
         self.title("台北市youbike及時資訊")
         mediumFont = {'font':('Arial', 20)}
+        s = ttk.Style()
+        s.configure('Red.TLabelframe.Label', font=('Arial', 20))
 
 
         #display interface
-        leftFrame = ttk.LabelFrame(self,text='台北市行政區',style='LLabelFrame')
-        areaList = tk.Listbox(leftFrame,**mediumFont)
+        leftFrame = ttk.LabelFrame(self,text='台北市行政區',style='Red.TLabelframe')
+        areaList = tk.Listbox(leftFrame,height=12,**mediumFont)
         for name in areas:
             areaList.insert(tk.END,name)
         areaList.pack(padx=10,pady=10)
         leftFrame.pack(side=tk.LEFT,padx=30,pady=30)
-        style = ttk.Style(self)
-        style.configure('LLabelFrame', font=('Arial', 20))
+
 
 
 if __name__ == "__main__":
