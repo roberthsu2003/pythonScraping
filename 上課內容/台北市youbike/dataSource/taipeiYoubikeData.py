@@ -5,13 +5,28 @@ sno(站點代號)、sna(場站中文名稱)、tot(場站總停車格)、sbi(場�
 '''
 
 import requests
+def getAreaSimpleInfo(siteName):
+    simpleInfoOfArea = []
+    for site in youbikeData:
+        if site['sarea'] == siteName:
+            total =int(site['tot'])
+            sbi = int(site['sbi'])
+            percent = sbi/total
+            if percent > 0.2:
+                status = 'green'
+            elif sbi > 0:
+                status = 'orange'
+            else:
+                status = 'red'
+            simpleInfoOfArea.append((site['sna'],status))
+    return simpleInfoOfArea
+
 response = requests.get('https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json')
 response.encoding = 'utf-8'
 downloadData = response.json()
 downloadData1=downloadData['retVal']
 #取出value值，轉為list
 youbikeData = list(downloadData1.values())
-print(youbikeData)
 #建立區域的list
 areaSet = set()
 for site in youbikeData:
@@ -20,4 +35,4 @@ for site in youbikeData:
 areas= list(areaSet)
 
 
-__all__ = ['youbikeData','areas']
+__all__ = ['areas','getAreaSimpleInfo']

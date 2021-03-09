@@ -31,7 +31,8 @@ class YoubikeWindow(tk.Tk):
 
     def userSelected(self,event):
         listbox = event.widget
-        print(listbox.get(listbox.curselection()))
+        areaName = listbox.get(listbox.curselection())
+        print(dataSource.getAreaSimpleInfo(areaName))
 
 
 
