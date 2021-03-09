@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5f05aa1-bd7e-4550-9c1d-18691cf2e951" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/台北市youbike/.ipynb_checkpoints/sample1-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/台北市youbike/.ipynb_checkpoints/sample1-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/台北市youbike/sample1.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/台北市youbike/sample1.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/台北市youbike/sample2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/台北市youbike/sample2.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,13 +136,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1613618526045</updated>
-    </task>
-    <task id="LOCAL-00027" summary="modify">
-      <created>1614062408069</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1614062408069</updated>
     </task>
     <task id="LOCAL-00028" summary="modify">
       <created>1614063200456</created>
@@ -481,7 +473,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615254115568</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="modify">
+      <created>1615255299685</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1615255299685</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
