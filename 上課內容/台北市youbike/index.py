@@ -23,8 +23,10 @@ class YoubikeWindow(tk.Tk):
         #rightSide
         rightFrame= tk.Frame(self)
         infoCanvas = dataSource.getInfoCanvas(rightFrame)
-        infoCanvas.pack()
-        rightFrame.pack(side=tk.RIGHT)
+        infoCanvas.pack(anchor=tk.NE)
+        infoFrame = ttk.LabelFrame(rightFrame,text='景美區',style='Red.TLabelframe')
+        infoFrame.pack()
+        rightFrame.pack(side=tk.RIGHT,fill=tk.Y)
 
 
 
