@@ -17,6 +17,6 @@ for site in youbikeData:
     areaSet.add(site['sarea'])
 
 areas= list(areaSet)
-print(areas)
+
 
 __all__ = ['youbikeData','areas']
