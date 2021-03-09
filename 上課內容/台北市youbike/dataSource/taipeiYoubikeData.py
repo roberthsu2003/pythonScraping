@@ -11,6 +11,7 @@ downloadData = response.json()
 downloadData1=downloadData['retVal']
 #取出value值，轉為list
 youbikeData = list(downloadData1.values())
+print(youbikeData)
 #建立區域的list
 areaSet = set()
 for site in youbikeData:

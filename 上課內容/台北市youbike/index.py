@@ -15,6 +15,7 @@ class YoubikeWindow(tk.Tk):
         #leftSide
         leftFrame = ttk.LabelFrame(self,text='台北市行政區',style='Red.TLabelframe')
         areaList = tk.Listbox(leftFrame,height=12,selectbackground='#888888',**mediumFont)
+        areaList.bind('<<ListboxSelect>>',self.userSelected)
         for name in dataSource.areas:
             areaList.insert(tk.END,name)
         areaList.pack(padx=10,pady=10)
@@ -27,6 +28,10 @@ class YoubikeWindow(tk.Tk):
         infoFrame = ttk.LabelFrame(rightFrame,text='景美區',style='Red.TLabelframe')
         infoFrame.pack()
         rightFrame.pack(side=tk.RIGHT,fill=tk.Y)
+
+    def userSelected(self,event):
+        listbox = event.widget
+        print(listbox.get(listbox.curselection()))
 
 
 
