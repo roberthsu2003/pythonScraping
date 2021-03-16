@@ -54,9 +54,6 @@ class YoubikeWindow(tk.Tk):
 
         print(self.infoFrame)
         for index,siteInfo in enumerate(info):
-            print(siteInfo)
-            print("===============")
-
             #一個row,5個cell
             if index % 5 == 0:
                 #每5個cell,要有一個parentFrame
@@ -76,7 +73,10 @@ class YoubikeWindow(tk.Tk):
 
     def buttonAction(self,event=None):
         #使用cget('text'),取出button的text
-        print(event.widget.cget('text'))
+        siteName = event.widget.cget('text')
+
+        #取出單一站點detail資料
+        print(dataSource.getDetailInfoOfSite(siteName))
 
 
 

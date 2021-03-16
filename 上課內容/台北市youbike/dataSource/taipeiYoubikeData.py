@@ -21,18 +21,25 @@ def getAreaSimpleInfo(siteName):
             simpleInfoOfArea.append((site['sna'],status))
     return simpleInfoOfArea
 
+def getDetailInfoOfSite(singleSiteName):
+    for detalData in youbikeData:
+        if detalData['sna'] == singleSiteName:
+            return detalData
+
 response = requests.get('https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json')
 response.encoding = 'utf-8'
 downloadData = response.json()
 downloadData1=downloadData['retVal']
 #取出value值，轉為list
+#youbikeData取得過濾解析完的資料,list內存dictionary
 youbikeData = list(downloadData1.values())
+print(youbikeData)
 #建立區域的list
 areaSet = set()
 for site in youbikeData:
     areaSet.add(site['sarea'])
 
-areas= list(areaSet)
+areas = list(areaSet)
 
 
-__all__ = ['areas','getAreaSimpleInfo']
+__all__ = ['areas','getAreaSimpleInfo','getDetailInfoOfSite']
