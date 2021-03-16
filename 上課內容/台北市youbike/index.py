@@ -26,7 +26,7 @@ class YoubikeWindow(tk.Tk):
         infoCanvas = dataSource.getInfoCanvas(rightFrame)
         infoCanvas.pack(anchor=tk.NE)
         self.infoFrame = ttk.LabelFrame(rightFrame,text='景美區',style='Red.TLabelframe')
-        self.infoFrame.pack()
+        self.infoFrame.pack(padx=20,pady=20)
         rightFrame.pack(side=tk.RIGHT,fill=tk.Y)
 
     def userSelected(self,event):
@@ -48,12 +48,16 @@ class YoubikeWindow(tk.Tk):
             widget.destroy()
 
         print(self.infoFrame)
-        for siteInfo in info:
+        for index,siteInfo in enumerate(info):
             print(siteInfo)
             print("===============")
             #建立一個frame,內有canvas的圓點和button
-            cellFrame = tk.Frame(self.infoFrame,bg='#cccccc',width=100,height=40,borderwidth=1,relief=tk.GROOVE)
-            cellFrame.pack()
+            #一個row,5個cell
+            if index % 5 == 0:
+                parentFrame = tk.Frame(self.infoFrame)
+                parentFrame.pack(anchor=tk.W)
+            cellFrame = tk.Frame(parentFrame, bg='#cccccc', width=150, height=40, borderwidth=1, relief=tk.GROOVE)
+            cellFrame.pack(side=tk.LEFT)
 
 
 
