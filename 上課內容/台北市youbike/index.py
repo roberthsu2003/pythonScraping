@@ -68,15 +68,15 @@ class YoubikeWindow(tk.Tk):
             #建立圓點
             #siteInfo是tuple
             dataSource.getColorCircle(cellFrame,siteInfo[1]).pack()
-            nameButton = tk.Button(cellFrame,text=siteInfo[0],width=20,font=(13,),command=lambda:self.buttonAction(siteInfo[0]))
-
+            nameButton = tk.Button(cellFrame,text=siteInfo[0],width=20,font=(13,))
+            nameButton.bind('<Button-1>',self.buttonAction)
             nameButton.pack()
 
             cellFrame.pack(side=tk.LEFT)
 
-    def buttonAction(self,siteName=None):
-
-        print(siteName)
+    def buttonAction(self,event=None):
+        #使用cget('text'),取出button的text
+        print(event.widget.cget('text'))
 
 
 
