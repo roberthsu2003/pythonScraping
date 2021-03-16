@@ -25,16 +25,25 @@ class YoubikeWindow(tk.Tk):
         rightFrame= tk.Frame(self)
         infoCanvas = dataSource.getInfoCanvas(rightFrame)
         infoCanvas.pack(anchor=tk.NE)
-        infoFrame = ttk.LabelFrame(rightFrame,text='景美區',style='Red.TLabelframe')
-        infoFrame.pack()
+        self.infoFrame = ttk.LabelFrame(rightFrame,text='景美區',style='Red.TLabelframe')
+        self.infoFrame.pack()
         rightFrame.pack(side=tk.RIGHT,fill=tk.Y)
 
     def userSelected(self,event):
         listbox = event.widget
         areaName = listbox.get(listbox.curselection())
         #得到選取區域的簡單資料
+        #simpleInfo內容是list,裏面有tuple(站名,顏色)
         simpleInfo = dataSource.getAreaSimpleInfo(areaName)
-        print(simpleInfo)
+
+        #改變右邊的區域內容,呼叫method,並傳送資料
+        self.changeDisplayOfRightSide(simpleInfo)
+
+
+    def changeDisplayOfRightSide(self,info):
+        # info內容是list,裏面有tuple(站名,顏色)
+        print(info)
+
 
 
 
