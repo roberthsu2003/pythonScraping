@@ -42,7 +42,18 @@ class YoubikeWindow(tk.Tk):
 
     def changeDisplayOfRightSide(self,info):
         # info內容是list,裏面有tuple(站名,顏色)
+        #先清除self.infoFrame內的內容
         print(info)
+        for widget in self.infoFrame.winfo_children():
+            widget.destroy()
+
+        print(self.infoFrame)
+        for siteInfo in info:
+            print(siteInfo)
+            print("===============")
+            #建立一個frame,內有canvas的圓點和button
+            cellFrame = tk.Frame(self.infoFrame,bg='#cccccc',width=100,height=40,borderwidth=1,relief=tk.GROOVE)
+            cellFrame.pack()
 
 
 
