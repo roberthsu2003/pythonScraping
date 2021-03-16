@@ -77,12 +77,15 @@ class YoubikeWindow(tk.Tk):
         siteName = event.widget.cget('text')
 
         #取出單一站點detail資料
-        print(dataSource.getDetailInfoOfSite(siteName))
+        #print(dataSource.getDetailInfoOfSite(siteName))
+        info = dataSource.getDetailInfoOfSite(siteName)
+        singleSiteInfo = SingleSiteInfo(self,title="測試",info=info)
 
 
 class SingleSiteInfo(Dialog):
     def __init__(self, parent, title=None, info=None):
         self.info = info #必需要寫在前面
+        print(self.info)
         super().__init__(parent,title)
 
 
