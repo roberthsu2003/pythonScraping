@@ -52,12 +52,19 @@ class YoubikeWindow(tk.Tk):
         for index,siteInfo in enumerate(info):
             print(siteInfo)
             print("===============")
-            #建立一個frame,內有canvas的圓點和button
+
             #一個row,5個cell
             if index % 5 == 0:
+                #每5個cell,要有一個parentFrame
                 parentFrame = tk.Frame(self.infoFrame)
                 parentFrame.pack(anchor=tk.W,padx=20)
+
+            #建立一個frame,內有canvas的圓點和button
             cellFrame = tk.Frame(parentFrame, bg='#cccccc', width=150, height=40, borderwidth=1, relief=tk.GROOVE)
+            #建立圓點
+            #siteInfo是tuple
+            circleCanvas = dataSource.getColorCircle(cellFrame,siteInfo[1])
+            circleCanvas.pack()
             cellFrame.pack(side=tk.LEFT)
 
 
