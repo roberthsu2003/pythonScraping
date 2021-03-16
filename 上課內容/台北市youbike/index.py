@@ -85,9 +85,28 @@ class YoubikeWindow(tk.Tk):
 class SingleSiteInfo(Dialog):
     def __init__(self, parent, title=None, info=None):
         self.info = info #必需要寫在前面
-        print(self.info)
         super().__init__(parent,title)
 
+    def body(self, master):
+        '''
+        create dialog body.
+
+        return widget that should have initial focus.
+        This method should be overridden, and is called
+        by the __init__ method.
+        '''
+        print(self.info)
+
+    def buttonbox(self):
+        '''
+        add standard button box.
+        如果不要使用正常的按鈕,必需覆寫這個method
+         '''
+        box = tk.Frame(self)
+        w = tk.Button(box, text="OK", width=10, command=self.ok, default=tk.ACTIVE)
+        w.pack(side=tk.LEFT, padx=5, pady=5)
+        self.bind("<Return>", self.ok)
+        box.pack()
 
 
 
