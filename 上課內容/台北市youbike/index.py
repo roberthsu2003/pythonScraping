@@ -37,13 +37,14 @@ class YoubikeWindow(tk.Tk):
         simpleInfo = dataSource.getAreaSimpleInfo(areaName)
 
         #改變右邊的區域內容,呼叫method,並傳送資料
-        self.changeDisplayOfRightSide(simpleInfo)
+        self.changeDisplayOfRightSide(simpleInfo, areaName)
 
 
-    def changeDisplayOfRightSide(self,info):
+    def changeDisplayOfRightSide(self,info,lableName):
         # info內容是list,裏面有tuple(站名,顏色)
         #先清除self.infoFrame內的內容
         print(info)
+        self.infoFrame.configure(text=lableName)
         for widget in self.infoFrame.winfo_children():
             widget.destroy()
 
@@ -55,7 +56,7 @@ class YoubikeWindow(tk.Tk):
             #一個row,5個cell
             if index % 5 == 0:
                 parentFrame = tk.Frame(self.infoFrame)
-                parentFrame.pack(anchor=tk.W)
+                parentFrame.pack(anchor=tk.W,padx=20)
             cellFrame = tk.Frame(parentFrame, bg='#cccccc', width=150, height=40, borderwidth=1, relief=tk.GROOVE)
             cellFrame.pack(side=tk.LEFT)
 
