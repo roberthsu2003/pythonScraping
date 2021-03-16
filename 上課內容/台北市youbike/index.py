@@ -60,11 +60,12 @@ class YoubikeWindow(tk.Tk):
                 parentFrame.pack(anchor=tk.W,padx=20)
 
             #建立一個frame,內有canvas的圓點和button
-            cellFrame = tk.Frame(parentFrame, bg='#cccccc', width=150, height=40, borderwidth=1, relief=tk.GROOVE)
+            cellFrame = tk.Frame(parentFrame, bg='#eeeeee', width=150, height=40, borderwidth=1, relief=tk.GROOVE)
             #建立圓點
             #siteInfo是tuple
-            circleCanvas = dataSource.getColorCircle(cellFrame,siteInfo[1])
-            circleCanvas.pack()
+            dataSource.getColorCircle(cellFrame,siteInfo[1]).pack()
+            nameButton = tk.Button(cellFrame,text=siteInfo[0],width=20,font=(13,))
+            nameButton.pack()
             cellFrame.pack(side=tk.LEFT)
 
 
