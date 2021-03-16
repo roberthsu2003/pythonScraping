@@ -1,6 +1,7 @@
 import dataSource
 import tkinter as tk
 import tkinter.ttk as ttk
+from tkinter.simpledialog import Dialog
 
 class YoubikeWindow(tk.Tk):
     def __init__(self):
@@ -77,6 +78,12 @@ class YoubikeWindow(tk.Tk):
 
         #取出單一站點detail資料
         print(dataSource.getDetailInfoOfSite(siteName))
+
+
+class SingleSiteInfo(Dialog):
+    def __init__(self, parent, title=None, info=None):
+        self.info = info #必需要寫在前面
+        super().__init__(parent,title)
 
 
 
