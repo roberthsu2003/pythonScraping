@@ -79,7 +79,7 @@ class YoubikeWindow(tk.Tk):
         #取出單一站點detail資料
         #print(dataSource.getDetailInfoOfSite(siteName))
         info = dataSource.getDetailInfoOfSite(siteName)
-        singleSiteInfo = SingleSiteInfo(self,title="測試",info=info)
+        singleSiteInfo = SingleSiteInfo(self,title="站場資訊",info=info)
 
 
 class SingleSiteInfo(Dialog):
@@ -96,17 +96,18 @@ class SingleSiteInfo(Dialog):
         by the __init__ method.
         '''
         print(self.info)
-        tk.Label(master, text=f'站場編號:{self.info["sno"]}').grid(row=0, sticky=tk.W)
-        tk.Label(master, text=f'站場名稱:{self.info["sna"]}').grid(row=1, sticky=tk.W)
-        tk.Label(master, text=f'車輛總數:{self.info["tot"]}').grid(row=2, sticky=tk.W)
-        tk.Label(master, text=f'可借車數:{self.info["sbi"]}').grid(row=3, sticky=tk.W)
-        tk.Label(master, text=f'站場地址:{self.info["ar"]}').grid(row=4, sticky=tk.W)
-        tk.Label(master, text=f'可還車位:{self.info["bemp"]}').grid(row=5, sticky=tk.W)
+        fontStyle = {'font':('arial',13)}
+        tk.Label(master, text=f'站場編號:{self.info["sno"]}', **fontStyle).grid(row=0, sticky=tk.W)
+        tk.Label(master, text=f'站場名稱:{self.info["sna"]}', **fontStyle).grid(row=1, sticky=tk.W)
+        tk.Label(master, text=f'車輛總數:{self.info["tot"]}', **fontStyle).grid(row=2, sticky=tk.W)
+        tk.Label(master, text=f'可借車數:{self.info["sbi"]}', **fontStyle).grid(row=3, sticky=tk.W)
+        tk.Label(master, text=f'站場地址:{self.info["ar"]}', **fontStyle).grid(row=4, sticky=tk.W)
+        tk.Label(master, text=f'可還車位:{self.info["bemp"]}', **fontStyle).grid(row=5, sticky=tk.W)
         if self.info['act'] == '1':
             state = '營運中'
         else:
             state = '維修中'
-        tk.Label(master, text=state).grid(row=6, sticky=tk.W)
+        tk.Label(master, text=state,**fontStyle).grid(row=6, sticky=tk.W)
 
     def buttonbox(self):
         '''
