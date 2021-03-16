@@ -13,6 +13,6 @@ def getInfoCanvas(parent):
 
 #建立有顏色的小圓點的canvas
 def getColorCircle(parent,color):
-    circleCanvas=tk.Canvas(parent,width=40,height=40,bg='#eeeeee')
+    circleCanvas=tk.Canvas(parent,width=40,height=40,bg='#cccccc',highlightthickness=0)
     circleCanvas.create_oval(10, 10, 30, 30, fill=color)
     return circleCanvas

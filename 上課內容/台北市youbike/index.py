@@ -25,9 +25,13 @@ class YoubikeWindow(tk.Tk):
         rightFrame= tk.Frame(self)
         infoCanvas = dataSource.getInfoCanvas(rightFrame)
         infoCanvas.pack(anchor=tk.NE)
-        self.infoFrame = ttk.LabelFrame(rightFrame,text='景美區',style='Red.TLabelframe')
+        self.infoFrame = ttk.LabelFrame(rightFrame,text='文山區',style='Red.TLabelframe')
         self.infoFrame.pack(padx=20,pady=20)
         rightFrame.pack(side=tk.RIGHT,fill=tk.Y)
+
+        #進入時,右邊顯示的區域
+        simpleInfo = dataSource.getAreaSimpleInfo('文山區')
+        self.changeDisplayOfRightSide(simpleInfo,'文山區')
 
     def userSelected(self,event):
         listbox = event.widget
@@ -60,7 +64,7 @@ class YoubikeWindow(tk.Tk):
                 parentFrame.pack(anchor=tk.W,padx=20)
 
             #建立一個frame,內有canvas的圓點和button
-            cellFrame = tk.Frame(parentFrame, bg='#eeeeee', width=150, height=40, borderwidth=1, relief=tk.GROOVE)
+            cellFrame = tk.Frame(parentFrame, bg='#cccccc', width=150, height=40, borderwidth=1, relief=tk.GROOVE)
             #建立圓點
             #siteInfo是tuple
             dataSource.getColorCircle(cellFrame,siteInfo[1]).pack()
