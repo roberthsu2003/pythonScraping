@@ -37,7 +37,7 @@
       <recent name="C:\Users\user\Documents\GitHub\pythonScraping\上課內容\台北市youbike" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.index (1)">
+  <component name="RunManager" selected="Python.index">
     <configuration name="空氣品質指標2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="上課內容" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -149,8 +149,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.index (1)" />
         <item itemvalue="Python.index" />
+        <item itemvalue="Python.index (1)" />
         <item itemvalue="Python.draw" />
         <item itemvalue="Python.taipeiYoubikeData" />
         <item itemvalue="Python.空氣品質指標2" />
@@ -166,13 +166,6 @@
       <option name="presentableId" value="Default" />
       <updated>1613618526045</updated>
       <workItem from="1615512623274" duration="42000" />
-    </task>
-    <task id="LOCAL-00071" summary="modify">
-      <created>1614934279400</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1614934279400</updated>
     </task>
     <task id="LOCAL-00072" summary="modify">
       <created>1614934293854</created>
@@ -510,7 +503,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616482297895</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="modify">
+      <created>1616482956272</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1616482956272</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
