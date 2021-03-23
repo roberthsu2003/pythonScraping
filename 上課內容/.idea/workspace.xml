@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b5f05aa1-bd7e-4550-9c1d-18691cf2e951" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/台北市youbike/dataSource/taipeiYoubikeData.py" beforeDir="false" afterPath="$PROJECT_DIR$/台北市youbike/dataSource/taipeiYoubikeData.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/台北市youbike/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/台北市youbike/index.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -166,13 +165,6 @@
       <option name="presentableId" value="Default" />
       <updated>1613618526045</updated>
       <workItem from="1615512623274" duration="42000" />
-    </task>
-    <task id="LOCAL-00063" summary="modify">
-      <created>1614923097199</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1614923097199</updated>
     </task>
     <task id="LOCAL-00064" summary="modify">
       <created>1614925128116</created>
@@ -510,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616462105336</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="modify">
+      <created>1616464069813</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1616464069813</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

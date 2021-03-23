@@ -5,6 +5,7 @@ import threading
 
 
 class YoubikeWindow(tk.Tk):
+    defaultArea = '文山區'
     def __init__(self):
         super().__init__()
         self.title("台北市youbike及時資訊")
@@ -40,6 +41,7 @@ class YoubikeWindow(tk.Tk):
     def userSelected(self,event):
         listbox = event.widget
         areaName = listbox.get(listbox.curselection())
+        YoubikeWindow.defaultArea = areaName
         #得到選取區域的簡單資料
         #simpleInfo內容是list,裏面有tuple(站名,顏色)
         simpleInfo = dataSource.getAreaSimpleInfo(areaName)
@@ -85,8 +87,8 @@ class YoubikeWindow(tk.Tk):
         singleSiteInfo = dataSource.SingleSiteInfo(self,title="站場資訊",info=info)
 
     def updateRightSideContent(self):
-        simpleInfo = dataSource.getAreaSimpleInfo('文山區')
-        self.changeDisplayOfRightSide(simpleInfo, '文山區')
+        simpleInfo = dataSource.getAreaSimpleInfo(YoubikeWindow.defaultArea)
+        self.changeDisplayOfRightSide(simpleInfo, YoubikeWindow.defaultArea)
 
     def updateDownloadData(self):
         #重新下載
