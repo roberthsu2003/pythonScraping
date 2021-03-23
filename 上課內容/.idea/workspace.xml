@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b5f05aa1-bd7e-4550-9c1d-18691cf2e951" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="b5f05aa1-bd7e-4550-9c1d-18691cf2e951" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,13 +166,6 @@
       <option name="presentableId" value="Default" />
       <updated>1613618526045</updated>
       <workItem from="1615512623274" duration="42000" />
-    </task>
-    <task id="LOCAL-00073" summary="modify">
-      <created>1615250733244</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1615250733244</updated>
     </task>
     <task id="LOCAL-00074" summary="modify">
       <created>1615253227052</created>
@@ -512,7 +503,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616483634359</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="modify">
+      <created>1616485369582</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1616485369582</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
