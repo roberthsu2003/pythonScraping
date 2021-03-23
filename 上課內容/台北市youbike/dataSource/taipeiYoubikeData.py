@@ -26,20 +26,28 @@ def getDetailInfoOfSite(singleSiteName):
         if detalData['sna'] == singleSiteName:
             return detalData
 
-response = requests.get('https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json')
-response.encoding = 'utf-8'
-downloadData = response.json()
-downloadData1=downloadData['retVal']
-#取出value值，轉為list
-#youbikeData取得過濾解析完的資料,list內存dictionary
-youbikeData = list(downloadData1.values())
-print(youbikeData)
-#建立區域的list
-areaSet = set()
-for site in youbikeData:
-    areaSet.add(site['sarea'])
+def loadDataFromYouBikeTP():
+    global youbikeData,areas
+    response = requests.get('https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json')
+    response.encoding = 'utf-8'
+    downloadData = response.json()
+    downloadData1=downloadData['retVal']
+    #取出value值，轉為list
+    #youbikeData取得過濾解析完的資料,list內存dictionary
+    youbikeData = list(downloadData1.values())
+    print(youbikeData)
+    #建立區域的list
+    areaSet = set()
+    for site in youbikeData:
+        areaSet.add(site['sarea'])
+    areas = list(areaSet)
 
-areas = list(areaSet)
+#建立global變數
+youbikeData = None
+areas =None
+#執行下載
+#更新時要重新呼叫它
+loadDataFromYouBikeTP()
 
 
-__all__ = ['areas','getAreaSimpleInfo','getDetailInfoOfSite']
+__all__ = ['areas','getAreaSimpleInfo','getDetailInfoOfSite','loadDataFromYouBikeTP']
