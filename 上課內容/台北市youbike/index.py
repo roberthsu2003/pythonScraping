@@ -96,14 +96,18 @@ class YoubikeWindow(tk.Tk):
         dataSource.loadDataFromYouBikeTP()
         #更新右邊畫面
         self.updateRightSideContent()
-        t = threading.Timer(1*60,self.updateDownloadData)
-        t.start()
+        self.t = threading.Timer(1*60,self.updateDownloadData)
+        self.t.start()
 
 
 
+def closeWindow():
+    window.destroy()
+    window.t.cancel()
 
 
 
 if __name__ == "__main__":
     window = YoubikeWindow()
+    window.protocol("WM_DELETE_WINDOW",closeWindow)
     window.mainloop()
