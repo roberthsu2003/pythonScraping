@@ -189,7 +189,7 @@ soup.find_all('a')
  </a>]
 ```
 
-#### eautifulSoup實體方法find(), 傳出Tag實體
+#### BeautifulSoup實體方法find(), 傳出Tag實體
 
 ```python
 soup.find(id='link3')
