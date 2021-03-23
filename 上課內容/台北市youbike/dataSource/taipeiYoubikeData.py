@@ -35,7 +35,7 @@ def loadDataFromYouBikeTP():
     #取出value值，轉為list
     #youbikeData取得過濾解析完的資料,list內存dictionary
     youbikeData = list(downloadData1.values())
-    print(youbikeData)
+    #print(youbikeData)
     #建立區域的list
     areaSet = set()
     for site in youbikeData:

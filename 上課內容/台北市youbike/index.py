@@ -1,6 +1,7 @@
 import dataSource
 import tkinter as tk
 import tkinter.ttk as ttk
+import threading
 
 
 class YoubikeWindow(tk.Tk):
@@ -31,8 +32,10 @@ class YoubikeWindow(tk.Tk):
         rightFrame.pack(side=tk.RIGHT,fill=tk.Y)
 
         #進入時,右邊顯示的區域
-        simpleInfo = dataSource.getAreaSimpleInfo('文山區')
-        self.changeDisplayOfRightSide(simpleInfo,'文山區')
+
+        #simpleInfo = dataSource.getAreaSimpleInfo('文山區')
+        #self.changeDisplayOfRightSide(simpleInfo,'文山區')
+        self.updateDownloadData()
 
     def userSelected(self,event):
         listbox = event.widget
@@ -48,12 +51,12 @@ class YoubikeWindow(tk.Tk):
     def changeDisplayOfRightSide(self,info,lableName):
         # info內容是list,裏面有tuple(站名,顏色)
         #先清除self.infoFrame內的內容
-        print(info)
+
         self.infoFrame.configure(text=lableName)
         for widget in self.infoFrame.winfo_children():
             widget.destroy()
 
-        print(self.infoFrame)
+
         for index,siteInfo in enumerate(info):
             #一個row,5個cell
             if index % 5 == 0:
@@ -80,6 +83,19 @@ class YoubikeWindow(tk.Tk):
         #print(dataSource.getDetailInfoOfSite(siteName))
         info = dataSource.getDetailInfoOfSite(siteName)
         singleSiteInfo = dataSource.SingleSiteInfo(self,title="站場資訊",info=info)
+
+    def updateRightSideContent(self):
+        simpleInfo = dataSource.getAreaSimpleInfo('文山區')
+        self.changeDisplayOfRightSide(simpleInfo, '文山區')
+
+    def updateDownloadData(self):
+        #重新下載
+        print('重新下載')
+        dataSource.loadDataFromYouBikeTP()
+        #更新右邊畫面
+        self.updateRightSideContent()
+        t = threading.Timer(1*60,self.updateDownloadData)
+        t.start()
 
 
 
