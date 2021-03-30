@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b5f05aa1-bd7e-4550-9c1d-18691cf2e951" name="Default Changelist" comment="" />
+    <list default="true" id="b5f05aa1-bd7e-4550-9c1d-18691cf2e951" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/scrape_5-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/scrape_5-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scrape_5.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/scrape_5.ipynb" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -166,13 +170,6 @@
       <option name="presentableId" value="Default" />
       <updated>1613618526045</updated>
       <workItem from="1615512623274" duration="42000" />
-    </task>
-    <task id="LOCAL-00091" summary="modify">
-      <created>1615278703905</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1615278703905</updated>
     </task>
     <task id="LOCAL-00092" summary="modify">
       <created>1615279321160</created>
@@ -510,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617090467398</updated>
     </task>
-    <option name="localTasksCounter" value="140" />
+    <task id="LOCAL-00140" summary="modify">
+      <created>1617091391131</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1617091391131</updated>
+    </task>
+    <option name="localTasksCounter" value="141" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
