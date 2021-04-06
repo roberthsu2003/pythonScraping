@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5f05aa1-bd7e-4550-9c1d-18691cf2e951" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/scrap_6-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/scrap_6-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scrap_6.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/scrap_6.ipynb" afterDir="false" />
     </list>
@@ -170,13 +169,6 @@
       <option name="presentableId" value="Default" />
       <updated>1613618526045</updated>
       <workItem from="1615512623274" duration="42000" />
-    </task>
-    <task id="LOCAL-00095" summary="modify">
-      <created>1615860806992</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1615860806992</updated>
     </task>
     <task id="LOCAL-00096" summary="modify">
       <created>1615862479073</created>
@@ -514,7 +506,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617672507504</updated>
     </task>
-    <option name="localTasksCounter" value="144" />
+    <task id="LOCAL-00144" summary="modify">
+      <created>1617673786932</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1617673786932</updated>
+    </task>
+    <option name="localTasksCounter" value="145" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
