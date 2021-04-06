@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5f05aa1-bd7e-4550-9c1d-18691cf2e951" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/台積電sqlite/cdb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sqlite/.ipynb_checkpoints/sqlite_1-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sqlite/.ipynb_checkpoints/sqlite_1-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sqlite/.ipynb_checkpoints/sqlite_2-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sqlite/.ipynb_checkpoints/sqlite_2-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sqlite/sqlite_1.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sqlite/sqlite_1.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sqlite/sqlite_2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sqlite/sqlite_2.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,13 +173,6 @@
       <option name="presentableId" value="Default" />
       <updated>1613618526045</updated>
       <workItem from="1615512623274" duration="42000" />
-    </task>
-    <task id="LOCAL-00099" summary="modify">
-      <created>1615865529762</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1615865529762</updated>
     </task>
     <task id="LOCAL-00100" summary="modify">
       <created>1615866418743</created>
@@ -512,7 +510,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617680161414</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL-00148" summary="modify">
+      <created>1617680833951</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1617680833951</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
