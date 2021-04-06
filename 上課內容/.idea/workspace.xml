@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b5f05aa1-bd7e-4550-9c1d-18691cf2e951" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/scrape_5-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/scrape_5-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scrape_5.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/scrape_5.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +39,7 @@
       <recent name="C:\Users\user\Documents\GitHub\pythonScraping\上課內容\台北市youbike" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.空氣品質指標2">
+  <component name="RunManager" selected="Python.index">
     <configuration name="空氣品質指標2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="上課內容" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -153,8 +151,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.空氣品質指標2" />
         <item itemvalue="Python.index" />
+        <item itemvalue="Python.空氣品質指標2" />
         <item itemvalue="Python.index (1)" />
         <item itemvalue="Python.draw" />
         <item itemvalue="Python.taipeiYoubikeData" />
@@ -170,13 +168,6 @@
       <option name="presentableId" value="Default" />
       <updated>1613618526045</updated>
       <workItem from="1615512623274" duration="42000" />
-    </task>
-    <task id="LOCAL-00092" summary="modify">
-      <created>1615279321160</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1615279321160</updated>
     </task>
     <task id="LOCAL-00093" summary="modify">
       <created>1615857297700</created>
@@ -514,7 +505,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617091391131</updated>
     </task>
-    <option name="localTasksCounter" value="141" />
+    <task id="LOCAL-00141" summary="modify">
+      <created>1617093504552</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1617093504552</updated>
+    </task>
+    <option name="localTasksCounter" value="142" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
