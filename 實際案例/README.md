@@ -3,7 +3,7 @@
 
 2.  [自goodinfo.tw取出台積電資料,並存成資料庫檔](./goodinfo.tw/台積電sqlite.ipynb)
 
-3.  [自goodinfo.tw取出台積電資料,並存成資料庫檔](./goodinfo.tw/台積電_sqlite_sqlAlchemy.ipynb)
+3.  [自goodinfo.tw取出台積電資料,並存成資料庫檔,使用sqlAlchemy](./goodinfo.tw/台積電_sqlite_sqlAlchemy.ipynb)
 
 4. [pchome24小時購物頁面,下載產品圖片和連結,並儲存成為CSV檔](./pchome24/pchome24csv.ipynb)
 
@@ -14,3 +14,5 @@
 7. [PTT文章下載(爬行多個頁面)](./ptt/ptt文章.ipynb)
 
 8. [Yahoo本周新片](./yahoo_thisWeek_movie/yahooMovie.ipynb)
+
+9. [股票及時查詢提醒系統(學員:梁晉嘉作品)](./股票及時查詢提醒系統/main.py)
