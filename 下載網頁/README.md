@@ -10,6 +10,8 @@ $ pip install requests
 ### 建立一個網頁get請求
 
 ```python
+
+import requests
 res = requests.get('https://api.github.com/events')
 ```
 
