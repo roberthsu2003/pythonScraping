@@ -49,7 +49,7 @@ res = requests.post('https://httpbin.org/post', data={'key':'value'})
 
 ## 回應文字內容(Response)
 
-response物件內的txt就是傳回的內容
+response物件內的text就是傳回的內容
 
 ```python
 import requests
