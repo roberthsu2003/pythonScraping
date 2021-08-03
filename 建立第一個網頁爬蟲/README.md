@@ -6,8 +6,8 @@
 4. 移至下一頁面，重覆上面3個動作
 
 ### 下載整網頁內容
-- 使用urllib package 內的 request module 內的 urlopen()這個function
-- urlopen()可以透過internet來讀取資料(html檔案,影像檔或其他任何檔案)
+- 使用requests套件
+- get()可以透過internet來讀取資料(html檔案,影像檔或其他任何檔案)
 
 ```python
 import requests
