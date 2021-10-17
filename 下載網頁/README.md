@@ -127,6 +127,7 @@ r.json()下載, 如果格式不符合會拋出錯誤`ValueError: No JSON object 
 ```
 
 存檔方式
+
 ```python
 with open(filename, 'wb') as fd:
     for chunk in r.iter_content(chunk_size=128):
@@ -197,7 +198,7 @@ else:
 ```
 
 ## 實際操作
-1. 讀取雲端json(API)
+1. 讀取雲端json(API),當使用瀏灠器觀看網址時，會看到json碼，呈現於網頁上的處理方式
 
 ```python
 import requests
@@ -207,7 +208,7 @@ r.json()
 得到list物件
 ```
 
-2. 讀取雲端csv檔(當看到最後的副檔名有csv檔時),當在瀏灠器內，只要點選就會下載檔案
+2. 讀取雲端csv檔(當看到最後的副檔名有csv檔時),當使用瀏灠器觀看網址時，會直接下載csv檔的處理方式
 
 ```python
 import requests
@@ -223,7 +224,7 @@ for row in csvObj:
     print(row)
 ```
 
-3. 讀取雲端json檔(當看到最後的副檔名有json檔時),當在瀏灠器內，只要點選就會下載檔案
+3. 讀取雲端json檔(當看到最後的副檔名有json檔時),當使用瀏灠器觀看網址時，會直接下載json檔的處理方式
 
 ```python
 import requests
@@ -235,7 +236,7 @@ response=requests.get(json_url)
 response.json()
 ```
 
-4. 下載雲端csv檔(當看到最後的副檔名有csv檔時),當在瀏灠器內，只要點選就會下載檔案
+4. 下載雲端csv檔(當看到最後的副檔名有csv檔時),並將檔案儲存於專案資料夾內
 
 ```python
 import requests
@@ -249,7 +250,7 @@ with open('station.csv', 'wb') as fd:
 檔案station.csv已經下載
 ```
 
-5. 下載雲端json檔(當看到最後的副檔名有csv檔時),當在瀏灠器內，只要點選就會下載檔案
+5. 下載雲端json檔(當看到最後的副檔名有csv檔時),並將檔案儲存於專案資料夾內
 
 ```python
 import requests
