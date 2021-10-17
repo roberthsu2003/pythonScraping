@@ -9,6 +9,7 @@ $ pip install requests
 ## 請求網頁(Request)
 ### 建立一個網頁get請求
 
+
 ```python
 
 import requests
