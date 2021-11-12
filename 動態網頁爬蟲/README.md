@@ -1,7 +1,7 @@
 ## 動態網頁爬蟲(Selenium)
 
 ### 1. Selenium 介紹
-Selenium提供了一個簡單的API應用程式介面（英語：Application Programming Interface），使用者可以利用Selenium Webdriver 編寫功能及測試。
+Selenium提供了一個簡單的API應用程式介面（英語：Application Programming Interface），使用者可以利用Selenium Webdriver 編寫功能及測試(test)。
 
 ### 2. Selenium 安裝
 
