@@ -15,4 +15,6 @@
 
 8. [Yahoo本周新片](./yahoo_thisWeek_movie/yahooMovie.ipynb)
 
-9. [股票及時查詢提醒系統(學員:梁晉嘉作品)](./股票及時查詢提醒系統/main.py)
+9. [高鐵假期_selenium](./高鐵假期_selenium/index.ipynb)
+
+10. [股票及時查詢提醒系統(學員:梁晉嘉作品)](./股票及時查詢提醒系統/main.py)
