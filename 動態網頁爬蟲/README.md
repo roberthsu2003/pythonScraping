@@ -25,7 +25,7 @@ pip install selenium
 
 選定了瀏覽器，在下載前，請記得檢查目前電腦上的瀏覽器版本，再下載對應的Webdriver，之後也要適時更新版本以維護程式碼運行！
 
-### 4. Chromedriver 使用
+### 4. Chromedriver (手動下載)使用
 
 ```python
 # 載入需要的套件
@@ -35,7 +35,21 @@ from selenium import webdriver
 driver = webdriver.Chrome("絕對路徑\chromedriver”)
 ```
 
-### 5.delay數秒後關閉視窗
+### 5 使用webdriver-manager,自動下載
+
+```
+pip install webdriver-manager
+```
+
+```
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+```
+
+### 6.delay數秒後關閉視窗
 
 ```
 time.sleep(3)
