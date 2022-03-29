@@ -18,3 +18,5 @@
 9. [高鐵假期_selenium](./高鐵假期_selenium/index.ipynb)
 
 10. [股票及時查詢提醒系統(學員:梁晉嘉作品)](./股票及時查詢提醒系統/main.py)
+
+11. [股票資訊_selenium_動態下載WebDrive](./股票爬蟲_selenium_動態下載WebDrive/lesson3.ipynb)
