@@ -40,8 +40,6 @@ driver = webdriver.Chrome("絕對路徑\chromedriver”)
 - webdriver-manager是thirdpart開發,下載管理不同的brower有不同的語法。請參考以下網址
 [webdriver_manager](https://github.com/SergeyPirogov/webdriver_manager)
 
-- 全部操作(sample1.ipynb)
-
 ```
 pip install webdriver-manager
 ```
@@ -54,28 +52,20 @@ from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 ```
 
-### webdriver的簡單操控
-
-#### 瀏覽網頁
-
-```python
-driver.get("https://www.selenium.dev/selenium/web/web-form.html")
-```
-
-#### 取得brower目前的資訊
-
+### webdriver自動下載簡易範例
 - [Browser interactions](https://www.selenium.dev/documentation/webdriver/interactions/)
 
 ```python
-title = driver.title
-```
-
-#### 模擬使用者操作
-- 先等待0.5秒
-
-```
+#使用webdriver-manager自動下載管理
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+driver.get("https://www.selenium.dev/selenium/web/web-form.html") 
+title = driver.title
+assert title == "Web form"
 driver.implicitly_wait(0.5)
 text_box = driver.find_element(by=By.NAME, value="my-text")
 submit_button = driver.find_element(by=By.CSS_SELECTOR, value="button")
@@ -84,12 +74,11 @@ text_box.send_keys("Selenium")
 submit_button.click()
 
 message = driver.find_element(by=By.ID, value="message")
-```
+value = message.text
 
-#### 結束session
-
-```
+assert value == "Received!"
 driver.quit()
+#driver.close()
 ```
 
 
