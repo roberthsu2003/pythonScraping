@@ -1,9 +1,15 @@
 ## 動態網頁爬蟲(Selenium)
 
-### 1. Selenium 介紹
+###  Selenium 介紹
 Selenium提供了一個簡單的API應用程式介面（英語：Application Programming Interface），使用者可以利用Selenium Webdriver 編寫功能及測試。
 
-### 2. Selenium 安裝
+## 安裝套件
+- 2個套件必需安裝
+- selenium套件
+- webdriver安裝
+
+###  Selenium 安裝
+
 
 在python裡執行以下程式碼，即可安裝Selenium套件。
 
@@ -12,7 +18,8 @@ pip install selenium
 ```
 
 
-### 3. Webdriver 下載
+###  Webdriver 下載
+#### 安裝有4種方法，可以選擇其中一種
 
 [官網說明](https://pypi.org/project/selenium/)
 
@@ -25,7 +32,7 @@ pip install selenium
 
 選定了瀏覽器，在下載前，請記得檢查目前電腦上的瀏覽器版本，再下載對應的Webdriver，之後也要適時更新版本以維護程式碼運行！
 
-### 4. Chromedriver (手動下載)使用
+###  Chromedriver (手動下載)使用
 
 ```python
 # 載入需要的套件
@@ -35,9 +42,9 @@ from selenium import webdriver
 driver = webdriver.Chrome("絕對路徑\chromedriver”)
 ```
 
-### 5 使用webdriver-manager,自動下載
+###  使用webdriver-manager,自動下載(並且會自動更新,建議使用)
 
-- webdriver-manager是thirdpart開發,下載管理不同的brower有不同的語法。請參考以下網址
+- webdriver-manager是third party開發,下載管理不同的brower有不同的語法。請參考以下網址
 [webdriver_manager](https://github.com/SergeyPirogov/webdriver_manager)
 
 ```
@@ -51,6 +58,66 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 ```
+
+
+### 撰寫selenium的有8個流程
+1. 建立一個session(開始一個工作)
+
+```python
+    driver = webdriver.Chrome()
+```
+
+2. 要求driver的browser瀏覽網頁
+
+```python
+    driver.get("https://www.selenium.dev/selenium/web/web-form.html")
+```
+
+3. 取得browser的資訊，或更改資料
+	- browser size / position, cookies, alerts
+
+```python
+    title = driver.title
+```
+
+4. 建立等待策略
+
+```python
+    driver.implicitly_wait(0.5)
+```
+
+5. 取得網頁元素
+
+```python
+    text_box = driver.find_element(by=By.NAME, value="my-text")
+    submit_button = driver.find_element(by=By.CSS_SELECTOR, value="button")
+```
+
+6. 模擬網頁元素動作
+
+```python
+    text_box.send_keys("Selenium")
+    submit_button.click()
+```
+
+7. 取得網頁元素資訊
+
+```python
+    value = message.text
+```
+
+8. 結束session工作
+
+```python
+    driver.quit()
+```
+
+9. 關閉browser
+
+```python
+	  driver.close()
+```
+
 
 ### webdriver自動下載簡易範例
 - [Browser interactions](https://www.selenium.dev/documentation/webdriver/interactions/)
