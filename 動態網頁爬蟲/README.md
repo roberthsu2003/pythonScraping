@@ -75,12 +75,15 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 3. 取得browser的資訊，或更改資料
 	- browser size / position, cookies, alerts
+	- [driver的資訊](./browser_infoomation.ipynb)
 
 ```python
     title = driver.title
 ```
 
 4. 建立等待策略
+
+- [等待策略細節說明](./wait_strategy.ipynb)
 
 ```python
     driver.implicitly_wait(0.5)
