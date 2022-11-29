@@ -124,3 +124,7 @@ function ajax_delay(str){
 
 </body></html>
 ```
+
+
+## 實際案例
+[台灣高鐵線上時刻表與票價查詢](./台灣高鐵.ipynb)
