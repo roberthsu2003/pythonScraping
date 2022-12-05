@@ -122,6 +122,7 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 ```
 
 
+
 ### webdriver自動下載簡易範例
 - [Browser interactions](https://www.selenium.dev/documentation/webdriver/interactions/)
 
@@ -151,9 +152,13 @@ driver.quit()
 #driver.close()
 ```
 
+### 練習網址:
+- [web-form](https://www.selenium.dev/selenium/web/web-form.html)
+- [file uploader](https://the-internet.herokuapp.com/upload)
+- [input-form](https://www.selenium.dev/selenium/web/inputs.html)
+- [各式表單](https://the-internet.herokuapp.com/)
 
-
-### 5. 整合BeautifulSoup
+###  整合BeautifulSoup
 
 - driver.page_source取得所有的網頁內容
 

@@ -1,13 +1,18 @@
 <!doctype html>
+<html>
+<head>
 <meta charset=utf-8>
 <title>Race Condition Example</title>
-
-<script>
-    var initialised = false;
-    window.addEventListener("load", function () {
-        var newElement = document.createElement("p");
-        newElement.textContent = "Hello from JavaScript!";
-        document.body.appendChild(newElement);
-        initialised = true;
-    });
-</script>
+</head>
+<body>
+    <script>
+        var initialised = false;
+        window.addEventListener("click", function () {
+            var newElement = document.createElement("p");
+            newElement.textContent = "Hello from JavaScript!";
+            document.body.appendChild(newElement);
+            initialised = true;
+        });
+    </script>
+</body>
+</html>
