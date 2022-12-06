@@ -173,6 +173,7 @@ soup.a
 ```
 
 #### BeautifulSoup實體方法find_all(), 傳出ResultSet實體
+- find_all(name,attrs,recursive,string,limit,**kwargs)
 
 ```python
 soup.find_all('a')
@@ -190,6 +191,7 @@ soup.find_all('a')
 ```
 
 #### BeautifulSoup實體方法find(), 傳出Tag實體
+- find(name,attrs,recursive,string,**kwargs)
 
 ```python
 soup.find(id='link3')
