@@ -47,6 +47,11 @@ asyncio.run(run())
 ```
 這段程式碼展示了如何用 Playwright 控制瀏覽器、載入頁面、等待元素並擷取內容
 
+[**Crawl4AI極簡教程(核心版)**](./Crawl4AI極簡教程(核心版).ipynb)
+
+### 使用crawl4AI必需了解python asyncio套件
+#### [有關於asyncio套件說明](asyncio教學.md)
+
 ---
 
 **總結**：Playwright 是現代網頁自動化與爬蟲的強大工具，特別適合處理需要互動、登入、JavaScript 動態渲染等情境。它與 crawl4AI 搭配，可以大幅提升資料擷取的成功率與效率，是 Python 開發者不可或缺的爬蟲利器。
