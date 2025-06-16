@@ -45,7 +45,7 @@ await some_async_function()
 
 - **執行非同步程式**：
 > [!IMPORTANT]  
-> **asyncio.run(main())**只可以在py檔執行  
+> `asyncio.run(main())`只可以在py檔執行  
 > ipynb檔無法執行,原因是ipynb本身在執行時,已經有建立事件迴圈,所以必需使用`await main()`  
 
     使用 `asyncio.run(main())` 或事件迴圈來運行非同步函數。
@@ -54,7 +54,7 @@ await some_async_function()
 ### 4. 簡單範例
 
 #### 範例 1：基本非同步函數
-
+[**ipynb檔實作**](asyncio非同步編程.ipynb)
 模擬不同任務的等待時間，展示非同步執行的優勢。
 
 ```python
