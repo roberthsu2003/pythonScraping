@@ -11,7 +11,7 @@
 ### 1. 什麼是 `asyncio`？
 
 - **概念**：`asyncio` 是 Python 用於非同步程式設計的標準庫，適用於 I/O 密集型任務（例如網路請求、檔案讀寫）。
-- **核心思想**：非同步程式允許程式在等待 I/O 操作時執行其他任務，提升效率。
+- **核心思想**：非同步程式允許程式在等待 I/O 操作和伺服器(MCP)時執行其他任務，提升效率。
 - **關鍵詞**：
     - `async def`：定義非同步函數（coroutine）。
     - `await`：暫停非同步函數，等待某個任務完成。
@@ -20,7 +20,7 @@
 ### 2. 為什麼需要 `asyncio`？
 
 - **同步 vs 非同步**：
-    - 同步程式：任務按順序執行，等待 I/O 會阻塞程式。
+    - 同步程式：任務按順序執行，等待 I/O 會`阻塞程式`。
     - 非同步程式：任務可交錯執行，等待 I/O 時可切換到其他任務。
 - **使用場景**：
     - 網路請求（爬蟲、API 呼叫）。
@@ -44,8 +44,12 @@ await some_async_function()
 ```
 
 - **執行非同步程式**：
+> [!IMPORTANT]  
+> **asyncio.run(main())**只可以在py檔執行  
+> ipynb檔無法執行,原因是ipynb本身在執行時,已經有建立事件迴圈,所以必需使用`await main()`  
 
-    使用 `asyncio.run()` 或事件迴圈來運行非同步函數。
+    使用 `asyncio.run(main())` 或事件迴圈來運行非同步函數。
+    
 
 ### 4. 簡單範例
 
@@ -66,7 +70,8 @@ async def main():
     await asyncio.gather(say_hello("任務1", 2), say_hello("任務2", 1))
 
 # 執行非同步程式
-asyncio.run(main())
+asyncio.run(main()) # py檔
+await main() # ipynb檔
 ```
 
 **預期輸出**：
@@ -99,7 +104,8 @@ async def main():
     results = await asyncio.gather(*tasks)
     print("所有資料：", results)
 
-asyncio.run(main())
+asyncio.run(main()) #py檔執行
+await main() # ipynb檔執行
 ```
 
 **預期輸出**：
@@ -270,7 +276,9 @@ asyncio.run(main())
 
 ---
 
-作為 Python 老師，教學生 asyncio 時，可以從簡單且易懂的範例開始，讓學生理解非同步程式設計的核心概念：協程（coroutine）、事件循環（event loop）、以及 async/await 語法。以下是幾個適合入門的教學重點與範例：
+## 第2篇文章
+
+教學生 asyncio 時，可以從簡單且易懂的範例開始，讓學生理解非同步程式設計的核心概念：協程（coroutine）、事件循環（event loop）、以及 async/await 語法。以下是幾個適合入門的教學重點與範例：
 
 ## 1. 介紹 async/await 與協程
 
