@@ -128,6 +128,7 @@ asyncio 非常核心且重要的觀念。
 
 fetch_data(url, delay)：這就像是準備好一張寫著「去某個 url 拿資料，中間要等 delay 秒」的食譜。你只是拿到了這張食譜，但還沒有開始動手做菜。
 tasks = [...]：這行程式碼就是把多張這樣的「食譜」（多個協程物件）搜集成一個列表 tasks。
+
 所以，當 tasks = [fetch_data(url, delay) for url, delay in urls] 這行執行完畢時，你得到的 tasks 是一個像下面這樣的列表，裡面裝滿了待執行的「計畫」，但沒有任何一個計畫被真正啟動。
 
 ```
@@ -166,13 +167,18 @@ async def fetch_data(url, delay):
 #### 2. 呼叫 fetch_data，但只會得到「協程物件」(執行的計畫)。
 
 這裡只是在建立計畫列表，尚未執行任何 print 或 sleep。
+
 tasks = [fetch_data(url, delay) for url, delay in urls]
+
 print(f"已建立 {len(tasks)} 個任務計畫，準備交給事件迴圈執行。")
 
 #### 3. 使用 asyncio.gather 將所有任務計畫提交給事件迴圈。
-事件迴圈開始執行後，才會真正進入 fetch_data 函數，並印出 "開始抓取..."。
+事件迴圈開始執行後，才會真正進入 fetch_data 函數，並印出 "開始抓取..."。 
+
 當遇到 await asyncio.sleep() 時，事件迴圈會聰明地切換到其他未完成的任務。
+
 results = await asyncio.gather(*tasks)
+
 print("所有資料：", results)
 
 #### 4. 啟動整個非同步程式，運行 main 協程。
