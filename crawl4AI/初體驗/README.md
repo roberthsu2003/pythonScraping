@@ -1,4 +1,6 @@
 # crawl4AI初體驗
+- [github crawl4AI](https://github.com/unclecode/crawl4ai)
+- [crawl4AI官方網站使用說明書](https://docs.crawl4ai.com/)
 
 ## Playwright 是什麼？為什麼用在 crawl4AI？
 
@@ -45,6 +47,27 @@ async def run():
 await run()
 ```
 這段程式碼展示了如何用 Playwright 控制瀏覽器、載入頁面、等待元素並擷取內容
+
+### Crawl4AI官方的第一個範例
+
+```pytho
+import asyncio
+from crawl4ai import AsyncWebCrawler
+
+async def main():
+    #建立一個AsyncWebCrawler的實體
+    async with AsyncWebCrawler() as crawler:
+        #Run the crawler on a URL
+        result = await crawler.arun(url='https://crawl4ai.com')
+
+        #列印取出的結果
+        print(result.markdown)
+
+#執行asyncio.run()
+
+await main()
+
+```
 
 [**Crawl4AI極簡教程(核心版)**](./Crawl4AI極簡教程(核心版).ipynb)
 
