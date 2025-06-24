@@ -37,18 +37,16 @@ async def run():
         browser = await p.chromium.launch(headless=False)
         page = await browser.new_page()
         await page.goto('https://example.com')
-        await page.wait_for_selector('.selector')  # 等待元素載入
-        content = await page.inner_text('.selector')
+        await page.wait_for_selector('p') #等待元素載入
+        content = await page.inner_text('p')
         print(content)
         await browser.close()
-
-asyncio.run(run())
+    
+await run()
 ```
 這段程式碼展示了如何用 Playwright 控制瀏覽器、載入頁面、等待元素並擷取內容
 
 [**Crawl4AI極簡教程(核心版)**](./Crawl4AI極簡教程(核心版).ipynb)
-
-
 
 ---
 
