@@ -10,5 +10,8 @@ Crawl4AI 是一套專為人工智慧（AI）和大型語言模型（LLM）應用
 
 ## [Crawl4A快速入門](./Crawl4A快速入門)
 
+## [不需要LLM的提取網頁內容方式](./Crawl4A快速入門/手動方式產生css_schema.md)
+
+
 
 

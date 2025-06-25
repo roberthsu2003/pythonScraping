@@ -145,11 +145,7 @@ schema = JsonCssExtractionStrategy.generate_schema(
 strategy = JsonCssExtractionStrategy(schema)
 ```
 
-**5.3 透過手動方式產生css_schema**
-
-```python
-
-```
+[**5.3 透過手動方式產生css_schema**](./手動方式產生css_schema.md)
 
 
 **5.4 透過css_schema擷取網頁內容**
