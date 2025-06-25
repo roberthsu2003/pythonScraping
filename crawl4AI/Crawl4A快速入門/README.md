@@ -64,3 +64,14 @@ if __name__ == "__main__":
 	#asyncio,run(main())
     await main()
 ```
+
+### 4. 產生MarkDown輸出
+預設情況下，Crawl4AI 會自動從每個爬取的頁面產生 Markdown 檔案。不過，具體輸出結果取決於你指定了 Markdown 產生器還是內容過濾器。
+
+- result.markdown:  
+直接將 HTML 轉換為 Markdown。
+
+- result.markdown.fit_markdown:  
+套用任何已配置的內容過濾器（例如,PruningContentFilter)。
+
+
