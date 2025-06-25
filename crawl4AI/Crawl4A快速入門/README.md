@@ -74,4 +74,123 @@ if __name__ == "__main__":
 - result.markdown.fit_markdown:  
 套用任何已配置的內容過濾器（例如,PruningContentFilter)。
 
+```python
+from crawl4ai import AsyncWebCrawler, CrawlerRunConfig,CacheMode
+from crawl4ai.content_filter_strategy import PruningContentFilter
+from crawl4ai.markdown_generation_strategy import DefaultMarkdownGenerator
+
+md_generator = DefaultMarkdownGenerator(
+    content_filter = PruningContentFilter(threshold=0.4, threshold_type="fixed") #說明1
+)
+
+config = CrawlerRunConfig(
+    cache_mode = CacheMode.BYPASS,
+    markdown_generator = md_generator
+)
+
+async with AsyncWebCrawler() as crawler:
+    result = await crawler.arun("https://news.ycombinator.com", config=config)
+    print("raw Markdown length:",len(result.markdown.raw_markdown))
+    print("Fit Markdown length:",len(result.markdown.fit_markdown))
+```
+
+
+### 5. 簡單資料擷取（基於CSS）
+
+Crawl4AI 也可以使用 CSS 或 XPath 選擇器來擷取結構化資料 (JSON)。以下是一個基於 CSS 的簡單範例：
+
+> 新功能！ Crawl4AI 現在提供了一個強大的實用程序，可以使用 LLM 自動產生提取模式。只需執行一次，即可獲得可重複使用的模式，實現快速：
+
+**5.1 透過本地模型產生css_schema**
+
+[**透過本地模型產生css_schema.ipynb**](./透過本地模型產生css_schema.ipynb)
+
+```python
+from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
+from crawl4ai import LLMConfig
+
+# Generate a schema (one-time cost)
+#html = "<div class='product'><h2>Gaming Laptop</h2><span class='price'>$999.99</span></div>"
+html = "<div class='item'><h2>Item 1</h2><a href='https://example.com/item1'>Link 1</a></div>"
+
+# Or using Ollama (open source, no token needed)
+schema = JsonCssExtractionStrategy.generate_schema(
+    html,
+    llm_config = LLMConfig(provider="ollama/llama3.2", api_token=None)  # Not needed for Ollama
+)
+
+# Use the schema for fast, repeated extractions
+strategy = JsonCssExtractionStrategy(schema)
+```
+
+**5.2 透過gemini,openai,anthropic產生css_schema**
+
+[**透過gemini產生css_schema.ipynb**](./透過本地模型產生css_schema.ipynb)
+
+```python
+from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
+from crawl4ai import LLMConfig
+
+# Generate a schema (one-time cost)
+html = "<div class='product'><h2>Gaming Laptop</h2><span class='price'>$999.99</span></div>"
+
+# Using OpenAI (requires API token)
+schema = JsonCssExtractionStrategy.generate_schema(
+    html,
+    llm_config = LLMConfig(        
+        provider="gemini/gemini-2.5-flash",
+        api_token="your-gemini-token")  # Required for OpenAI
+)
+# Use the schema for fast, repeated extractions
+strategy = JsonCssExtractionStrategy(schema)
+```
+
+**5.3 透過手動方式產生css_schema**
+
+```python
+
+```
+
+
+**5.4 透過css_schema擷取網頁內容**
+
+[**透過css_schema擷取網頁內容.ipynb**](./lesson4_透過css_schema取出內容.ipynb)
+
+```python
+import asyncio
+import json
+from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
+from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
+
+async def main():
+
+    schema = {
+        "name": "Example Items",
+        "baseSelector": "div.item",
+        "fields": [
+            {"name": "title", "selector": "h2", "type": "text"},
+            {"name": "link", "selector": "a", "type": "attribute", "attribute": "href"}
+        ]
+    }
+
+    raw_html = "<div class='item'><h2>Item 1</h2><a href='https://example.com/item1'>Link 1</a></div>"
+
+    async with AsyncWebCrawler() as crawler:
+        result = await crawler.arun(
+            url="raw://" + raw_html,
+            config=CrawlerRunConfig(
+                cache_mode=CacheMode.BYPASS,
+                extraction_strategy=JsonCssExtractionStrategy(schema)
+            )
+        )
+        # The JSON output is stored in 'extracted_content'
+        data = json.loads(result.extracted_content)
+        print(result.extracted_content)
+        print("========================")
+        print(data)
+
+if __name__ == "__main__":
+    await main()
+
+```
 
