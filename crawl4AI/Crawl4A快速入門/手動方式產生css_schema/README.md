@@ -35,9 +35,81 @@ Crawl4AI 最強大的功能之一是無需依賴大型語言模型即可從網�
 
 ### 簡單範例：加密貨幣價格
 
+[**台灣銀行牌告匯率**](./lesson1_加密貨幣價格.ipynb)
+
 讓我們從使用 JsonCssExtractionStrategy 進行簡單的基於模式的提取開始。以下是從網站提取加密貨幣價格的程式碼片段（類似於舊版 Coinbase 範例）。注意，我們沒有調用任何 LLM：
 
+```python
+import json
+import asyncio
+from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
+from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
 
+async def extract_crypto_prices():
+    dummy_html = """
+    <html>
+      <body>
+        <div class='crypto-row'>
+          <h2 class='coin-name'>Bitcoin</h2>
+          <span class='coin-price'>$28,000</span>
+        </div>
+        <div class='crypto-row'>
+          <h2 class='coin-name'>Ethereum</h2>
+          <span class='coin-price'>$1,800</span>
+        </div>
+      </body>
+    </html>
+    """
+    #1. 定義一個簡單的extraction schema
+    schema = {
+        "name":"Crypto Prices",
+        "baseSelector": "div.crypto-row",
+        "fields":[
+            {
+                "name": "coin_name",
+                "selector": "h2.coin-name",
+                "type":"text"
+            },
+            {
+                "name":"price",
+                "selector":"span.coin-price",
+                "type":"text"
+            }
+        ]
+    }
 
+    #2. 建立extraction strategy
+    extraction_strategy = JsonCssExtractionStrategy(schema, verbose=True) #Enables verbose logging for debugging purposes.
 
+    #3. 設定爬蟲配置
+    config = CrawlerRunConfig(
+        cache_mode = CacheMode.BYPASS,
+        extraction_strategy=extraction_strategy
+    )
 
+    async with AsyncWebCrawler(verbose=True) as crawler:
+        #4. 執行爬蟲和提取任務
+        raw_url = f"raw://{dummy_html}"
+        result = await crawler.arun(
+            url=raw_url,
+            config=config
+        )
+
+        if not result.success:
+            print("Crawl failed:", result.error_message)
+            return
+        
+        # 5. 解析被提取的json資料
+        data = json.loads(result.extracted_content)
+        print(f"Extracted {len(data)} coin entries")
+        print(json.dumps(data[0], indent=2) if data else "No Data found")
+
+#asyncio.run(extract_crypto_prices())
+await extract_crypto_prices()
+
+```
+
+> [!Tip]
+> - baseSelector:告知每一個「項目」（加密行）在哪裡。
+> - fields:2個欄位(coin_name, price)使用簡單的css選取器
+> - 每個欄位定義一個type(e.g., text, attribute, html, regex, etc.)
