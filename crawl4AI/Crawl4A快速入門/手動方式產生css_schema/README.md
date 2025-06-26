@@ -33,7 +33,9 @@ Crawl4AI 最強大的功能之一是無需依賴大型語言模型即可從網�
 
 例如，如果您有一個產品列表，每個產品可能都有名稱、價格、評論和「相關產品」。對於一致、結構化的頁面來說，這種方法比 LLM 更快、更可靠。
 
-### 簡單範例：加密貨幣價格
+---
+
+### 2. 簡單範例：加密貨幣價格
 
 [**台灣銀行牌告匯率**](./lesson1_加密貨幣價格.ipynb)
 
@@ -113,3 +115,243 @@ await extract_crypto_prices()
 > - baseSelector:告知每一個「項目」（加密行）在哪裡。
 > - fields:2個欄位(coin_name, price)使用簡單的css選取器
 > - 每個欄位定義一個type(e.g., text, attribute, html, regex, etc.)
+
+---
+
+### 3. 高階Schema & 嵌套結構
+
+實際網站通常會包含巢狀或重複的數據，例如包含產品的類別，而產品本身又包含評論或功能清單。為此，我們可以定義嵌套或列表（甚至是 nested_list）欄位。
+
+Sample E-Commerce HTML
+
+```
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>電子商務產品目錄範例</title>
+    <style>
+        .category { border: 1px solid #ddd; padding: 20px; margin-bottom: 30px; }
+        .category-name { color: #333; border-bottom: 2px solid #2196F3; padding-bottom: 10px; }
+        .product { border: 1px solid #eee; padding: 15px; margin: 15px 0; background: #f9f9f9; }
+        .product-name { color: #e91e63; font-size: 1.2em; }
+        .product-price { color: #4CAF50; font-weight: bold; }
+        .product-details { background: #f0f7ff; padding: 10px; margin: 10px 0; }
+        .product-features { list-style-type: none; padding: 0; }
+        .product-features li { padding: 5px 0; }
+        .review { border-top: 1px dashed #ccc; padding: 10px 0; }
+        .related-products { background: #fff8e1; padding: 10px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="category" data-cat-id="cat-001">
+        <h2 class="category-name">3C電子產品</h2>
+        
+        <!-- 產品 1 -->
+        <div class="product">
+            <h3 class="product-name">無線藍牙耳機 Pro</h3>
+            <p class="product-price">NT$ 2,980</p>
+            
+            <div class="product-details">
+                <span class="brand">品牌: SoundMax</span>
+                <span class="model">型號: SM-BT500</span>
+            </div>
+            
+            <ul class="product-features">
+                <li>主動降噪功能</li>
+                <li>續航力30小時</li>
+                <li>IPX7防水等級</li>
+            </ul>
+            
+            <div class="review">
+                <span class="reviewer">張先生</span>
+                <span class="rating">★★★★☆ (4.5)</span>
+                <p class="review-text">降噪效果非常好，長時間佩戴也很舒適</p>
+            </div>
+            
+            <div class="review">
+                <span class="reviewer">王小姐</span>
+                <span class="rating">★★★★★ (5.0)</span>
+                <p class="review-text">音質超出預期，CP值很高</p>
+            </div>
+            
+            <div>
+                <ul class="related-products">
+                    <li><span class="related-name">無線充電盒</span> <span class="related-price">NT$ 690</span></li>
+                    <li><span class="related-name">耳機保護套</span> <span class="related-price">NT$ 350</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 產品 2 -->
+        <div class="product">
+            <h3 class="product-name">智能運動手環</h3>
+            <p class="product-price">NT$ 1,580</p>
+            
+            <div class="product-details">
+                <span class="brand">品牌: FitLife</span>
+                <span class="model">型號: FL-2023</span>
+            </div>
+            
+            <ul class="product-features">
+                <li>24小時心率監測</li>
+                <li>睡眠品質分析</li>
+                <li>50米防水</li>
+            </ul>
+            
+            <div class="review">
+                <span class="reviewer">李先生</span>
+                <span class="rating">★★★★☆ (4.0)</span>
+                <p class="review-text">電池續航力很強，一週充電一次即可</p>
+            </div>
+            
+            <div class="related-products">
+                <ul>
+                    <li><span class="related-name">替換錶帶</span> <span class="related-price">NT$ 290</span></li>
+                    <li><span class="related-name">專用充電座</span> <span class="related-price">NT$ 450</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="category" data-cat-id="cat-002">
+        <h2 class="category-name">家用電器</h2>
+        
+        <!-- 產品 3 -->
+        <div class="product">
+            <h3 class="product-name">智能空氣清淨機</h3>
+            <p class="product-price">NT$ 8,990</p>
+            
+            <div class="product-details">
+                <span class="brand">品牌: AirPure</span>
+                <span class="model">型號: AP-3000</span>
+            </div>
+            
+            <ul class="product-features">
+                <li>PM2.5即時監測</li>
+                <li>APP遠端控制</li>
+                <li>靜音夜間模式</li>
+            </ul>
+            
+            <div class="review">
+                <span class="reviewer">陳太太</span>
+                <span class="rating">★★★★★ (5.0)</span>
+                <p class="review-text">過敏症狀明顯改善，非常值得購買</p>
+            </div>
+            
+            <div class="related-products">
+                <ul>
+                    <li><span class="related-name">專用濾網組</span> <span class="related-price">NT$ 1,200</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+```
+
+**Schema**
+
+```python
+schema = {
+    "name": "E-commerce Product Catalog",
+    "baseSelector": "div.category",
+    # (1) We can define optional baseFields if we want to extract attributes 
+    # from the category container
+    "baseFields": [
+        {"name": "data_cat_id", "type": "attribute", "attribute": "data-cat-id"}, 
+    ],
+    "fields": [
+        {
+            "name": "category_name",
+            "selector": "h2.category-name",
+            "type": "text"
+        },
+        {
+            "name": "products",
+            "selector": "div.product",
+            "type": "nested_list",    # repeated sub-objects
+            "fields": [
+                {
+                    "name": "name",
+                    "selector": "h3.product-name",
+                    "type": "text"
+                },
+                {
+                    "name": "price",
+                    "selector": "p.product-price",
+                    "type": "text"
+                },
+                {
+                    "name": "details",
+                    "selector": "div.product-details",
+                    "type": "nested",  # single sub-object
+                    "fields": [
+                        {
+                            "name": "brand",
+                            "selector": "span.brand",
+                            "type": "text"
+                        },
+                        {
+                            "name": "model",
+                            "selector": "span.model",
+                            "type": "text"
+                        }
+                    ]
+                },
+                {
+                    "name": "features",
+                    "selector": "ul.product-features li",
+                    "type": "list",
+                    "fields": [
+                        {"name": "feature", "type": "text"} 
+                    ]
+                },
+                {
+                    "name": "reviews",
+                    "selector": "div.review",
+                    "type": "nested_list",
+                    "fields": [
+                        {
+                            "name": "reviewer", 
+                            "selector": "span.reviewer", 
+                            "type": "text"
+                        },
+                        {
+                            "name": "rating", 
+                            "selector": "span.rating", 
+                            "type": "text"
+                        },
+                        {
+                            "name": "comment", 
+                            "selector": "p.review-text", 
+                            "type": "text"
+                        }
+                    ]
+                },
+                {
+                    "name": "related_products",
+                    "selector": "ul.related-products li",
+                    "type": "list",
+                    "fields": [
+                        {
+                            "name": "name", 
+                            "selector": "span.related-name", 
+                            "type": "text"
+                        },
+                        {
+                            "name": "price", 
+                            "selector": "span.related-price", 
+                            "type": "text"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
+```
+
+
