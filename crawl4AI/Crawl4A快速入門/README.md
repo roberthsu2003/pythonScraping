@@ -104,6 +104,7 @@ Crawl4AI 也可以使用 CSS 或 XPath 選擇器來擷取結構化資料 (JSON)�
 > 新功能！ Crawl4AI 現在提供了一個強大的實用程序，可以使用 LLM 自動產生提取模式。只需執行一次，即可獲得可重複使用的模式，實現快速：
 
 **5.1 透過本地模型產生css_schema**
+
 **5.2 透過gemini,openai,anthropic產生css_schema**
 
 [**透過llama和Gemini模型實作的.ipynb**](./lesson4_css_base_使用llm建立schema.ipynb)
