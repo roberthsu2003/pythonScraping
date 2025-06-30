@@ -105,7 +105,7 @@ Crawl4AI 也可以使用 CSS 或 XPath 選擇器來擷取結構化資料 (JSON)�
 
 **5.1 透過本地模型產生css_schema**
 
-[**透過本地模型產生css_schema.ipynb**](./透過本地模型產生css_schema.ipynb)
+[**透過本地模型產生css_schema.ipynb**](./lesson4_css_base_使用llm建立schema.ipynb)
 
 ```python
 from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
