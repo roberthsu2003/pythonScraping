@@ -122,9 +122,12 @@ await extract_crypto_prices()
 
 實際網站通常會包含巢狀或重複的數據，例如包含產品的類別，而產品本身又包含評論或功能清單。為此，我們可以定義嵌套或列表（甚至是 nested_list）欄位。
 
-Sample E-Commerce HTML
+**Sample E-Commerce HTML**
+
+**以下是HTML**
 
 ```
+dummy_html = """
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -175,8 +178,8 @@ Sample E-Commerce HTML
                 <p class="review-text">音質超出預期，CP值很高</p>
             </div>
             
-            <div>
-                <ul class="related-products">
+            <div class="related-products">
+                <ul>
                     <li><span class="related-name">無線充電盒</span> <span class="related-price">NT$ 690</span></li>
                     <li><span class="related-name">耳機保護套</span> <span class="related-price">NT$ 350</span></li>
                 </ul>
@@ -239,8 +242,8 @@ Sample E-Commerce HTML
                 <p class="review-text">過敏症狀明顯改善，非常值得購買</p>
             </div>
             
-            <div class="related-products">
-                <ul>
+            <div>
+                <ul class="related-products">
                     <li><span class="related-name">專用濾網組</span> <span class="related-price">NT$ 1,200</span></li>
                 </ul>
             </div>
@@ -248,110 +251,142 @@ Sample E-Commerce HTML
     </div>
 </body>
 </html>
-
+"""
 ```
 
-**Schema**
+**以下是Schema**
 
 ```python
-schema = {
-    "name": "E-commerce Product Catalog",
+schema ={
+    "name": "E-commerce 產品目錄",
     "baseSelector": "div.category",
-    # (1) We can define optional baseFields if we want to extract attributes 
-    # from the category container
-    "baseFields": [
-        {"name": "data_cat_id", "type": "attribute", "attribute": "data-cat-id"}, 
+    "baseFields":[
+        {"name":"data_cat_id","type":"attribute","attribute":"data-cat-id"}
     ],
-    "fields": [
+    "fields":[
         {
-            "name": "category_name",
-            "selector": "h2.category-name",
-            "type": "text"
+            "name":"目錄名稱",
+            "selector":"h2.category-name",
+            "type":"text"
         },
         {
-            "name": "products",
-            "selector": "div.product",
-            "type": "nested_list",    # repeated sub-objects
-            "fields": [
+            "name":"產品",
+            "selector":"div.product",
+            "type":"nested_list", #repeated, sub-objects
+            "fields":[
                 {
-                    "name": "name",
-                    "selector": "h3.product-name",
-                    "type": "text"
+                    "name":"名稱",
+                    "selector":"h3.product-name",
+                    "type":"text"
                 },
                 {
-                    "name": "price",
-                    "selector": "p.product-price",
-                    "type": "text"
+                    "name":"價格",
+                    "selector":"p.product-price",
+                    "type":"text"
                 },
                 {
-                    "name": "details",
-                    "selector": "div.product-details",
-                    "type": "nested",  # single sub-object
-                    "fields": [
+                    "name":"資訊",
+                    "selector":"div.product-details",
+                    "type":"nested",
+                    "fields":[
                         {
-                            "name": "brand",
-                            "selector": "span.brand",
-                            "type": "text"
+                            "name":"品牌",
+                            "selector":"span.brand",
+                            "type":"text"
                         },
                         {
-                            "name": "model",
-                            "selector": "span.model",
-                            "type": "text"
+                            "name":"型號",
+                            "selector":"span.model",
+                            "type":"text"
+                        }
+                        
+                    ]
+                },
+                {
+                    "name":"功能",
+                    "selector":"ul.product-features li",
+                    "type":"list",
+                    "fields":[
+                        {
+                            "name":"功能",
+                            "type":"text"
                         }
                     ]
                 },
                 {
-                    "name": "features",
-                    "selector": "ul.product-features li",
-                    "type": "list",
-                    "fields": [
-                        {"name": "feature", "type": "text"} 
-                    ]
-                },
-                {
-                    "name": "reviews",
-                    "selector": "div.review",
-                    "type": "nested_list",
-                    "fields": [
+                    "name":"reviews",
+                    "selector":"div.review",
+                    "type":"nested_list",
+                    "fields":[
                         {
-                            "name": "reviewer", 
-                            "selector": "span.reviewer", 
-                            "type": "text"
+                            "name":"reviewer",
+                            "selector":"span.reviewer",
+                            "type":"text"
                         },
                         {
-                            "name": "rating", 
-                            "selector": "span.rating", 
-                            "type": "text"
+                            "name":"rating",
+                            "selector":"span.rating",
+                            "type":"text"
                         },
                         {
-                            "name": "comment", 
-                            "selector": "p.review-text", 
-                            "type": "text"
+                            "name":"comment",
+                            "selector":"p.review-text",
+                            "type":"text"
                         }
                     ]
                 },
                 {
-                    "name": "related_products",
-                    "selector": "ul.related-products li",
-                    "type": "list",
-                    "fields": [
-                        {
-                            "name": "name", 
-                            "selector": "span.related-name", 
-                            "type": "text"
-                        },
-                        {
-                            "name": "price", 
-                            "selector": "span.related-price", 
-                            "type": "text"
-                        }
-                    ]
+                  "name":"相關產品",
+                  "selector":".related-products li",
+                  "type":"list",
+                  "fields":[
+                    {
+                        "name":"名稱",
+                        "selector":"span.related-name",
+                        "type":"text"
+                    },
+                    {
+                        "name":"價格",
+                        "selector":"span.related-price",
+                        "type":"text"
+                    }
+                  ]
                 }
             ]
         }
     ]
 }
+```
 
+**以下是程式碼**
+
+```python
+import json
+import asyncio
+from crawl4ai import AsyncWebCrawler, CrawlerRunConfig
+from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
+
+async def extract_ecommerce_data():
+    strategy = JsonCssExtractionStrategy(schema, verbose=True)
+    config = CrawlerRunConfig(
+        extraction_strategy= strategy
+    )
+    async with AsyncWebCrawler(verbose=True) as crawler:
+        result = await crawler.arun(
+            url=f"raw://{dummy_html}",
+            config=config
+        )
+
+        if not result.success:
+            print("Crawl failed:", result.error_message)
+            return
+        
+        print(result.extracted_content)
+        #解析json output
+        #data = json.loads(result.extracted_content)
+        #print(json.dumps(data, indent=2, ensure_ascii=False) if data else "No data found.")
+
+await extract_ecommerce_data()
 ```
 
 
