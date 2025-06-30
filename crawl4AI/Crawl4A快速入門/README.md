@@ -74,6 +74,8 @@ if __name__ == "__main__":
 - result.markdown.fit_markdown:  
 套用任何已配置的內容過濾器（例如,PruningContentFilter)。
 
+[**使用內容過濾器.ipynb**](./lesson3_使用內容過濾器.ipynb)
+
 ```python
 from crawl4ai import AsyncWebCrawler, CrawlerRunConfig,CacheMode
 from crawl4ai.content_filter_strategy import PruningContentFilter
