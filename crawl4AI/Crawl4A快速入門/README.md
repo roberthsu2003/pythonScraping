@@ -111,154 +111,116 @@ Crawl4AI 也可以使用 CSS 或 XPath 選擇器來擷取結構化資料 (JSON)�
 **下方是透過本地模型產生schema的程式碼**
 
 ```python
-import json
-
-from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
 from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
+from crawl4ai import LLMConfig, AsyncWebCrawler,CacheMode,CrawlerRunConfig
+import json
+from pprint import pprint
 
-async def extract_crypto_prices():
-#1. 定義一個簡單的extraction schema
+# Generate a schema (one-time cost)
+#html = "<div class='product'><h2>Gaming Laptop</h2><span class='price'>$999.99</span></div>"
+html = "<div class='item'><h2>Item 1</h2><a href='https://example.com/item1'>Link 1</a></div>"
 
-    schema = {
-        "name":"台幣匯率",
-        "baseSelector": "#ie11andabove > div > table > tbody > tr",
-        "fields":[
-            {
-                "name": "幣別",
-                "selector": 'td[data-table="幣別"] div.hidden-phone.print_show.xrt-cur-indent',
-                "type":"text"
-            },
-            {
-                "name":"現金匯率_本行買入",
-                "selector":'[data-table="本行現金買入"]',
-                "type":"text"
-            },
-            {
-                "name":"現金匯率_本行賣出",
-                "selector":'[data-table="本行現金賣出"]',
-                "type":"text"
-            },
-            {
-                "name":"即期匯率_本行買入",
-                "selector":'[data-table="本行即期買入"]',
-                "type":"text"
-            },
-            {
-                "name":"即期匯率_本行買入",
-                "selector":'[data-table="本行即期賣出"]',
-                "type":"text"
-            }
-        ]
-    }
+# Or using Ollama (open source, no token needed)
+schema = JsonCssExtractionStrategy.generate_schema(
+    html,
+    llm_config = LLMConfig(provider="ollama/llama3.2", api_token=None)  # Not needed for Ollama
+)
 
-    #2. 建立extraction strategy
-    extraction_strategy = JsonCssExtractionStrategy(schema, verbose=True) #Enables verbose logging for debugging purposes.
+# Use the schema for fast, repeated extractions
+strategy = JsonCssExtractionStrategy(schema)
 
-    #3. 設定爬蟲配置
-    config = CrawlerRunConfig(
-        cache_mode = CacheMode.BYPASS,
-        extraction_strategy=extraction_strategy
+#非常重要,一定要有CrawlerRunConfig的實體
+#一定要有extraction_strategy的引數名稱
+#不然使用result.extracted_content會是None
+
+config = CrawlerRunConfig(
+    cache_mode=CacheMode.BYPASS,
+    extraction_strategy=strategy
+)
+
+async with AsyncWebCrawler() as crawler:
+    result = await crawler.arun(
+        url = f"raw://{html}",
+        config=config
     )
 
-    async with AsyncWebCrawler(verbose=True) as crawler:
-        #4. 執行爬蟲和提取任務
-        raw_url = 'https://rate.bot.com.tw/xrt?Lang=zh-TW'
-        result = await crawler.arun(
-            url=raw_url,
-            config=config
-        )
+    print("=====lamma3.2產生的schema=========")
+    pprint(schema)
+    data = json.loads(result.extracted_content)
+    print("==========擷取結果==========")
+    pprint(data)
 
-        if not result.success:
-            print("Crawl failed:", result.error_message)
-            return
-        
-        # 5. 解析被提取的json資料
-        data = json.loads(result.extracted_content)
-        print(f"Extracted {len(data)} coin entries")
-        print(json.dumps(data, indent=2,ensure_ascii=False) if data else "No Data found")
-
-await extract_crypto_prices()
 ```
 
 
 **下方是透過gemini的擷取的程式碼**
 
 ```python
-import json
-
-from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
 from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
+from crawl4ai import LLMConfig,CrawlerRunConfig
+from pprint import pprint
 
-async def extract_crypto_prices():
-#1. 定義一個簡單的extraction schema
+# Generate a schema (one-time cost)
+html = """
+<html>
+    <body>
+        <div class='product'>
+            <h2>Gaming Laptop</h2>
+            <span class='price'>$999.99</span>
+        </div>
+    <body>
+</html>
+"""
 
-    schema = {
-        "name":"台幣匯率",
-        "baseSelector": "#ie11andabove > div > table > tbody > tr",
-        "fields":[
-            {
-                "name": "幣別",
-                "selector": 'td[data-table="幣別"] div.hidden-phone.print_show.xrt-cur-indent',
-                "type":"text"
-            },
-            {
-                "name":"現金匯率_本行買入",
-                "selector":'[data-table="本行現金買入"]',
-                "type":"text"
-            },
-            {
-                "name":"現金匯率_本行賣出",
-                "selector":'[data-table="本行現金賣出"]',
-                "type":"text"
-            },
-            {
-                "name":"即期匯率_本行買入",
-                "selector":'[data-table="本行即期買入"]',
-                "type":"text"
-            },
-            {
-                "name":"即期匯率_本行買入",
-                "selector":'[data-table="本行即期賣出"]',
-                "type":"text"
-            }
-        ]
-    }
+# Using OpenAI (requires API token)
 
-    #2. 建立extraction strategy
-    extraction_strategy = JsonCssExtractionStrategy(schema, verbose=True) #Enables verbose logging for debugging purposes.
+schema = JsonCssExtractionStrategy.generate_schema(
+    html,
+    llm_config = LLMConfig(        
+        provider="gemini/gemini-2.5-flash",
+        api_token="gemini api key")  # Required for OpenAI
+)
 
-    #3. 設定爬蟲配置
-    config = CrawlerRunConfig(
-        cache_mode = CacheMode.BYPASS,
-        extraction_strategy=extraction_strategy
+# 手動產生的schema
+# schema = {
+#     'name': 'Product Details',
+#     'baseSelector': '.product',
+#     'fields': [
+#         {'name': 'title', 
+#          'selector': 'h2', 
+#          'type': 'text'},
+#         {'name': 'price',
+#          'selector': '.price',
+#          'type': 'text'}]
+# }
+
+# Use the schema for fast, repeated extractions
+strategy = JsonCssExtractionStrategy(schema,verbose=True)
+
+#3. 設定爬蟲配置
+config = CrawlerRunConfig(
+    cache_mode = CacheMode.BYPASS,
+    extraction_strategy=strategy
+)
+async with AsyncWebCrawler() as crawler:
+    raw_url = f"raw://{html}"
+    result = await crawler.arun(
+        url = raw_url,
+        config=config
     )
-
-    async with AsyncWebCrawler(verbose=True) as crawler:
-        #4. 執行爬蟲和提取任務
-        raw_url = 'https://rate.bot.com.tw/xrt?Lang=zh-TW'
-        result = await crawler.arun(
-            url=raw_url,
-            config=config
-        )
-
-        if not result.success:
-            print("Crawl failed:", result.error_message)
-            return
-        
-        # 5. 解析被提取的json資料
-        data = json.loads(result.extracted_content)
-        print(f"Extracted {len(data)} coin entries")
-        print(json.dumps(data, indent=2,ensure_ascii=False) if data else "No Data found")
-
-await extract_crypto_prices()
+    print("======Gmini 自動產生的schema======")
+    print(schema)
+    print("=======取出的結果===========")
+    data = json.loads(result.extracted_content)
+    print(data)
 ```
 
 [**5.3 透過手動方式產生css_schema**](./手動方式產生css_schema)
 
 
-**5.4 透過css_schema擷取網頁內容**
+**5.4 透過自訂的css_schema擷取網頁內容**
 
-[**透過css_schema擷取網頁內容.ipynb**](./lesson4_透過css_schema取出內容.ipynb)
+[**透過自訂的schema擷取網頁內容.ipynb**](./lesson4_透過css_schema取出內容.ipynb)
 
 ```python
 import asyncio
