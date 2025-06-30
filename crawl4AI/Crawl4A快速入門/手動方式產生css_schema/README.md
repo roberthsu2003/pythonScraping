@@ -124,6 +124,8 @@ await extract_crypto_prices()
 
 **Sample E-Commerce HTML**
 
+[**實作下方程式碼的實作ipynb**](./lesson2_高階schema和嵌套.ipynb)
+
 **以下是HTML**
 
 ```
