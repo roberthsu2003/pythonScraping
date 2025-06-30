@@ -389,4 +389,8 @@ async def extract_ecommerce_data():
 await extract_ecommerce_data()
 ```
 
+### ‼️有關CSS schema內的Nested, list, nested_list
+[**實際範例說明_nested,list,nested_list**](lesson3_nesting_types_example.ipynb)
+
+
 
