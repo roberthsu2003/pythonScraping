@@ -217,7 +217,9 @@ async with AsyncWebCrawler() as crawler:
 ```
 
 **5.3 透過手動方式產生css_schema**
-[**手動方式產生css_schema(內有多個實際案例)**](./手動方式產生css_schema)
+
+[**‼️手動方式產生css_schema(內有多個實際案例)**](./手動方式產生css_schema)
+
 **下方程式碼是透過手動schema建立的擷取範例**
 
 ```python
