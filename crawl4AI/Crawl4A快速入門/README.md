@@ -17,7 +17,7 @@
 
 下面是一個最小的 Python 腳本，它會建立一個 AsyncWebCrawler，取得一個網頁，並列印其 Markdown 輸出的前 300 個字元：
 
-[**第1個爬蟲.ipynb**](./lesson1_第1個爬串.ipynb)
+[**第1個爬蟲.ipynb**](./lesson1_第1個爬蟲.ipynb)
 
 ```python
 import asyncio
