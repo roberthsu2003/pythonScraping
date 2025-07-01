@@ -1,0 +1,21 @@
+{
+  "mcpServers": 
+  {
+      "localpostgres": {
+              "command": "npx",
+              "args": [
+                  "-y",
+                  "@modelcontextprotocol/server-postgres",
+                  "postgresql:${POSTGRES_KEY}"
+              ]
+      }
+  },
+  "contextFileName":[
+    "GEMINI.md"
+  ],
+  "checkpointing":{
+    "engalbed":true
+  }
+  
+  
+}
