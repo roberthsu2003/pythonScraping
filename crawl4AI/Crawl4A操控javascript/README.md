@@ -9,5 +9,16 @@ Crawl4AI 提供了強大的功能，可與動態網頁互動、處理 JavaScript
 3. 等待元素或資料出現(Wait for elements or data to appear)
 4. 跨多個步驟重複使用session(Reuse sessions across multiple steps)
 
+## 1. JavaScript 執行
+
+### 基本執行
+
+Crawler RunConfig 中的 js 程式碼接受單一 JS 字串或 JS 片段清單。
+
+範例：我們將捲動到頁面底部，然後選擇性地點擊「載入更多」按鈕。
+
+```python
+```
+
 ## 實際案例
 - [**Crawl4AI爬取台灣即時股票資訊**](./lesson1_爬取台灣即時股票資訊.py)
