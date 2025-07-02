@@ -17,7 +17,114 @@ Crawler RunConfig 中的 js 程式碼接受單一 JS 字串或 JS 片段清單�
 
 範例：我們將捲動到頁面底部，然後選擇性地點擊「載入更多」按鈕。
 
+[**基本執行實作.ipynb**](./lesson1_向下捲動和按按鈕.ipynb)
+
 ```python
+import asyncio
+from crawl4ai import AsyncWebCrawler,CrawlerRunConfig
+
+async def main():
+    #single JS command
+    config = CrawlerRunConfig(
+        js_code="window.scrollTo(0, document.body.scrollHeight);"
+    )
+
+    async with AsyncWebCrawler() as crawler:
+        result = await crawler.arun(
+            url='https://news.ycombinator.com',
+            config = config
+        )
+        print(result.cleaned_html)
+        print("Crawled length:", len(result.cleaned_html))
+
+    #Multiple commands
+    js_commands =[
+        "window.scrollTo(0, document.body.scrollHeight);",
+        "document.querySelector('a.morelink')?.click();"
+    ]
+    config = CrawlerRunConfig(js_code=js_commands, wait_for="css:.athing:nth-child(31)")
+
+    async with AsyncWebCrawler() as crawler:
+        result = await crawler.arun(
+            url = 'https://news.ycombinator.com',
+            config = config
+        )
+        print("After scroll+click, length:", len(result.cleaned_html))
+
+if __name__ == "__main__":
+    await main()
+
+```
+
+### 等待
+
+有時，你只想等待特定元素出現。例如：
+
+[**等待的實作範例.ipynb**](./lesson2_等待的操作.ipynb)
+
+```python
+#基於css
+
+import asyncio
+from crawl4ai import AsyncWebCrawler, CrawlerRunConfig,BrowserConfig
+
+async def main():
+    base_browser = BrowserConfig(
+        browser_type="chromium",
+        headless=False
+    )
+    config = CrawlerRunConfig(
+        #Wait for at least 30 items on Hacker News
+        wait_for="css:.athing:nth-child(30)"
+    )
+
+    async with AsyncWebCrawler(config=base_browser) as crawler:
+        result = await crawler.arun(
+            url = 'https://news.ycombinator.com',
+            config=config
+        )
+        print("We have at least 30 items loader!")
+        print("Total items in HTML:",result.cleaned_html)
+
+if __name__ == "__main__":
+    await main()
+```
+
+
+```python
+#基於javascript
+
+import asyncio
+from crawl4ai import AsyncWebCrawler, CrawlerRunConfig,BrowserConfig
+
+async def main():
+    base_browser = BrowserConfig(
+        browser_type="chromium",
+        headless=False
+    )
+
+    wait_condition = """()=>{
+        const items = document.querySelectorAll('.athing')
+        return items.length > 50;
+    }
+    
+    """
+
+    config = CrawlerRunConfig(
+        #Wait for at least 30 items on Hacker News
+        wait_for=f"js:{wait_condition}"
+    )
+
+    async with AsyncWebCrawler(config=base_browser) as crawler:
+        result = await crawler.arun(
+            url = 'https://news.ycombinator.com',
+            config=config
+        )
+        print("We have at least 30 items loader!")
+        print("Total items in HTML:",result.cleaned_html)
+
+if __name__ == "__main__":
+    await main()
 ```
 
 ## 實際案例
