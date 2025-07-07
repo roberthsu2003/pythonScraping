@@ -18,6 +18,11 @@ async def crawl_stock_info():
         "baseSelector": "main.main",  # 從整個頁面開始選擇
         "fields": [
             {
+                "name":"日期時間",
+                "selector":"time.last-time#lastQuoteTime",
+                "type":"text"
+            },
+            {
                 "name": "股票號碼",
                 "selector": "span.astock-code[c-model='id']", # 假設股票代碼在這個選擇器下
                 "type": "text"

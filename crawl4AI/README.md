@@ -14,6 +14,8 @@ Crawl4AI 是一套專為人工智慧（AI）和大型語言模型（LLM）應用
 
 ## [操控javascript的動態提取](./Crawl4A操控javascript)
 
+## [多網址爬串](./Crawl4A多頁面爬蟲)
+
 ## 實際案例:
 [**台灣銀行牌告匯率**](./Crawl4A快速入門/手動方式產生css_schema/lesson1_台灣銀行牌告匯率.ipynb)
 
