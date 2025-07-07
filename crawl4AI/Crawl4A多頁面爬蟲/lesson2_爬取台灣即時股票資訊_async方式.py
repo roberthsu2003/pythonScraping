@@ -88,7 +88,7 @@ async def crawl_stock_info():
     }
 
     # 將 BrowserConfig 直接傳遞給 AsyncWebCrawle
-    browserConfig = BrowserConfig(
+    browserConfig = BrowserConfig( # noqa
         headless=True,
         verbose=True,
         browser_mode="dedicated",

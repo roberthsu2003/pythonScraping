@@ -112,7 +112,8 @@ async def crawl_stock_info():
                 scroll_delay=10,
             )
 
-            for result in results:
+        
+        for result in results: # noqa
                 if result.success:                
                     data = json.loads(result.extracted_content)
                     print(json.dumps(data, indent=2, ensure_ascii=False))

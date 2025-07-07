@@ -79,3 +79,5 @@
 			使用asyncio.gather()
 			使用for loop的方式
 			```
+			
+- 更好方法:
