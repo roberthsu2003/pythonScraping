@@ -6,8 +6,12 @@ from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
 
 #爬取https://www.wantgoo.com/stock/2330/technical-chart的資料
 async def crawl_stock_info():
+    """爬取台灣即時股票資訊"""
     print("\n=== 爬取台灣即時股票資訊 ===")
-    url = "https://www.wantgoo.com/stock/2330/technical-chart"
+    urls = [
+        "https://www.wantgoo.com/stock/2330/technical-chart",
+        "https://www.wantgoo.com/stock/2317/technical-chart"
+    ]
 
     # 定義 CSS 提取 Schema
     # 根據網頁結構，我們需要找到包含股票資訊的區塊
@@ -80,7 +84,7 @@ async def crawl_stock_info():
 
     # 將 BrowserConfig 直接傳遞給 AsyncWebCrawle
     browserConfig = BrowserConfig(
-        headless=False,
+        headless=True,
         verbose=True,
         #use_persistent_context=True,
         browser_mode="dedicated",
@@ -98,25 +102,25 @@ async def crawl_stock_info():
             js_code=js_command,        
             verbose=True,            
         )
-    
-    async with AsyncWebCrawler(config=browserConfig) as crawler:           
-        results = await crawler.arun(
-            url,
-            config=config,
-            wait_for_selector=["h3.astock-name", "span.astock-code"],
-            scroll_delay=10,
-        )
-        for result in results:
-            if result.success:                
-                data = json.loads(result.extracted_content)
-                print(json.dumps(data, indent=2, ensure_ascii=False))
-            else:
-                print(f"Failed to crawl {result.url}: {result.error_message}")
         
-        
-        
+    for url in urls:
+        async with AsyncWebCrawler(config=browserConfig) as crawler:           
+            results = await crawler.arun(
+                url,
+                config=config,
+                wait_for_selector=["h3.astock-name", "span.astock-code"],
+                scroll_delay=10,
+            )
 
+            for result in results:
+                if result.success:                
+                    data = json.loads(result.extracted_content)
+                    print(json.dumps(data, indent=2, ensure_ascii=False))
+                else:
+                    print(f"Failed to crawl {result.url}: {result.error_message}")
+          
 async def main():
+    """主程式入口"""
     await crawl_stock_info()
 
 if __name__ == "__main__":
