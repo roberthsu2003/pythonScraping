@@ -1,10 +1,11 @@
+# 使用crawl4AI必需了解python asyncio套件
+
+### [有關於asyncio套件說明](./asyncio套件教學)
+
 # Crawl4AI
 Crawl4AI 是一套專為人工智慧（AI）和大型語言模型（LLM）應用設計的開源 Python 網頁爬蟲與資料擷取工具。它具備高效能的非同步和平行處理能力，能快速抓取大量網頁，並支援動態網站的無頭瀏覽器操作（如 Playwright 的 Chromium），能執行 JavaScript 以獲取動態內容。
 
 ### [安裝Crawl4A](./安裝)
-
-## 使用crawl4AI必需了解python asyncio套件
-### [有關於asyncio套件說明](./asyncio套件教學)
 
 ## [Crawl4A初體驗](./初體驗)
 
