@@ -30,7 +30,7 @@ print(crawl4ai.__version__.__version__)
 
 
 ## 說明1:
-你問得很好，這是很多在用 crawl4ai（或其他使用 asyncio 的套件）時會遇到的問題，以下是完整且清楚的說明：
+使用 crawl4ai（或其他使用 asyncio 的套件）時會遇到的問題，以下是完整且清楚的說明：
 
 ⸻
 
