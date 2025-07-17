@@ -50,7 +50,7 @@ await run()
 
 ### Crawl4AI官方的第一個範例
 
-```pytho
+```python
 import asyncio
 from crawl4ai import AsyncWebCrawler
 
