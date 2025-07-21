@@ -3,6 +3,8 @@
 
 import json
 import asyncio
+import os
+from datetime import datetime
 from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
 from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
 
@@ -65,9 +67,51 @@ async def extract_crypto_prices():
         # 5. 解析被提取的json資料
         data = json.loads(result.extracted_content)
         print(f"Extracted {len(data)} coin entries")
-        print(json.dumps(data, indent=2,ensure_ascii=False) if data else "No Data found")
+        
+        # 6. 儲存資料為JSON格式，建立適當的檔案名稱
+        if data:
+            # 建立基於時間的檔案名稱
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"台幣匯率_{timestamp}.json"
+            
+            # 確保資料夾存在
+            os.makedirs("data", exist_ok=True)
+            filepath = os.path.join("data", filename)
+            
+            # 儲存JSON檔案
+            with open(filepath, 'w', encoding='utf-8') as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+            
+            print(f"資料已儲存至: {filepath}")
+            print(json.dumps(data, indent=2, ensure_ascii=False))
+        else:
+            print("No Data found")
 
 async def main():
-    await extract_crypto_prices()
+    """主程式：每隔10分鐘自動執行一次爬蟲"""
+    print("台幣匯率爬蟲程式啟動...")
+    print("每10分鐘自動執行一次")
+    
+    while True:
+        try:
+            current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            print(f"\n=== 開始執行爬蟲 ({current_time}) ===")
+            
+            await extract_crypto_prices()
+            
+            print("=== 爬蟲執行完成 ===")
+            print("等待10分鐘後再次執行...")
+            
+            # 等待10分鐘 (600秒)
+            await asyncio.sleep(600)
+            
+        except KeyboardInterrupt:
+            print("\n程式被使用者中斷")
+            break
+        except Exception as e:
+            print(f"執行過程中發生錯誤: {e}")
+            print("等待10分鐘後重試...")
+            await asyncio.sleep(600)
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
