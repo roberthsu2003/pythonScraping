@@ -44,7 +44,7 @@ print(crawl4ai.__version__.__version__)
 
 ---
 
-✅ 2. **問題在哪裡？**
+2. **問題在哪裡？**
 
 在某些執行環境（如 Jupyter Notebook、IPython）中，asyncio.run() 會出錯！
 
