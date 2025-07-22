@@ -63,9 +63,11 @@ async def main():
         #列印取出的結果
         print(result.markdown)
 
-#執行asyncio.run()
+#py檔執行
+asyncio.run(main()))
 
-await main()
+#jupyter notebook執行
+#await main()
 
 ```
 
