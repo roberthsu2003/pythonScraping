@@ -87,6 +87,8 @@ async def crawl_stock_info():
         headless=True,
         verbose=True,
         #use_persistent_context=True,
+        # browser_mode 設為 "dedicated"，代表每個爬蟲任務都會開一個獨立的瀏覽器，
+        # 彼此隔離，適合需要登入或避免互相干擾的情境，但會比較耗資源。
         browser_mode="dedicated",
         )
     js_command = [
