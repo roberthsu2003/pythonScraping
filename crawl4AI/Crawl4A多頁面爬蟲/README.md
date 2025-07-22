@@ -72,12 +72,12 @@
 		使用for loop
 		```
 		
-		- [**做用loop的方式1**](./lesson2_爬取台灣即時股票資訊_async方式.py)
+	- [**使用loop的方式1**](./lesson2_爬取台灣即時股票資訊_async方式.py)
 
-			```
-			爬取台灣即時股票資訊
-			使用asyncio.gather()
-			使用for loop的方式
-			```
+		```
+		爬取台灣即時股票資訊
+		使用asyncio.gather()
+		使用for loop的方式
+		```
 			
 - 更好方法:
