@@ -117,7 +117,7 @@ async def main():
 
     schema = {
         "name": "Example Items",
-        "baseSelector": "div.item",
+        "baseSelector": "div.item", #只有一筆,所以抓到1筆
         "fields": [
             {"name": "title", "selector": "h2", "type": "text"},
             {"name": "link", "selector": "a", "type": "attribute", "attribute": "href"}
@@ -175,7 +175,7 @@ async def extract_crypto_prices():
     #1. 定義一個簡單的extraction schema
     schema = {
         "name":"Crypto Prices",
-        "baseSelector": "div.crypto-row",
+        "baseSelector": "div.crypto-row", #有2筆,所以抓到2筆
         "fields":[
             {
                 "name": "coin_name",
