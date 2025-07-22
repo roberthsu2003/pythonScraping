@@ -13,11 +13,11 @@ async def extract_crypto_prices():
 
     schema = {
         "name":"台幣匯率",
-        "baseSelector": "#ie11andabove > div > table > tbody > tr",
+        "baseSelector":"table[title='牌告匯率'] tr",
         "fields":[
             {
-                "name": "幣別",
-                "selector": 'td[data-table="幣別"] div.hidden-phone.print_show.xrt-cur-indent',
+                "name":"幣名",
+                "selector":"td[data-table='幣別'] div.visible-phone.print_hide",
                 "type":"text"
             },
             {
@@ -36,13 +36,13 @@ async def extract_crypto_prices():
                 "type":"text"
             },
             {
-                "name":"即期匯率_本行買入",
+                "name":"即期匯率_本行賣出",
                 "selector":'[data-table="本行即期賣出"]',
                 "type":"text"
             }
         ]
     }
-
+    
     #2. 建立extraction strategy
     extraction_strategy = JsonCssExtractionStrategy(schema, verbose=True) #Enables verbose logging for debugging purposes.
 
