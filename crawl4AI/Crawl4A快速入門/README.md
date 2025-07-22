@@ -103,9 +103,125 @@ Crawl4AI 也可以使用 CSS 或 XPath 選擇器來擷取結構化資料 (JSON)�
 
 > 新功能！ Crawl4AI 現在提供了一個強大的實用程序，可以使用 LLM 自動產生提取模式。只需執行一次，即可獲得可重複使用的模式，實現快速：
 
-**5.1 透過本地模型產生css_schema**
+**5.1 透過自訂的css_schema擷取網頁內容**
 
-**5.2 透過gemini,openai,anthropic產生css_schema**
+[**透過自訂的schema擷取網頁內容.ipynb**](./lesson4_透過css_schema取出內容.ipynb)
+
+```python
+import asyncio
+import json
+from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
+from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
+
+async def main():
+
+    schema = {
+        "name": "Example Items",
+        "baseSelector": "div.item",
+        "fields": [
+            {"name": "title", "selector": "h2", "type": "text"},
+            {"name": "link", "selector": "a", "type": "attribute", "attribute": "href"}
+        ]
+    }
+
+    raw_html = "<div class='item'><h2>Item 1</h2><a href='https://example.com/item1'>Link 1</a></div>"
+
+    async with AsyncWebCrawler() as crawler:
+        result = await crawler.arun(
+            url="raw://" + raw_html,
+            config=CrawlerRunConfig(
+                cache_mode=CacheMode.BYPASS,
+                extraction_strategy=JsonCssExtractionStrategy(schema)
+            )
+        )
+        # The JSON output is stored in 'extracted_content'
+        data = json.loads(result.extracted_content)
+        print(result.extracted_content)
+        print("========================")
+        print(data)
+
+if __name__ == "__main__":
+    await main()
+
+```
+
+**5.2 透過手動方式產生css_schema**
+
+[**‼️手動方式產生css_schema(內有多個實際案例)**](./手動方式產生css_schema)
+
+**下方程式碼是透過手動schema建立的擷取範例**
+
+```python
+import json
+import asyncio
+from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
+from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
+
+async def extract_crypto_prices():
+    dummy_html = """
+    <html>
+      <body>
+        <div class='crypto-row'>
+          <h2 class='coin-name'>Bitcoin</h2>
+          <span class='coin-price'>$28,000</span>
+        </div>
+        <div class='crypto-row'>
+          <h2 class='coin-name'>Ethereum</h2>
+          <span class='coin-price'>$1,800</span>
+        </div>
+      </body>
+    </html>
+    """
+    #1. 定義一個簡單的extraction schema
+    schema = {
+        "name":"Crypto Prices",
+        "baseSelector": "div.crypto-row",
+        "fields":[
+            {
+                "name": "coin_name",
+                "selector": "h2.coin-name",
+                "type":"text"
+            },
+            {
+                "name":"price",
+                "selector":"span.coin-price",
+                "type":"text"
+            }
+        ]
+    }
+
+    #2. 建立extraction strategy
+    extraction_strategy = JsonCssExtractionStrategy(schema, verbose=True) #Enables verbose logging for debugging purposes.
+
+    #3. 設定爬蟲配置
+    config = CrawlerRunConfig(
+        cache_mode = CacheMode.BYPASS,
+        extraction_strategy=extraction_strategy
+    )
+
+    async with AsyncWebCrawler(verbose=True) as crawler:
+        #4. 執行爬蟲和提取任務
+        raw_url = f"raw://{dummy_html}"
+        result = await crawler.arun(
+            url=raw_url,
+            config=config
+        )
+
+        if not result.success:
+            print("Crawl failed:", result.error_message)
+            return
+        
+        # 5. 解析被提取的json資料
+        data = json.loads(result.extracted_content)
+        print(f"Extracted {len(data)} coin entries")
+        print(json.dumps(data[0], indent=2) if data else "No Data found")
+
+await extract_crypto_prices()
+```
+
+**5.3 透過本地模型產生css_schema**
+
+**5.4 透過gemini,openai,anthropic產生css_schema**
 
 [**透過llama和Gemini模型實作的.ipynb**](./lesson4_css_base_使用llm建立schema.ipynb)
 
@@ -216,121 +332,9 @@ async with AsyncWebCrawler() as crawler:
     print(data)
 ```
 
-**5.3 透過手動方式產生css_schema**
-
-[**‼️手動方式產生css_schema(內有多個實際案例)**](./手動方式產生css_schema)
-
-**下方程式碼是透過手動schema建立的擷取範例**
-
-```python
-import json
-import asyncio
-from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
-from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
-
-async def extract_crypto_prices():
-    dummy_html = """
-    <html>
-      <body>
-        <div class='crypto-row'>
-          <h2 class='coin-name'>Bitcoin</h2>
-          <span class='coin-price'>$28,000</span>
-        </div>
-        <div class='crypto-row'>
-          <h2 class='coin-name'>Ethereum</h2>
-          <span class='coin-price'>$1,800</span>
-        </div>
-      </body>
-    </html>
-    """
-    #1. 定義一個簡單的extraction schema
-    schema = {
-        "name":"Crypto Prices",
-        "baseSelector": "div.crypto-row",
-        "fields":[
-            {
-                "name": "coin_name",
-                "selector": "h2.coin-name",
-                "type":"text"
-            },
-            {
-                "name":"price",
-                "selector":"span.coin-price",
-                "type":"text"
-            }
-        ]
-    }
-
-    #2. 建立extraction strategy
-    extraction_strategy = JsonCssExtractionStrategy(schema, verbose=True) #Enables verbose logging for debugging purposes.
-
-    #3. 設定爬蟲配置
-    config = CrawlerRunConfig(
-        cache_mode = CacheMode.BYPASS,
-        extraction_strategy=extraction_strategy
-    )
-
-    async with AsyncWebCrawler(verbose=True) as crawler:
-        #4. 執行爬蟲和提取任務
-        raw_url = f"raw://{dummy_html}"
-        result = await crawler.arun(
-            url=raw_url,
-            config=config
-        )
-
-        if not result.success:
-            print("Crawl failed:", result.error_message)
-            return
-        
-        # 5. 解析被提取的json資料
-        data = json.loads(result.extracted_content)
-        print(f"Extracted {len(data)} coin entries")
-        print(json.dumps(data[0], indent=2) if data else "No Data found")
-
-await extract_crypto_prices()
-```
 
 
 
-**5.4 透過自訂的css_schema擷取網頁內容**
 
-[**透過自訂的schema擷取網頁內容.ipynb**](./lesson4_透過css_schema取出內容.ipynb)
 
-```python
-import asyncio
-import json
-from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
-from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
-
-async def main():
-
-    schema = {
-        "name": "Example Items",
-        "baseSelector": "div.item",
-        "fields": [
-            {"name": "title", "selector": "h2", "type": "text"},
-            {"name": "link", "selector": "a", "type": "attribute", "attribute": "href"}
-        ]
-    }
-
-    raw_html = "<div class='item'><h2>Item 1</h2><a href='https://example.com/item1'>Link 1</a></div>"
-
-    async with AsyncWebCrawler() as crawler:
-        result = await crawler.arun(
-            url="raw://" + raw_html,
-            config=CrawlerRunConfig(
-                cache_mode=CacheMode.BYPASS,
-                extraction_strategy=JsonCssExtractionStrategy(schema)
-            )
-        )
-        # The JSON output is stored in 'extracted_content'
-        data = json.loads(result.extracted_content)
-        print(result.extracted_content)
-        print("========================")
-        print(data)
-
-if __name__ == "__main__":
-    await main()
-
-```
 
