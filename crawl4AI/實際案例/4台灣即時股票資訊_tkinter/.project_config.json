@@ -1,0 +1,52 @@
+{
+  "project": {
+    "name": "股票爬蟲工具",
+    "english_name": "Stock Crawler GUI",
+    "version": "1.0.0",
+    "description": "基於 Python tkinter 的股票資料爬取桌面應用程式",
+    "root_directory": "lesson6",
+    "type": "desktop_application",
+    "language": "python"
+  },
+  "directories": {
+    "root": "/Users/roberthsu2003/Documents/GitHub/__2025_07_08_tvdi_crawler__/lesson6",
+    "source": "./",
+    "docs": "./"
+  },
+  "entry_points": {
+    "main": "index.py",
+    "gui": "stock_gui.py",
+    "runner": "run.py"
+  },
+  "dependencies": {
+    "core": [
+      "crawl4ai",
+      "twstock"
+    ],
+    "builtin": [
+      "tkinter",
+      "asyncio",
+      "threading"
+    ]
+  },
+  "features": {
+    "core_functions": [
+      "股票清單管理",
+      "多選股票功能", 
+      "即時資料爬取",
+      "圖形介面顯示"
+    ],
+    "technical_features": [
+      "非同步爬取",
+      "錯誤處理",
+      "進度顯示",
+      "搜尋過濾"
+    ]
+  },
+  "ai_context": {
+    "working_directory": "/Users/roberthsu2003/Documents/GitHub/__2025_07_08_tvdi_crawler__/lesson6",
+    "is_project_root": true,
+    "development_status": "completed",
+    "last_updated": "2025-07-29"
+  }
+}

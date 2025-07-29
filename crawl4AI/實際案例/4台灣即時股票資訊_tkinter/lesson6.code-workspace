@@ -1,0 +1,66 @@
+{
+    "folders": [
+        {
+            "name": "股票爬蟲工具",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "python.defaultInterpreterPath": "python3",
+        "python.analysis.extraPaths": ["."],
+        "files.associations": {
+            "*.md": "markdown"
+        },
+        "editor.rulers": [80, 120],
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "terminal.integrated.cwd": "${workspaceFolder}",
+        "explorer.fileNesting.enabled": true,
+        "explorer.fileNesting.patterns": {
+            "*.py": "${capture}.pyc",
+            "README.md": ".project_*.md, .ai_*.md"
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-python.python",
+            "ms-python.vscode-pylance",
+            "ms-toolsai.jupyter"
+        ]
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "運行主程式",
+                "type": "shell",
+                "command": "python3",
+                "args": ["index.py"],
+                "group": {
+                    "kind": "build",
+                    "isDefault": true
+                },
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "new"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "啟動 GUI",
+                "type": "shell", 
+                "command": "python3",
+                "args": ["stock_gui.py"],
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "new"
+                }
+            }
+        ]
+    }
+}

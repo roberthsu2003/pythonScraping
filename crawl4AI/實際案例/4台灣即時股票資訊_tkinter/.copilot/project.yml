@@ -1,0 +1,86 @@
+# GitHub Copilot 專案配置
+
+name: "股票爬蟲工具"
+description: "基於 Python tkinter 的股票資料爬取桌面應用程式"
+
+# 專案基本資訊
+project:
+  type: "python_desktop_application"
+  framework: "tkinter"
+  language: "python"
+  version: "1.0.0"
+  
+# 專案結構
+structure:
+  root: "lesson6"
+  entry_point: "index.py"
+  main_modules:
+    - "index.py"      # 主程式入口
+    - "wantgoo.py"    # 爬蟲核心模組
+    - "stock_gui.py"  # GUI 介面模組
+    - "run.py"        # 啟動腳本
+
+# 技術棧
+tech_stack:
+  runtime: "python3.8+"
+  gui_framework: "tkinter"
+  web_crawler: "crawl4ai"
+  data_source: "twstock, wantgoo.com"
+  async_processing: "asyncio"
+  threading: "threading"
+
+# 開發指南
+development:
+  code_style: "PEP 8"
+  architecture: "modular"
+  error_handling: "comprehensive"
+  testing: "manual"
+  
+# AI 助手指導原則
+ai_guidelines:
+  context_awareness:
+    - "lesson6 是專案根目錄"
+    - "專案功能完整，包含 GUI 和爬蟲"
+    - "維護現有程式碼架構"
+    - "遵循模組化設計原則"
+  
+  development_principles:
+    - "保持程式碼風格一致性"
+    - "確保完整的錯誤處理"
+    - "維護使用者體驗一致性"
+    - "遵循 Python 最佳實踐"
+
+# 功能模組
+features:
+  core:
+    - name: "股票清單管理"
+      files: ["wantgoo.py"]
+      description: "載入和管理台灣股票清單"
+    
+    - name: "資料爬取"
+      files: ["wantgoo.py"]
+      description: "使用 crawl4ai 爬取股票即時資料"
+    
+    - name: "圖形介面"
+      files: ["stock_gui.py"]
+      description: "tkinter 實作的使用者介面"
+    
+    - name: "程式入口"
+      files: ["index.py"]
+      description: "選單系統和程式入口點"
+
+# 資料模型
+data_models:
+  stock_info:
+    fields:
+      - "日期時間"
+      - "股票號碼"
+      - "股票名稱"
+      - "即時價格"
+      - "漲跌"
+      - "漲跌百分比"
+      - "開盤價"
+      - "最高價"
+      - "最低價"
+      - "成交量(張)"
+      - "前一日收盤價"

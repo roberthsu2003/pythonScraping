@@ -1,0 +1,106 @@
+# GitHub Copilot 工作區配置
+
+# 專案識別
+workspace:
+  name: "lesson6-stock-crawler"
+  root: "lesson6"
+  type: "python-desktop-app"
+
+# AI 助手配置  
+copilot:
+  # 專案感知設定
+  project_awareness:
+    enabled: true
+    root_markers: [".copilot", "README.md", "prd.md"]
+    primary_language: "python"
+    
+  # 程式碼補全設定
+  code_completion:
+    enabled: true
+    context_lines: 10
+    include_comments: true
+    follow_style_guide: "pep8"
+    
+  # 聊天助手設定
+  chat:
+    enabled: true
+    context_files: 
+      - "README.md"
+      - "prd.md"
+      - ".copilot/instructions.md"
+      - ".copilot/knowledge.md"
+    
+    system_message: |
+      你是 lesson6 股票爬蟲專案的專業 AI 助手。
+      專案具備完整的 GUI 介面和爬蟲功能。
+      請基於現有架構提供開發協助。
+
+# 檔案模式配置
+file_patterns:
+  source_files:
+    - "*.py"
+    - "*.md"
+    - "*.json"
+    - "*.yml"
+    - "*.yaml"
+    
+  ignore_files:
+    - "__pycache__/**"
+    - "*.pyc"
+    - ".git/**"
+    - "temp/**"
+
+# 語言特定設定
+language_config:
+  python:
+    version: "3.8+"
+    style_guide: "pep8"
+    max_line_length: 88
+    import_style: "absolute"
+    
+    # 主要依賴
+    dependencies:
+      - "tkinter"
+      - "crawl4ai" 
+      - "twstock"
+      - "asyncio"
+      - "threading"
+      - "json"
+      - "pathlib"
+
+# 專案特定提示
+project_prompts:
+  architecture_awareness: |
+    這是一個模組化的 Python 桌面應用程式：
+    - index.py: 程式入口和選單系統
+    - wantgoo.py: 爬蟲核心邏輯
+    - stock_gui.py: tkinter GUI 實作
+    - 保持模組間的清晰分離
+    
+  development_guidelines: |
+    開發時請遵循：
+    1. 維持現有的程式碼架構
+    2. 確保完整的錯誤處理
+    3. 保持使用者體驗一致性
+    4. 遵循 Python 最佳實踐
+    
+  common_tasks: |
+    常見開發任務：
+    - 功能擴展和改進
+    - 介面優化
+    - 性能調優
+    - 錯誤修復
+    - 新增資料來源
+
+# 整合工具
+integrations:
+  vscode:
+    settings:
+      "python.defaultInterpreterPath": "python3"
+      "python.linting.enabled": true
+      "python.linting.pylintEnabled": true
+      
+  github:
+    copilot_enabled: true
+    code_review: true
+    issue_tracking: true
