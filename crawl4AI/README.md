@@ -53,7 +53,8 @@ Crawl4AI 是一套專為人工智慧（AI）和大型語言模型（LLM）應用
 ---
 
 **整合tkinter**
-[3台灣即時股票資訊_tkinter](./4台灣即時股票資訊_tkinter)
+
+[台灣即時股票資訊_tkinter](./實際案例/4台灣即時股票資訊_tkinter)
 
 - 無自動更新功能
 - 主執行檔:index.py
@@ -66,7 +67,7 @@ pip install twstock
 
 ![](./images/pic2.png)
 
-[4台灣即時股票資訊_tkinter](./3台灣即時股票資訊_tkinter)
+[台灣即時股票資訊_tkinter](./實際案例/3台灣即時股票資訊_tkinter)
 
 - 包含自動更新功能
 - 主執行檔main.py
