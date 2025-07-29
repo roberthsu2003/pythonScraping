@@ -65,4 +65,4 @@ Crawl4AI 是一套專為人工智慧（AI）和大型語言模型（LLM）應用
 pip install twstock
 ```
 
-![](./pic1.png)
+![](./images/pic1.png)
